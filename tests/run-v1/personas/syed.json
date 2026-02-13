@@ -1,0 +1,11 @@
+{
+  "id": "syed",
+  "name": "Syed (VCare, handwash, Pakistan)",
+  "based_on": "context/Good/handwash SR.txt",
+  "classification": "unfeasible pricing",
+  "messages": [
+    "I want handwash, what is the MOQ and price? I need delivery to Pakistan. My budget is 25-30 rupees per piece",
+    "How many pieces I would have to order to get 25-30 rupees per piece? That is my target",
+    "I want the whole thing, handwash bottle with handwash liquid inside, not only bottle. Tell me price with delivery to my doorstep in Karachi"
+  ]
+}

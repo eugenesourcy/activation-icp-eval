@@ -1,0 +1,22 @@
+{
+  "run": "v2",
+  "date": "2026-02-12",
+  "model": "anthropic/claude-opus-4-6",
+  "openclaw_version": "2026.2.10",
+  "thinking_level": "low",
+  "prompts": {
+    "AGENTS": "AGENTS_v2.md",
+    "SOUL": "SOUL_v2.md"
+  },
+  "changes_from_v1": [
+    "Human handoff for call requests",
+    "Budget math before exit (local currency → USD → units)",
+    "No company ≠ non-ICP for new businesses",
+    "WhatsApp formatting (no markdown tables)",
+    "Catalog request handling (explain + ask for reference)",
+    "$100 sample voucher as trust tool",
+    "Restricted product section",
+    "Tone matching (adapt to lead register)",
+    "Reduced emoji (0-1 per message)"
+  ]
+}

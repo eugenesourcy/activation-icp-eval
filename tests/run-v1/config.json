@@ -1,0 +1,12 @@
+{
+  "run": "v1",
+  "date": "2026-02-12",
+  "model": "anthropic/claude-opus-4-6",
+  "openclaw_version": "2026.2.10",
+  "thinking_level": "low",
+  "prompts": {
+    "AGENTS": "AGENTS_v1.md",
+    "SOUL": "SOUL_v1.md"
+  },
+  "notes": "First pass. No WhatsApp formatting rules. No human handoff path. No budget-math-before-exit rule."
+}

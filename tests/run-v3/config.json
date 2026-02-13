@@ -1,0 +1,17 @@
+{
+  "run": "v3",
+  "date": "2026-02-12",
+  "model": "anthropic/claude-opus-4-6",
+  "openclaw_version": "2026.2.10",
+  "thinking_level": "low",
+  "prompts": {
+    "AGENTS": "AGENTS_v3.md",
+    "SOUL": "SOUL_v3.md"
+  },
+  "changes_from_v2": [
+    "Removed overfitted currency conversion examples (70K MXN, 80K naira, 25-30 PKR)",
+    "Strengthened restricted product detection (batteries, hazmat, IATA regs)",
+    "Enforced explain WHY with parenthetical pattern",
+    "Enforced message length max 4-5 lines"
+  ]
+}

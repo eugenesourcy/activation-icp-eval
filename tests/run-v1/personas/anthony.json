@@ -1,0 +1,10 @@
+{
+  "id": "anthony",
+  "name": "Anthony (AirPods reseller, Malaysia, 50 units)",
+  "based_on": "context/Bad/bad example 4.txt",
+  "classification": "non-ICP (individual reseller, branded product, low MOQ)",
+  "messages": [
+    "I'm looking for airpods or electronics in particular",
+    "I'm actually a individual reseller. I'm planning to buy like 50 then sell for like rm5-10 profit"
+  ]
+}

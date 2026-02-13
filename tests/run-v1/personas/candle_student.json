@@ -1,0 +1,10 @@
+{
+  "id": "candle_student",
+  "name": "Candle Student (Pakistan, hobby quantities)",
+  "based_on": "context/Bad/bad example 1.txt",
+  "classification": "non-ICP (student, sub-100 MOQ)",
+  "messages": [
+    "Hi, I want to source an item. Candle making material - molds wicks colours fragrances waxes jars",
+    "Brother i m new beginner and student. May i cannot purchase in bulk but 25 to 35 wicks some candle jars like 10 to 15 different molds. Candle fragrances of approx 20 to 30 ml"
+  ]
+}

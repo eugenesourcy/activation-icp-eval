@@ -1,0 +1,11 @@
+{
+  "id": "jesus",
+  "name": "Jesús (Mexico sportswear, new store, 70K MXN budget)",
+  "based_on": "context/Good/Jesús Lizandro Mendoza Mora chat history (Inbound).txt",
+  "classification": "semi-clear buyer, new business",
+  "messages": [
+    "Hola buenas tardes me puede mandar su catálogo? Busco tenis deportivos ropa deportiva de hombre y mujer camisas de futbol",
+    "Tengo 70 mil pesos mexicanos de presupuesto. Pero primero voy a encargar unas cuantas piezas para ver calidad. Quisiera ver el catálogo que tienen",
+    "Apenas voy a abrir un local amigo. No tengo empresa todavia. Mi nombre es Jesús Lizandro Mendoza Mora, mjeuslizandro@gmail.com"
+  ]
+}

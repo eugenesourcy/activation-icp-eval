@@ -1,0 +1,11 @@
+{
+  "id": "anam",
+  "name": "Anam (jewelry/bags/makeup, zero specs)",
+  "based_on": "context/Bad/bad example 2.txt",
+  "classification": "unclear buyer",
+  "messages": [
+    "Hi, I want to source an item",
+    "Jewelry and bags. Makeup",
+    "I have no reference. No idea on price or quantity"
+  ]
+}

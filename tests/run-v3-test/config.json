@@ -1,0 +1,10 @@
+{
+  "run": "v3-test",
+  "type": "hold-out test set",
+  "date": "2026-02-12",
+  "model": "anthropic/claude-opus-4-6",
+  "openclaw_version": "2026.2.10",
+  "thinking_level": "low",
+  "prompts": "same as run-v3 (no changes)",
+  "purpose": "Check generalization — same prompt, 6 new personas not seen during training"
+}

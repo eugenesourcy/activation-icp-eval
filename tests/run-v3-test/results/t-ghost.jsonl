@@ -1,0 +1,6 @@
+{"type":"session","version":3,"id":"t-ghost","timestamp":"2026-02-12T17:21:05.459Z","cwd":"/home/node/.openclaw/workspace"}
+{"type":"model_change","id":"d6282195","parentId":null,"timestamp":"2026-02-12T17:21:05.462Z","provider":"anthropic","modelId":"claude-opus-4-6"}
+{"type":"thinking_level_change","id":"0377b959","parentId":"d6282195","timestamp":"2026-02-12T17:21:05.462Z","thinkingLevel":"low"}
+{"type":"custom","customType":"model-snapshot","data":{"timestamp":1770916865463,"provider":"anthropic","modelApi":"anthropic-messages","modelId":"claude-opus-4-6"},"id":"2ebfa606","parentId":"0377b959","timestamp":"2026-02-12T17:21:05.463Z"}
+{"type":"message","id":"0dab4bd4","parentId":"2ebfa606","timestamp":"2026-02-12T17:21:05.470Z","message":{"role":"user","content":[{"type":"text","text":"Hi"}],"timestamp":1770916865466}}
+{"type":"message","id":"e2742b4b","parentId":"0dab4bd4","timestamp":"2026-02-12T17:21:09.432Z","message":{"role":"assistant","content":[{"type":"text","text":"\n\nHi! 👋 What are you looking to source?"}],"api":"anthropic-messages","provider":"anthropic","model":"claude-opus-4-6","usage":{"input":3,"output":17,"cacheRead":0,"cacheWrite":14270,"totalTokens":14290,"cost":{"input":0.000015000000000000002,"output":0.00042500000000000003,"cacheRead":0,"cacheWrite":0.0891875,"total":0.0896275}},"stopReason":"stop","timestamp":1770916865468}}

@@ -1,0 +1,9 @@
+{
+  "id": "jammaica",
+  "name": "Jammaica (Little Luna's Bakeshop, pastry packaging, wants call)",
+  "based_on": "context/Good/P1 PH leads asking for a call.txt",
+  "classification": "P1 lead, call-preferring",
+  "messages": [
+    "Hi, we are still looking for our pastries and drinks packaging. What is the best time to call you? I prefer zoom call if that's ok"
+  ]
+}
