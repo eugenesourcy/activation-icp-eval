@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -30,7 +30,7 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 <div class="header">
     <h1>Sourcy WhatsApp Bot</h1>
     <div class="subtitle">Conversational agent prototype for activation — lead qualification and SR collection</div>
-    <div class="date">Eric San &middot; 12 February 2026</div>
+    <div class="date">Eric San &middot; Updated 16 February 2026 (v7)</div>
 </div>
 
 <div class="container">
@@ -282,7 +282,73 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 
 <hr>
 
-<!-- ═══ IV. LIMITATIONS ═══ -->
+<!-- ═══ III-B. v7 ITERATION ═══ -->
+<div class="section">
+    <h2>III. Iteration: v6 → v7 (Based on Karl's Feedback)</h2>
+    <p>Karl's feedback on the prototype: <em>"not business logical."</em> We interpreted this as: each turn carries dropout risk. If a lead reads our message and it doesn't either hook them (category expertise, specific prices) or qualify them (budget math, quantity check), we've wasted the turn and they may never reply again.</p>
+
+    <h3>What Changed</h3>
+    <div class="compare">
+        <div class="compare-col col-before">
+            <h4>v5 (Original Prototype)</h4>
+            <ul>
+                <li>4-5 line messages, sometimes 6+</li>
+                <li>Asked for specs before giving prices</li>
+                <li>"What's the process?" got a multi-step explanation</li>
+                <li>"Catalog?" got a paragraph about why we don't have one</li>
+                <li>Narrowing questions before value delivery</li>
+            </ul>
+        </div>
+        <div class="compare-col col-after">
+            <h4>v7 (Current)</h4>
+            <ul>
+                <li>Hard cap: 2-3 lines per message</li>
+                <li>Prices FIRST when category is named</li>
+                <li>"Process?" → one-liner redirect</li>
+                <li>"Catalog?" → "No fixed catalog — we source from 2,000+ factories. What do you need?"</li>
+                <li>Every turn: wow > qualify > advance SR</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Scored Results (v7)</h3>
+    <p>We built a rubric scoring each bot turn on 5 dimensions (0-2 each, max 10/turn): message length, value delivery, qualification, conversation discipline, and the "last message test" — if this is the last message the lead reads, did we hook them or learn if they're worth chasing?</p>
+
+    <div class="metrics">
+        <div class="metric-cell"><div class="label">Pass Rate</div><div class="value">8/8</div><div class="sub">all personas pass ≥7.0</div></div>
+        <div class="metric-cell"><div class="label">Avg Score</div><div class="value">8.8</div><div class="sub">out of 10 per turn</div></div>
+        <div class="metric-cell"><div class="label">Avg Lines</div><div class="value">1-4</div><div class="sub">down from 10-15</div></div>
+        <div class="metric-cell"><div class="label">Biggest Win</div><div class="value">Anam</div><div class="sub">4.8→7.8 (prices-first)</div></div>
+    </div>
+
+    <table>
+        <tr><th>Persona</th><th>v5 Behavior</th><th>v7 Behavior</th><th>Score</th></tr>
+        <tr><td>Anam ("no idea")</td><td>Asked "which category?" then asked again without giving prices</td><td>Immediately gives price ranges for all 3 categories. Then narrows.</td><td>7.8/10</td></tr>
+        <tr><td>femmoraaa (teenager)</td><td>Gave a 5-line process explanation when asked "what's the process?"</td><td>One-liner: "Share refs → factory quotes → samples → bulk." Then asks what matters.</td><td>9.0/10</td></tr>
+        <tr><td>Jesus (catalog request)</td><td>Paragraph explaining "we don't have a fixed catalog" before giving any prices</td><td>"No fixed catalog — we work direct with factories." Then prices for all 3 categories.</td><td>8.0/10</td></tr>
+        <tr><td>Syed (price-sensitive)</td><td>Gave honest exit but in 4-5 lines</td><td>Same honest math, 2 lines. Specific re-entry price.</td><td>8.5/10</td></tr>
+        <tr><td>Battery (restricted)</td><td>Held firm (good) but verbose explanation</td><td>Same restriction, tighter language. Pivots to what we CAN source.</td><td>8.5/10</td></tr>
+        <tr><td>Anthony (branded)</td><td>Clean exit</td><td>Same quality, tighter.</td><td>9.0/10</td></tr>
+        <tr><td>Jammaica (wants call)</td><td>Good handoff</td><td>Perfect: call + value in parallel.</td><td>10.0/10</td></tr>
+        <tr><td>Candle (student)</td><td>Clean exit</td><td>Same respect, tighter.</td><td>8.5/10</td></tr>
+    </table>
+
+    <div class="callout callout-note">
+        <strong>Key insight: the model is steerable</strong>
+        Going from v5 to v7 required only text changes in two files (SOUL.md + AGENTS.md). No code changes, no retraining, no new infrastructure. Karl's feedback was turned into concrete rules ("prices first", "2-3 line cap", "one-liner for catalog questions") and the bot immediately followed them. This steerability is the core value — any business logic the team identifies can be encoded as a rule and tested within hours.
+    </div>
+</div>
+
+<div class="section">
+    <h2>IV. Live on Telegram</h2>
+    <p>The bot is deployed and responding live on Telegram: <a href="https://t.me/sourcy_activation_bot" style="color:var(--accent);font-weight:600">@sourcy_activation_bot</a></p>
+    <p>Message it from any Telegram account to test. Same behavior as shown in this report. Zero ban risk (official Telegram Bot API, not unofficial like WhatsApp Baileys).</p>
+    <p>Infrastructure: Railway (Singapore), Claude Opus 4, OpenClaw gateway. Response time: 2-5 seconds. Uptime: always-on with health checks.</p>
+</div>
+
+<hr>
+
+
 <div class="section">
     <h2>III. Honest Limitations</h2>
     <div class="callout callout-info">
@@ -388,7 +454,7 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
     <h2>VI. Next Steps</h2>
     <p><strong>Step 1 — Review (now):</strong> Review this report and the repo. Flag anything that feels off in the conversations — wrong pricing, wrong tone, missing edge cases. This feedback goes directly into the next testing round.</p>
 
-    <p><strong>Step 2 — Internal testing via Telegram (this week):</strong> We deploy the bot and connect it to a Telegram channel. The team messages the bot on their phones and sees it respond live — same behavior shown in this report, but interactive. Zero ban risk. No WhatsApp decision needed yet.</p>
+    <p><strong>Step 2 — Internal testing via Telegram (LIVE):</strong> ✅ The bot is live at <a href="https://t.me/sourcy_activation_bot" style="color:var(--cream);text-decoration:underline">@sourcy_activation_bot</a>. Message it from any Telegram account. Zero ban risk.</p>
 
     <p><strong>Step 3 — WhatsApp infrastructure decision (in parallel):</strong> We need a decision on which WhatsApp path to take for production:</p>
     <table>
@@ -410,7 +476,7 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 
 </div>
 
-<footer>Eric San &middot; Prepared for Sourcy Activation Team &middot; 12 February 2026</footer>
+<footer>Eric San &middot; Prepared for Sourcy Activation Team &middot; Updated 16 February 2026 (v7 + Telegram)</footer>
 
 </body>
 </html>

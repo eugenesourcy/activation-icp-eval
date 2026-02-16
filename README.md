@@ -217,9 +217,64 @@ tests/
 sourcy_wa_bot_prototype_report.html  # Deployed report for stakeholders
 ```
 
-## Deploying
+## Deploying (Railway + Telegram)
 
-Report deploys to Vercel: `sourcy-jade.vercel.app`
-GitHub repo: `github.com/neicras/sourcy-activation-bot`
+The bot is deployed on Railway as a Docker container connected to Telegram.
 
-For production WhatsApp deployment, enable the WhatsApp plugin in `.openclaw/openclaw.json` and configure the channel credentials.
+**Live bot:** [@sourcy_activation_bot](https://t.me/sourcy_activation_bot)
+**Railway dashboard:** `railway.com/project/e74629e4-ea2e-4c7e-8ccf-46907839fe6e`
+**Report:** `sourcy-jade.vercel.app`
+**GitHub:** `github.com/neicras/sourcy-activation-bot`
+
+### How Railway deployment works
+
+The `Dockerfile` and `entrypoint.sh` in this repo handle everything:
+
+1. `Dockerfile` — copies `workspace/` (SOUL.md, AGENTS.md, etc.) into the OpenClaw image
+2. `entrypoint.sh` — writes `openclaw.json` (Telegram config) and `auth-profiles.json` (Anthropic key) from Railway env vars at startup, then runs the gateway
+
+**Railway env vars (set on the service):**
+- `ANTHROPIC_API_KEY` — Anthropic API key for Claude Opus
+- `TELEGRAM_BOT_TOKEN` — Telegram bot token from BotFather
+- `OPENCLAW_GATEWAY_TOKEN` — gateway auth token
+- `PORT=8080` — required by Railway
+- `OPENCLAW_STATE_DIR=/data/.openclaw` — persistent volume
+- `OPENCLAW_WORKSPACE_DIR=/data/workspace` — persistent volume
+
+**Important:** The gateway reads workspace from `$HOME/.openclaw/workspace/` (currently `/root/.openclaw/workspace/`), NOT from `$OPENCLAW_WORKSPACE_DIR`. The entrypoint copies bundled files there on startup if missing. To update the bot's behavior:
+
+1. Edit `workspace/SOUL.md` or `workspace/AGENTS.md` locally
+2. `git push` to GitHub
+3. `cd sourcy && railway up` to rebuild and deploy
+4. Or SSH in and copy files directly: `railway ssh -- "cp /data/workspace/AGENTS.md /root/.openclaw/workspace/AGENTS.md"`
+
+### First-time Railway setup
+
+```bash
+# Install Railway CLI
+brew install railway
+
+# Login + link project
+railway login
+cd sourcy
+railway link  # select sourcy-activation-bot project
+
+# Set env vars
+railway variables --set "ANTHROPIC_API_KEY=sk-ant-..." --set "TELEGRAM_BOT_TOKEN=123:abc..." --skip-deploys
+
+# Deploy
+railway up
+```
+
+### Updating the bot
+
+```bash
+# Edit workspace files
+vim workspace/AGENTS.md
+
+# Push + deploy
+git add workspace/ && git commit -m "Update bot rules" && git push
+railway up
+```
+
+For production WhatsApp deployment, change `entrypoint.sh` to enable the WhatsApp channel instead of Telegram, and set the WhatsApp credentials as env vars.
