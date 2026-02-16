@@ -53,7 +53,7 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 <!-- ═══ I. WHAT WE DID ═══ -->
 <div class="section">
     <h2>I. What We Did</h2>
-    <p>We studied the gold standard conversation, Eugene's requirements document and key findings on lead behavior, the CC/BTBD decision backlog, and 13 raw WhatsApp conversations from the test period — plus the A/B experiment data (variants 1-6, CVR breakdown, quality SR classification). From these we built a conversational agent and tested it over 5 rounds using 14 lead personas drawn from the real data. Each round: test against personas, identify failures, fix the prompt, re-test. This process uncovered and fixed 7 issues — from the bot incorrectly denying that Sourcy does calls, to reversing a hazmat restriction under lead pushback, to asking leads for budget information they'd already said they don't have.</p>
+    <p>We studied the gold standard conversation, Eugene's requirements document and key findings on lead behavior, and 13 raw WhatsApp conversations from the test period — plus the A/B experiment data (variants 1-6, CVR breakdown, quality SR classification). From these we built a conversational agent and iterated the prompt through 7 versions based on Karl's feedback. The current version (v7) was tested against 8 lead personas drawn from real WA chat data: 8/8 pass, avg score 8.8/10. Key changes in v7: prices-first (when lead names category, first response includes price range), 2-3 line message cap, one-liner answers for catalog/process questions. The iteration methodology is fully reproducible — test personas, prompt versions, and scoring rubric are documented in the GitHub repo.</p>
 </div>
 
 <hr>
@@ -61,7 +61,7 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 <!-- ═══ II. CONVERSATIONS ═══ -->
 <div class="section">
     <h2>II. Conversations</h2>
-    <p>We tested the bot against 14 leads drawn from real WhatsApp chat data. Below are the key conversations grouped by outcome: leads that reached a completed SR, leads handed off to the human team, leads correctly exited, and leads that would have been lost under manual handling but were kept alive by the bot. Each conversation includes bounce analysis — what could cause the lead to leave at each turn, and how the bot mitigates it.</p>
+    <p>We tested v7 against 8 leads drawn from real WhatsApp chat data. Below are the key conversations grouped by outcome: leads that reached a completed SR, leads handed off to the human team, leads correctly exited, and leads that would have been lost under manual handling but were kept alive by the bot. Each conversation includes bounce analysis — what could cause the lead to leave at each turn, and how the bot mitigates it.</p>
 
     <!-- ── SR COMPLETIONS ── -->
     <h3>Leads → Completed SR</h3>
