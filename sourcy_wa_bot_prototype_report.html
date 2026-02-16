@@ -73,58 +73,51 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         </div>
         <div class="persona-body">
             <div class="persona-meta">Real lead from Feb 6, 2026. Lead messages replayed exactly from chat data.</div>
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
-                <div class="wa-bubble wa-lead">Hola, busco tenis deportivos ropa deportiva camisas de futbol. Me puede mandar su catálogo?</div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
+                <div class="wa-bubble wa-lead">Hola, quisiera ver el catalogo de sus productos</div>
                 <div class="bounce">Bounce risk: he wants a "catálogo" — if just told "we don't have one" he'll leave.</div>
-                <div class="wa-bubble wa-bot">No manejamos catálogo fijo — trabajamos directo con fábricas. Tenis: $5-15/par. Ropa deportiva: $3-8/pieza. Camisas: $3-6/pieza. ¿Cuántas piezas por categoría? (a partir de 200+ se nota la diferencia en precio)</div>
-                <div class="bounce bounce-bot">→ Reframed "no catalog" as an advantage. → Price ranges immediately. → Explained WHY quantity matters.</div>
+                <div class="wa-bubble wa-bot">No tenemos catálogo fijo — trabajamos directo con fábricas según lo que necesites. ¿Qué producto estás buscando?</div>
+                <div class="bounce bounce-bot">→ One-liner: no catalog, reframed as advantage, straight to "what do you need?" No filler.</div>
 
-                <div class="wa-bubble wa-lead">Algo asi como Nike Air Max sin marca. 70 mil pesos de presupuesto. Primero unas cuantas piezas para ver calidad.</div>
-                <div class="bounce">Bounce risk: "unas cuantas piezas" + "no marca" could trigger a "too small" exit. But 70K MXN = ~$4,000.</div>
-                <div class="wa-bubble wa-bot">Eso te da 300-500+ piezas surtidas. Tenemos un voucher de $100 USD para muestras. ¿Me puedes mandar una foto o link del estilo exacto de tenis?</div>
-                <div class="bounce bounce-bot">→ Did the budget math ($4,000 = 300-500 pieces — viable). → $100 sample voucher. → Asks for photo to move forward.</div>
+                <div class="wa-bubble wa-lead">tenis deportivos ropa deportiva de hombre y mujer camisas de futbol</div>
+                <div class="wa-bubble wa-bot">¡Buenas categorías! Tenis deportivos con tu logo van de $8-15/par, ropa deportiva $4-12/pieza, y camisas de futbol $5-10/unidad. ¿Cuántas piezas estás pensando para empezar?</div>
+                <div class="bounce bounce-bot">→ Prices-first for all 3 categories. One qualifying question. 2 lines.</div>
 
-                <div class="wa-bubble wa-lead">Apenas voy abrir un local amigo. No tengo empresa. Jesús Lizandro Mendoza Mora. mjeuslizandro@gmail.com. León Guanajuato</div>
-                <div class="bounce">Bounce risk: "no tengo empresa" — an earlier version of the bot sent this lead to local markets instead of keeping him.</div>
-                <div class="wa-bubble wa-bot">• Producto: Tenis estilo Air Max (sin marca) + ropa deportiva + camisas de futbol<br>• Presupuesto: 70,000 MXN (~4,000 USD)<br>• Entrega: León, Guanajuato<br>• Contacto: Jesús Lizandro Mendoza Mora<br>• Email: mjeuslizandro@gmail.com<br>• Timeline: Flexible (muestras primero)<br><br>Cotizaciones en 24-48 horas a tu correo.</div>
-                <div class="bounce bounce-bot">→ "No company" is fine — "lo importante es el pedido." → SR recap. → Clear next step.</div>
+                <div class="wa-bubble wa-lead">Apenas voy abrir un local amigo. Quiero algo con mi marca. Mi presupuesto es 70 mil pesos mexicanos de todo surtido</div>
+                <div class="bounce">Bounce risk: "apenas voy a abrir" — new store, no company. Could trigger premature exit. But 70K MXN = ~$4,000.</div>
+                <div class="wa-bubble wa-bot">70 mil pesos son ~$4,000 USD, buen presupuesto para arrancar con las 3 categorías. Con eso podrías surtir ~150 pares de tenis + 200 piezas de ropa deportiva + 150 camisas de futbol, todo con tu marca. ¿Ya tienes logo y diseños listos?</div>
+                <div class="bounce bounce-bot">→ Did the budget math immediately ($4,000 = viable). → Broke it down by category. → One question to advance.</div>
             </div>
         </div>
         <div class="persona-assessment">
-            <strong>What the bot did:</strong> Converted a lead with no company, asking for a catalog that doesn't exist, in a language other than English — into a complete SR in 3 turns. The budget math ($4,000 = viable order) prevented a premature exit. The lead volunteered his name and email unprompted — a sign the conversation built trust.
+            <strong>What the bot did:</strong> Converted a lead with no company, asking for a catalog that doesn't exist, in a language other than English — into an advancing conversation in 3 turns. Catalog question got a one-liner (not a paragraph). Budget math ($4,000 = 500 pieces across categories) prevented a premature exit. Prices delivered immediately once categories were named.
         </div>
     </div>
 
     <div class="persona-card">
         <div class="persona-header">
             <h3>femmoraaa — Teenager in Pakistan, Instagram jewelry brand</h3>
-            <span class="tag tag-strong">SR IN 5 TURNS</span>
+            <span class="tag tag-strong">ADVANCING IN 3 TURNS</span>
         </div>
         <div class="persona-body">
             <div class="persona-meta">Real lead from Feb 3-4, 2026. Originally classified as low-quality by the growth team.</div>
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
-                <div class="wa-bubble wa-lead">I want to source bulk jewellery from china. How much investment as a teenager?</div>
-                <div class="wa-bubble wa-bot">Ready-stock: $300-800 for 200-500 pcs. Custom logo: $500-1,500. With ~$500 you could start a small collection. What type of jewelry?</div>
-                <div class="bounce bounce-bot">→ Answered her actual question ("how much investment") with real numbers instead of asking for specs she doesn't have.</div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
+                <div class="wa-bubble wa-lead">Hi, I want to source an item. I wanted to source some bulk amount of jewellery and accessories from china, can you give me a breakdown of how does it works and how much of investment do i have to make as a teenager. i would be waiting for the reply</div>
+                <div class="wa-bubble wa-bot">Jewelry from factories runs $0.50-3/piece for fashion (alloy/steel) or $3-15 for fine (silver/gold). A first order of 200-500 pieces could start around $300-1,500 total. What type of jewelry are you thinking — earrings, necklaces, rings, bracelets?</div>
+                <div class="bounce bounce-bot">→ Answered her actual question ("how much investment") with real numbers. Prices-first. One question.</div>
 
-                <div class="wa-bubble wa-lead">Stainless gold, tarnish-free, minimal aesthetic. Pendants, rings, earrings, bracelets, watches. What's the process?</div>
-                <div class="wa-bubble wa-bot">Process: 1) Share references 2) Factory quotes 3) Samples 4) Bulk + QC + ship. $100 sample voucher. How many pieces for first order?</div>
+                <div class="wa-bubble wa-lead">oh sure. I'm looking for a reliable supplier of high-quality, tarnish-free, and stainless gold minimal jewellery and accessories. As a retailer, particularly those with a modern aesthetic. it can be anything jewellery related, like pendants, rings, earrings, bracelets, watches etc. I'm looking to purchase in bulk and would appreciate reasonable pricing. what the process?</div>
+                <div class="wa-bubble wa-bot">PVD gold stainless steel jewelry, tarnish-free — great pick. Runs $1-4/piece depending on design, MOQ usually 50-200 per style.<br><br>Process is simple: you send me reference photos of styles you like, we quote from factories, you sample first ($100 voucher available), then bulk. Send me some pics of the aesthetic you're going for!</div>
+                <div class="bounce bounce-bot">→ "What's the process?" got a one-liner (not a multi-step dump). Prices included. Asks for photos to advance.</div>
 
-                <div class="wa-bubble wa-lead">No target price, doing research. Just opened @femmoraaa.co on IG. Haven't started yet. New to this.</div>
-                <div class="bounce">Bounce risk: "no target price" — if asked for budget she'll stall (she said she doesn't know).</div>
-                <div class="wa-bubble wa-bot">PVD gold stainless steel matches your brand. To get started I need: where are you based? + 3-5 reference photos of styles you like.</div>
-                <div class="bounce bounce-bot">→ Didn't ask for budget. Asked for location + photos instead — things she can actually provide.</div>
-
-                <div class="wa-bubble wa-lead">Minimalist gold hoops, thin chain necklaces with small pendants, simple band rings. I am in Karachi Pakistan</div>
-                <div class="wa-bubble wa-bot">• Product: PVD gold stainless steel — hoops, pendant necklaces, band rings<br>• Quantity: ~150-200 mixed (starter order)<br>• Budget: ~$550-650 all-in<br>• Delivery: Karachi, Pakistan<br>• Timeline: Flexible (pre-launch)<br><br>What email for quotes?</div>
-                <div class="bounce bounce-bot">→ Estimated quantity + budget FOR her (she never stated these). → SR recap with defaults.</div>
-
-                <div class="wa-bubble wa-lead">fatima@femmoraaa.co</div>
-                <div class="wa-bubble wa-bot">Quotes with product photos in 24-48 hours. We'll start with samples using your $100 voucher. Best of luck with the launch!</div>
+                <div class="wa-bubble wa-lead">for now i dont have a target price as i was doing research on it. i have recently open a page on insta by the name of @femmoraaa.co and i was hunting for the best jewellery, i havent started it yet. sure let me know the process with budget friendly accessories. as i am still new to this</div>
+                <div class="bounce">Bounce risk: "no target price" + "still new" — if asked for budget she'll stall.</div>
+                <div class="wa-bubble wa-bot">For a starter collection of 10-15 styles × 50 pieces each, you're looking at around $500-2,000 total at $1-4/piece for PVD gold stainless steel. That's enough to launch a solid Instagram shop.<br><br>What's your rough budget to start — closer to $500 or can you stretch to $1,000+?</div>
+                <div class="bounce bounce-bot">→ Estimated budget FOR her (she never stated one). Gave a concrete starter package. One question with two easy options.</div>
             </div>
         </div>
         <div class="persona-assessment">
-            <strong>What the bot did:</strong> This lead was classified as low-quality — teenager, no target price, hasn't started. But she had a specific aesthetic, an Instagram brand, and sent reference descriptions. The bot estimated her budget and quantity for her (since she couldn't state them herself), and reached a complete SR. This is a lead that would have been lost without guided qualification.
+            <strong>What the bot did:</strong> This lead was classified as low-quality — teenager, no target price, hasn't started. But she had a specific aesthetic and an Instagram brand. The bot answered "how much investment?" with prices-first, handled "what's the process?" as a one-liner instead of a paragraph, and estimated her budget for her. Three turns in, she's being guided toward a concrete starter order.
         </div>
     </div>
 
@@ -137,15 +130,13 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
             <span class="tag tag-strong">CALL SCHEDULED</span>
         </div>
         <div class="persona-body">
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
-                <div class="wa-bubble wa-lead">Hi, we are still looking for our pastries and drinks packaging. What is the best time to call you? I prefer zoom call</div>
-                <div class="wa-bubble wa-bot">We absolutely do Zoom calls — let me connect you with our sourcing team. Email and preferred time/timezone? In the meantime — boxes, pouches, cups, or a mix?</div>
-                <div class="wa-bubble wa-lead">Yes Im available. jammaica.devera@gmail.com. littlelunasbakeshop.com</div>
-                <div class="wa-bubble wa-bot">I'll pass your details to our team to schedule. Could you share packaging type and quantities? Helps our team come prepared with relevant pricing.</div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
+                <div class="wa-bubble wa-lead">Hi, we are still looking for our pastries and drinks packaging. What is the best time to call you? I prefer zoom call if that's ok</div>
+                <div class="wa-bubble wa-bot">Absolutely, we do Zoom calls! Let me connect you with our sourcing team to set that up.<br><br>Quick while we arrange it — food packaging runs $0.15-1.50/unit depending on material and custom printing. What's your email and preferred time for the call?</div>
             </div>
         </div>
         <div class="persona-assessment">
-            When a lead prefers calls, the bot facilitates the handoff immediately — confirms the call, collects email, and asks qualifying questions so the human specialist joins prepared.
+            When a lead prefers calls, the bot facilitates the handoff immediately — confirms the call AND delivers prices in one turn. No wasted messages. Collects email to advance.
         </div>
     </div>
 
@@ -160,23 +151,31 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         </div>
         <div class="persona-body">
             <div class="persona-meta">Real lead from Feb 3, 2026. In the actual conversation, Michael rejected her: "unable to proceed — not enough detail."</div>
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
                 <div class="wa-bubble wa-lead">Hi, I want to source an item</div>
-                <div class="wa-bubble wa-bot">Hey! What are you looking to source?</div>
+                <div class="wa-bubble wa-bot">Hey! What product are you looking to source?</div>
 
-                <div class="wa-bubble wa-lead">Jewelry and bags. Makeup</div>
+                <div class="wa-bubble wa-lead">Jewelry and bags</div>
                 <div class="bounce">Bounce risk: broad categories, no specs. If asked for reference/specs she doesn't have, she'll stall.</div>
-                <div class="wa-bubble wa-bot">Nice — those are popular categories! Let's start with one to keep things focused. Which one's the priority?</div>
-                <div class="bounce bounce-bot">→ Didn't ask for specs. Narrowed to one category first. One question.</div>
+                <div class="wa-bubble wa-bot">Jewelry runs $0.50-3/piece for fashion (alloy/steel) or $3-15 for fine (silver/gold). Bags range $2-15 depending on material and style. Which one should we start with?</div>
+                <div class="bounce bounce-bot">→ Prices-first for BOTH categories immediately. One qualifying question. No filler.</div>
 
-                <div class="wa-bubble wa-lead">I have no reference. No idea</div>
+                <div class="wa-bubble wa-lead">Makeup</div>
+                <div class="wa-bubble wa-bot">Makeup products run $0.50-4/unit depending on type — lipsticks, palettes, skincare, etc. Are you looking for private label (your brand) or ready-made products?</div>
+                <div class="bounce bounce-bot">→ She pivoted to a third category. Bot gave prices immediately again. One question.</div>
+
+                <div class="wa-bubble wa-lead">I have no reference.</div>
+                <div class="wa-bubble wa-bot">No worries! Most popular are lip products ($0.50-1.50), eyeshadow palettes ($1-3), and skincare sets ($2-5). Which of those catches your eye?</div>
+                <div class="bounce bounce-bot">→ "No reference" didn't kill the conversation. Bot offered specific products with prices to react to.</div>
+
+                <div class="wa-bubble wa-lead">No idea</div>
                 <div class="bounce">Bounce risk: this is the moment Michael rejected her. "No idea" = dead end in a form-based process.</div>
-                <div class="wa-bubble wa-bot">No worries — let me give you something to work with! Jewelry: $0.50-3/pc. Bags: PU leather $3-10, canvas $1-5. Makeup: private label $1-5/unit. Are you looking to sell in a store, online, or something else? (Helps me narrow down the right price tier)</div>
-                <div class="bounce bounce-bot">→ Gave her concrete options with prices to react to. → Asked a qualifying question that's easy to answer (store vs online). → "No idea" didn't end the conversation.</div>
+                <div class="wa-bubble wa-bot">How about this — what's your budget for the first order? That helps me narrow down the best options for you.</div>
+                <div class="bounce bounce-bot">→ 5 turns in and the bot is still engaging. Switched from product questions to budget — the one qualifying question that could advance or exit cleanly.</div>
             </div>
         </div>
         <div class="persona-assessment">
-            Whether Anam converts is unknown — her intent may be too low. But she got 3 turns of engagement instead of a rejection at turn 3. The difference: instead of requiring specs upfront, the bot provided options and let the lead react.
+            Whether Anam converts is unknown — her intent may be too low. But she got 5 turns of engagement instead of a rejection at turn 3. The v7 difference: prices-first on every category she named (jewelry, bags, makeup), specific product options when she said "no reference," and a clean qualifying pivot to budget when she said "no idea." The bot never gave up.
         </div>
     </div>
 
@@ -191,15 +190,20 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         </div>
         <div class="persona-body">
             <div class="persona-meta">Real lead from Jan-Feb 2026. Persistent — followed up after 3 days with "??" when ignored. Current process: 6 days, wrong product sourced.</div>
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
-                <div class="wa-bubble wa-lead">I want handwash, what is the MOQ and price? I need delivery to Pakistan. My budget is 25-30 rupees per piece</div>
-                <div class="bounce">Three trust questions in one message — price, MOQ, delivery. This lead wants numbers, not process.</div>
-                <div class="wa-bubble wa-bot">At 25-30 PKR (~$0.09-0.11), international sourcing won't work — factory prices start at $0.30-1.00/unit before shipping. Local Pakistani manufacturers will be far more competitive. If your budget can reach $0.50-0.80/unit (140-220 PKR), we could source 500ml custom branded handwash at MOQs of 3,000-5,000. Would either direction work?</div>
-                <div class="bounce bounce-bot">→ Answered all 3 trust questions immediately. → Honest about the gap. → Named the specific price that WOULD work (140-220 PKR). → One question.</div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
+                <div class="wa-bubble wa-lead">Hi, I need price, moq, delivery time and quality validation for 500ml liquid handwash with custom branding. Company is VCare based in Karachi. Our target price is 25-30 PKR per piece.</div>
+                <div class="bounce">Four trust questions in one message — price, MOQ, delivery, quality. This lead wants numbers, not process.</div>
+                <div class="wa-bubble wa-bot">500ml custom handwash from factories runs $0.30-0.80/unit (~80-220 PKR) depending on formulation and packaging. Your target of 25-30 PKR (~$0.09) is below raw material cost unfortunately — bottle + pump alone is $0.10-0.15.<br><br>At 80 PKR/unit ($0.30), would that budget work for VCare? How many units are you thinking?</div>
+                <div class="bounce bounce-bot">→ Answered all trust questions immediately. → Honest about the gap with specific math. → Named the exact price that WOULD work (80 PKR). → One question.</div>
+
+                <div class="wa-bubble wa-lead">Importing is not a problem for me. Can you source it or not?</div>
+                <div class="bounce">Lead pushes back — direct, wants a yes/no.</div>
+                <div class="wa-bubble wa-bot">Absolutely, we can source custom branded 500ml handwash! The import side is fine — liquid handwash ships by sea no problem.<br><br>The challenge is price: factories can't produce at 25-30 PKR. Lowest realistic is ~$0.30/unit (80 PKR) at 5,000+ units. How many units are you planning, and could your budget stretch closer to that range?</div>
+                <div class="bounce bounce-bot">→ Confirmed "yes we can source." → Held firm on price reality. → Specific MOQ and price point. → One question to advance.</div>
             </div>
         </div>
         <div class="persona-assessment">
-            <strong>Comparison:</strong> In the actual conversation, Syed waited 22 hours for a first response, was asked for his company website before getting any pricing, waited 6 more days, and received quotes for the wrong product (packaging only, not handwash liquid). The bot resolved this in one turn with honest numbers and a specific re-entry point.
+            <strong>Comparison:</strong> In the actual conversation, Syed waited 22 hours for a first response, was asked for his company website before getting any pricing, waited 6 more days, and received quotes for the wrong product (packaging only, not handwash liquid). The bot resolved this in 2 turns with honest numbers, specific budget math, and kept the door open at a realistic price point.
         </div>
     </div>
 
@@ -210,19 +214,19 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         </div>
         <div class="persona-body">
             <div class="persona-meta">Real lead from Feb 2, 2026. Tests whether the bot holds its position when challenged.</div>
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
-                <div class="wa-bubble wa-lead">Battery required Long 12/7. 2026 manufactured, pure original. Also need 8 fuse and 64 connectors</div>
-                <div class="wa-bubble wa-bot">Can't source batteries — IATA dangerous goods, special packaging, customs seizure risk. Local distributor is better for batteries. Fuses and connectors we can help with! What specs?</div>
-                <div class="bounce bounce-bot">→ Flagged restriction immediately with specific reason (IATA). → Didn't reject the whole request — pivoted to items we CAN source.</div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
+                <div class="wa-bubble wa-lead">Battery required Long 12/7, 2026, original. Also 8 fuse and 64 connectors</div>
+                <div class="wa-bubble wa-bot">Batteries are one we can't ship internationally — they're classified as dangerous goods (IATA), so carriers often hold or reject them regardless of destination rules. Not worth risking your money on that.<br><br>Fuses and connectors we can definitely help with! What type/size are you looking for — automotive, industrial, or electrical panel?</div>
+                <div class="bounce bounce-bot">→ Flagged restriction immediately with specific reason (IATA). → Framed it as protecting the lead's money. → Pivoted to items we CAN source with qualifying question.</div>
 
                 <div class="wa-bubble wa-lead">Importing batteries where?? Importing in Pakistan no problem</div>
                 <div class="bounce">Lead pushes back — thinks the restriction is about Pakistan's import rules, not about shipping carriers.</div>
-                <div class="wa-bubble wa-bot">For the battery, local distributor in Pakistan is your best bet — faster, no shipping risk, warranty. But let's get moving on the fuses and connectors! What type/rating?</div>
-                <div class="bounce bounce-bot">→ Held firm. Acknowledged his point but didn't reverse. Redirected to what we can help with.</div>
+                <div class="wa-bubble wa-bot">I hear you — Pakistan may allow battery imports, and you may be right about that. The issue is getting them there safely through international shipping carriers. Batteries (lead-acid, lithium, any type) face IATA dangerous goods restrictions, special packaging requirements, and real seizure risk at customs checkpoints along the way.<br><br>We'd rather not risk your money on a shipment that could get held. For the fuses and connectors though — we can source those no problem. What specs do you need?</div>
+                <div class="bounce bounce-bot">→ Acknowledged his point respectfully. → Held firm with specific reasons (IATA, seizure risk). → Redirected to what we can help with.</div>
             </div>
         </div>
         <div class="persona-assessment">
-            The bot held its restriction even under pushback. Earlier versions actually reversed course here and started quoting battery prices — which would have created a liability. The fix: shipping regulations are absolute regardless of what destination countries allow for import.
+            The bot held its restriction even under pushback — and explained WHY rather than just repeating "we can't." Earlier versions actually reversed course here and started quoting battery prices. v7 acknowledges the lead's perspective ("you may be right") while holding firm on the safety reality.
         </div>
     </div>
 
@@ -233,18 +237,18 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         </div>
         <div class="persona-body">
             <div class="persona-meta">Real lead from Feb 2, 2026.</div>
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
                 <div class="wa-bubble wa-lead">I'm looking for airpods or electronics in particular</div>
                 <div class="bounce">Bounce risk: branded product request. If asked for company website before addressing this, he'll feel interrogated.</div>
-                <div class="wa-bubble wa-bot">Can't source branded AirPods — IP issues, customs seizure risk. But we source TWS earbuds with similar specs at $3-12/unit. Interested in unbranded alternatives?</div>
+                <div class="wa-bubble wa-bot">We can't source branded AirPods (Apple IP), but we can find similar TWS earbuds from factories at $2-8/unit depending on features. What's your target quantity?</div>
                 <div class="bounce bounce-bot">→ Addressed branded issue immediately. → Offered alternative with pricing. → One question.</div>
 
-                <div class="wa-bubble wa-lead">I'm actually a individual reseller. 50 units, RM 5-10 profit</div>
-                <div class="wa-bubble wa-bot">50 units at ~$3-8/unit + shipping RM 5-15/unit eats most of the margin. Shopee, 1688, or local KL wholesale better for this quantity. At 200+ units we can get you factory-direct pricing.</div>
-                <div class="bounce bounce-bot">→ Showed the margin math (WHY). → Specific alternatives. → Specific re-entry: 200+ units.</div>
+                <div class="wa-bubble wa-lead">im actually a individual reseller. im planning to buy like 50 then sell for like rm5-10profit</div>
+                <div class="wa-bubble wa-bot">50 units at ~$3-5/unit = $150-250 total, with RM5-10 profit per piece — that's tight margins and below most factory MOQs for custom orders.<br><br>For 50 TWS earbuds, you'd be looking at ready-stock options around $3-5/unit. Would that work with your selling price?</div>
+                <div class="bounce bounce-bot">→ Did the margin math. → Acknowledged it's tight but still offered a path (ready-stock). → One question.</div>
             </div>
         </div>
-        <div class="persona-assessment">2 turns. Real Anthony said "Okay thanks" — accepted the exit. The bot showed him the math instead of just saying "we can't help."</div>
+        <div class="persona-assessment">2 turns. v7 still does the margin math but keeps the door slightly more open than an outright exit — offers ready-stock as a viable path for small quantities.</div>
     </div>
 
     <div class="persona-card">
@@ -253,18 +257,18 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
             <span class="tag tag-strong">CLEAN EXIT</span>
         </div>
         <div class="persona-body">
-            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — live response from OpenClaw</span></div>
-                <div class="wa-bubble wa-lead">Candle making material - molds wicks colours fragrances waxes jars</div>
-                <div class="wa-bubble wa-bot">Candle supplies! Molds $0.50-3/pc, wicks $0.01-0.05/pc, fragrance oils $3-10/kg, glass jars $0.30-1.50/pc. Are you launching a candle brand, or restocking?</div>
-                <div class="bounce bounce-bot">→ Priced all 6 items immediately. → One qualifying question.</div>
+            <div class="wa-convo"><div class="wa-header"><span>Lead — real message from test data</span><span class="wa-header-bot">Bot — v7 response from OpenClaw</span></div>
+                <div class="wa-bubble wa-lead">Hi, I want to source an item. Candle making material. Molds wicks colours fragrances. Waxes. Jars</div>
+                <div class="wa-bubble wa-bot">Candle supplies from China run really well! Silicone molds $0.50-3/pc, wicks $0.01-0.05/pc, dye chips $0.02-0.10/pc, fragrance oils $3-8/kg, soy/paraffin wax $1-3/kg, glass jars $0.30-2/pc. Are you starting a candle brand or supplying a craft shop?</div>
+                <div class="bounce bounce-bot">→ Priced ALL 6 items immediately. One qualifying question.</div>
 
-                <div class="wa-bubble wa-lead">Brother i m new beginner and student. 25 to 35 wicks, 10 to 15 jars</div>
+                <div class="wa-bubble wa-lead">Brother i m new beginner and student. May i cannot purchase in bulk but 25 to 35 wicks some candle jars like 10 to 15 different molds</div>
                 <div class="bounce">Self-identifies as student with hobby quantities. Clean exit expected.</div>
-                <div class="wa-bubble wa-bot">For these quantities, shipping from China costs more than the products. Local craft stores, Amazon, or Daraz are better options. At 100+ jars and bulk wax, factory-direct pricing saves 40-60% — come back when you're ready to scale!</div>
-                <div class="bounce bounce-bot">→ Explained WHY (shipping > product). → Geography-aware alternatives (Daraz for Pakistan). → Specific re-entry point.</div>
+                <div class="wa-bubble wa-bot">I appreciate your honesty! Those quantities are really small for factory sourcing — at 25-35 wicks and 10-15 molds, shipping alone would cost more than the products. You'd get better prices buying from a local craft supplier or Amazon/Shopee.<br><br>When you're ready to scale to 500+ wicks, 100+ jars, and 50+ molds, factory pricing drops 40-60% and that's where we really shine. Hit me up then!</div>
+                <div class="bounce bounce-bot">→ Explained WHY (shipping > product). → Specific alternatives. → Specific re-entry: 500+ wicks, 100+ jars, 50+ molds.</div>
             </div>
         </div>
-        <div class="persona-assessment">2 turns. Matched his "brother" tone. No condescension about being a student.</div>
+        <div class="persona-assessment">2 turns. Matched his "brother" tone. No condescension about being a student. Specific re-entry thresholds so he knows when to come back.</div>
     </div>
 
     <!-- ── LOST → SAVED ── -->
@@ -273,10 +277,10 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 
     <table>
         <tr><th>Lead</th><th>What Happened (Manual)</th><th>What the Bot Does</th></tr>
-        <tr><td>Anam (jewelry, "no idea")</td><td>Rejected: "unable to proceed — not enough detail"</td><td>Gave price ranges for 3 categories. Asked "which is your priority?" Keeps the conversation alive.</td></tr>
-        <tr><td>Jesús (Mexico, no company)</td><td>Was kept, but hit with 4-field form before any pricing</td><td>Gave pricing first. Did budget math. SR in 3 turns.</td></tr>
-        <tr><td>femmoraaa (teenager, no price)</td><td>Classified as low-quality, conversation ended</td><td>Estimated budget for her. Reached complete SR in 5 turns.</td></tr>
-        <tr><td>Syed (handwash, Pakistan)</td><td>6-day response, wrong product sourced</td><td>1-turn honest answer with specific alternative price point.</td></tr>
+        <tr><td>Anam (jewelry, "no idea")</td><td>Rejected: "unable to proceed — not enough detail"</td><td>Prices-first for every category she named. 5 turns of engagement instead of rejection at turn 3.</td></tr>
+        <tr><td>Jesús (Mexico, no company)</td><td>Was kept, but hit with 4-field form before any pricing</td><td>Catalog one-liner. Prices-first. Budget math ($4,000 = 500 pieces). Advancing in 3 turns.</td></tr>
+        <tr><td>femmoraaa (teenager, no price)</td><td>Classified as low-quality, conversation ended</td><td>Estimated starter package for her ($500-2,000). Advancing toward order in 3 turns.</td></tr>
+        <tr><td>Syed (handwash, Pakistan)</td><td>6-day response, wrong product sourced</td><td>2-turn honest answer with specific math (80 PKR = $0.30 realistic price point).</td></tr>
     </table>
 </div>
 
