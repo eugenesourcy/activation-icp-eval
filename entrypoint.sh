@@ -1,8 +1,14 @@
 #!/bin/sh
 set -e
 
-CONFIG_DIR="/home/node/.openclaw"
-mkdir -p "$CONFIG_DIR/agents/main/agent" "$CONFIG_DIR/agents/main/sessions" "$CONFIG_DIR/credentials"
+CONFIG_DIR="${OPENCLAW_STATE_DIR:-/home/node/.openclaw}"
+WORKSPACE="${OPENCLAW_WORKSPACE_DIR:-/home/node/.openclaw/workspace}"
+mkdir -p "$CONFIG_DIR/agents/main/agent" "$CONFIG_DIR/agents/main/sessions" "$CONFIG_DIR/credentials" "$WORKSPACE"
+
+# Copy bundled workspace files if workspace is empty or missing SOUL.md
+if [ ! -f "$WORKSPACE/SOUL.md" ]; then
+  cp -r /home/node/.openclaw/workspace/* "$WORKSPACE/" 2>/dev/null || true
+fi
 
 # Write openclaw.json (Telegram channel config)
 cat > "$CONFIG_DIR/openclaw.json" << 'EOF'
@@ -57,4 +63,4 @@ fi
 chmod 700 "$CONFIG_DIR"
 chmod 600 "$CONFIG_DIR/openclaw.json"
 
-exec node dist/index.js gateway --bind lan --port "${PORT:-8080}" --allow-unconfigured
+exec node dist/index.js gateway --bind lan --port "${PORT:-8080}"
