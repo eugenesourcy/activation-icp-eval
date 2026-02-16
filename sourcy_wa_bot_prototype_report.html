@@ -30,7 +30,7 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 <div class="header">
     <h1>Sourcy WhatsApp Bot</h1>
     <div class="subtitle">Conversational agent prototype for activation — lead qualification and SR collection</div>
-    <div class="date">12 February 2026</div>
+    <div class="date">Eric San &middot; 12 February 2026</div>
 </div>
 
 <div class="container">
@@ -53,7 +53,7 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 <!-- ═══ I. WHAT WE DID ═══ -->
 <div class="section">
     <h2>I. What We Did</h2>
-    <p>We studied the gold standard conversation, Eugene's requirements document, the CC/BTBD decision backlog, and 13 raw WhatsApp conversations from the test period. From these we built a conversational agent and tested it over 5 rounds using 14 lead personas drawn from the real data. Each round: test against personas, identify failures, fix the prompt, re-test. This process uncovered and fixed 7 issues — from the bot incorrectly denying that Sourcy does calls, to reversing a hazmat restriction under lead pushback, to asking leads for budget information they'd already said they don't have.</p>
+    <p>We studied the gold standard conversation, Eugene's requirements document and key findings on lead behavior, the CC/BTBD decision backlog, and 13 raw WhatsApp conversations from the test period — plus the A/B experiment data (variants 1-6, CVR breakdown, quality SR classification). From these we built a conversational agent and tested it over 5 rounds using 14 lead personas drawn from the real data. Each round: test against personas, identify failures, fix the prompt, re-test. This process uncovered and fixed 7 issues — from the bot incorrectly denying that Sourcy does calls, to reversing a hazmat restriction under lead pushback, to asking leads for budget information they'd already said they don't have.</p>
 </div>
 
 <hr>
@@ -295,13 +295,17 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         The bot was tested against ~13 real conversations from the test period. Eugene has agreed to share the remaining ~22 WhatsApp conversations from the live experiment. More data means more edge cases covered and a stronger bot. The testing process is designed for this — new conversations get turned into test personas and run against the prompt.
     </div>
 
+    <div class="callout callout-caution">
+        <strong>Price accuracy — LLM estimates vs reality</strong>
+        The bot's price ranges come from the LLM's general knowledge, not Sourcy's supplier database. We spot-checked against live Alibaba listings: for stainless steel water bottles, the bot quoted $4-8/unit, while Alibaba shows $0.89-4.80 — right ballpark but missed the low end. For most product categories the ranges are directionally correct, but misquotes are possible. Real supplier data (via the planned Sourcy data skill) would eliminate this risk. In the meantime, leads should be told these are estimate ranges — final quotes come from the sourcing team.
+    </div>
+
     <div class="callout callout-warning">
-        <strong>What this prototype does not yet solve</strong>
+        <strong>Other open items</strong>
         <ul style="margin:6px 0 10px 20px;font-size:.88rem">
-            <li><strong>Price ranges are LLM-estimated</strong> — not from Sourcy's supplier database. Real pricing data would eliminate misquoting risk.</li>
-            <li><strong>Simulated conversations only</strong> — real leads behave unpredictably. Needs live WhatsApp testing with real traffic.</li>
+            <li><strong>Simulated conversations only</strong> — real leads behave unpredictably. Needs live testing with real traffic.</li>
             <li><strong>No image handling tested</strong> — many leads send photos. CLI testing can't verify this.</li>
-            <li><strong>The gold standard principles are applied as written</strong> — the bot may handle some edge cases differently than the growth team would. This is expected and can be tuned.</li>
+            <li><strong>Production resilience</strong> — concurrent sessions, API rate limits, and downtime handling need to be validated. Will need support from the tech team on production hardening.</li>
         </ul>
     </div>
 </div>
@@ -318,7 +322,12 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         <li><strong>Fix the prompt</strong> (edit AGENTS.md)</li>
         <li><strong>Re-run all personas</strong> to check nothing else broke</li>
     </ol>
-    <p>Over 5 iterations, this process found and fixed 7 issues — from the bot denying that Sourcy does calls (it does), to reversing a restricted product decision under lead pushback, to asking leads for information they'd already said they don't have. Each fix is a one-line change in the workspace file.</p>
+    <p>This process found and fixed 7 issues over 5 iterations. Each fix is a one-line change in the workspace file — no code deploys needed.</p>
+
+    <div class="callout callout-info">
+        <strong>Ownership</strong>
+        I'll own the prompt updates and testing process. To keep the bot improving, I'll need ongoing access to the full conversation data — both the remaining ~22 test-period conversations Eugene agreed to share, and new conversations as they come in from production. The more real data the bot is tested against, the fewer surprises in production.
+    </div>
 </div>
 
 <hr>
@@ -335,10 +344,29 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
         <tr><td><strong>Prompt</strong></td><td>SOUL.md + AGENTS.md (plain text workspace files)</td><td>Editable, version-controlled, no code changes needed. All conversational rules live here.</td></tr>
     </table>
     <p>The bot is currently running in Docker on local infrastructure. Connecting to WhatsApp requires a phone number and a QR scan — no server migration needed. Deploy to Railway or any VPS for production.</p>
+    <a href="https://github.com/neicras/sourcy-activation-bot" style="display:block;border:1px solid var(--border);padding:12px 14px;margin:10px 0;text-decoration:none;color:var(--ink);background:var(--parchment);border-radius:4px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <svg height="16" width="16" viewBox="0 0 16 16" fill="var(--ink-muted)"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:500">neicras/sourcy-activation-bot</span>
+        </div>
+        <div style="font-size:.84rem;color:var(--ink-light)">WhatsApp conversational agent for lead qualification and SR collection. Context data, test runs, prompt versions, and this report.</div>
+    </a>
 
     <div class="callout callout-caution">
         <strong>WhatsApp ban risk</strong>
-        Baileys is an unofficial WhatsApp Web API — Meta does not officially support bot usage on personal WhatsApp numbers. Eugene's team previously got a number banned within 1 week using Botpress. Mitigation: use a dedicated number (not the main Sourcy number), keep message volume low during testing, avoid bulk messaging patterns. For production scale, the official WhatsApp Business API (via Twilio or Meta Cloud API) is the safer long-term path — but Baileys is fine for the prototype and initial 50/50 split.
+        Baileys is an unofficial WhatsApp Web API — Meta does not officially support bot usage on personal WhatsApp numbers. Eugene's team previously got a number banned within 1 week using Botpress. Mitigation for testing: use a dedicated number (not the main Sourcy number), keep message volume low. For production: the official WhatsApp Business API removes this risk entirely but has its own setup process. Decision for the team — see Step 3 below.
+    </div>
+
+    <div class="callout callout-warning">
+        <strong>OpenClaw platform risks</strong>
+        OpenClaw is a fast-moving open-source project (188K stars, 9,000+ commits). That's a strength (active development, many channels supported) but carries risks we should be aware of:
+        <ul style="margin:6px 0 10px 20px;font-size:.88rem">
+            <li><strong>It's infrastructure, not a chatbot builder.</strong> OpenClaw behaves as a long-lived stateful backend service. Failures that don't show up in testing can surface under production load — message loss during gateway restarts, session isolation issues, and cron/heartbeat timing problems have been reported.</li>
+            <li><strong>WhatsApp channel stability.</strong> Known issues: messages can be silently dropped during gateway restarts (config changes trigger restarts), and cron-triggered messages sometimes don't reach WhatsApp even when the system reports success.</li>
+            <li><strong>Breaking changes.</strong> The project moves fast — updates can change config format, CLI behavior, or plugin APIs. We pin to a specific version and test before updating.</li>
+            <li><strong>Single maintainer risk.</strong> Core development is driven by a small team. If the project stalls or pivots, we'd need to maintain our fork or migrate.</li>
+        </ul>
+        <strong>Mitigations:</strong> Pin to a tested version (currently 2026.2.10). Monitor the gateway with health checks. Keep the prompt/workspace portable — if we ever need to switch platforms, the conversational logic (SOUL.md + AGENTS.md) transfers to any LLM system. The investment is in the conversation design, not the framework.
     </div>
 
     <h3>Roadmap: Tools &amp; Skills</h3>
@@ -358,20 +386,31 @@ footer{text-align:center;padding:14px;color:var(--ink-muted);font-size:.75rem;bo
 <!-- ═══ VI. NEXT STEPS ═══ -->
 <div class="verdict">
     <h2>VI. Next Steps</h2>
-    <p><strong>Can I test it now?</strong> Yes — the bot is running and generates responses live. We can demo conversations on request. For internal team testing without WhatsApp ban risk, we can connect via Telegram first (native OpenClaw support, just needs a bot token — zero risk). WhatsApp connection needs a phone number + QR scan.</p>
+    <p><strong>Step 1 — Review (now):</strong> Review this report and the repo. Flag anything that feels off in the conversations — wrong pricing, wrong tone, missing edge cases. This feedback goes directly into the next testing round.</p>
 
-    <p><strong>To go live with real traffic:</strong></p>
-    <p>1. <strong>WhatsApp number</strong> — a dedicated phone number for the bot. Can be a new SIM, or the existing Sourcy number if doing a 50/50 split.</p>
-    <p>2. <strong>Remaining conversation data from Eugene</strong> — the ~22 test-period WA conversations he agreed to share. More edge cases = stronger bot before going live.</p>
-    <p>3. <strong>Real pricing data</strong> — category price ranges from actual supplier quotes, so the bot quotes real numbers instead of estimates.</p>
-    <p>4. <strong>Handoff process</strong> — when the bot routes a lead to the growth team (call requests, complex projects), who receives the handoff and how?</p>
-    <p>5. <strong>50/50 split mechanics</strong> — how we route traffic between bot and manual for the live experiment.</p>
-    <p><strong>Timeline:</strong> Bot can be on WhatsApp within a day of receiving a phone number. Recommend 1-2 days of internal team testing before live traffic.</p>
+    <p><strong>Step 2 — Internal testing via Telegram (this week):</strong> We deploy the bot and connect it to a Telegram channel. The team messages the bot on their phones and sees it respond live — same behavior shown in this report, but interactive. Zero ban risk. No WhatsApp decision needed yet.</p>
+
+    <p><strong>Step 3 — WhatsApp infrastructure decision (in parallel):</strong> We need a decision on which WhatsApp path to take for production:</p>
+    <table>
+        <tr><th>Option</th><th>Ban Risk</th><th>Cost</th><th>Setup Time</th></tr>
+        <tr><td><strong>Baileys (unofficial API)</strong></td><td style="color:var(--red-dark)">High — Eugene's team got banned in 1 week with Botpress (same approach). Meta can disable at any time.</td><td>Free</td><td>Minutes (QR scan)</td></tr>
+        <tr><td><strong>WhatsApp Business API (official)</strong></td><td style="color:var(--green-dark)">Zero — Meta-approved</td><td>Free tier: 1,000 convos/month, then ~$0.02-0.08/convo</td><td>1-3 days (Meta approval)</td></tr>
+    </table>
+    <p>For prototype testing, Baileys on a dedicated number (not the main Sourcy number) works. For production, the official Business API removes the ban risk but has its own setup process and cost structure. This is a decision for the team — we can support either path on our end. On our side it's just a config change (QR scan for Baileys, webhook config for Business API). In the meantime, Telegram is available for internal testing with zero risk on either front.</p>
+
+    <p><strong>Step 4 — Connect WhatsApp + 50/50 split:</strong> Once WhatsApp infra is decided, connection is a QR scan (Baileys) or webhook config (Business API). For the 50/50 experiment, suggested success criteria: the bot runs smoothly, handles conversations without critical failures, and collects data we can learn from. Even if conversion is comparable rather than higher, we gain 24/7 coverage, instant response, and a dataset to improve from. The goal for round 1 is validation and learning, not beating the manual baseline.</p>
+
+    <p><strong>Also needed from the team:</strong></p>
+    <p>1. <strong>Remaining ~22 WA conversations</strong> Eugene agreed to share — more data = stronger bot before live traffic</p>
+    <p>2. <strong>Real category pricing</strong> from supplier quotes — eliminates misquoting risk</p>
+    <p>3. <strong>Handoff process</strong> — who receives when the bot routes a lead to the team?</p>
+
+    <p>I'll own the prompt updates and testing process, with ongoing access to conversation data as it comes in.</p>
 </div>
 
 </div>
 
-<footer>Prepared for Sourcy team &middot; 12 February 2026</footer>
+<footer>Eric San &middot; Prepared for Sourcy Activation Team &middot; 12 February 2026</footer>
 
 </body>
 </html>

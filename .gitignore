@@ -1,4 +1,14 @@
-.vercel
+# OpenClaw runtime (credentials, sessions, device pairing)
+.openclaw/
+
+# Secrets
+.env
+
+# Node
+node_modules/
+
+# Vercel
+.vercel/
+
+# OS
 .DS_Store
-.openclaw
-node_modules
