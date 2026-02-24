@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Activation ICP Eval</title>
+  <style>
+    :root {
+      --bg: #f4efe4;
+      --paper: #fffaf0;
+      --ink: #1f2a2a;
+      --muted: #5d6b6b;
+      --line: #d6ccba;
+      --brand: #1d7f72;
+      --brand-2: #d97b2d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 400px at 100% -20%, #ffd9a8 0%, transparent 70%),
+        radial-gradient(1100px 500px at -10% 0%, #bfe4de 0%, transparent 65%),
+        var(--bg);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wrap {
+      max-width: 560px;
+      padding: 32px 24px;
+      background: var(--paper);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(22, 27, 29, 0.08);
+    }
+    h1 {
+      margin: 0 0 8px;
+      color: var(--brand);
+      font-size: 1.75rem;
+    }
+    p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li { margin-bottom: 10px; }
+    a {
+      display: block;
+      padding: 12px 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 500;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    a:hover {
+      border-color: var(--brand);
+      box-shadow: 0 2px 8px rgba(29, 127, 114, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Activation ICP Eval</h1>
+    <p>Dashboards and reports for the activation ICP evaluation.</p>
+    <ul>
+      <li><a href="icp_eval_dashboard.html">ICP Eval Dashboard (v1–v7 summary)</a></li>
+      <li><a href="icp_eval_deep_dive.html">ICP Eval Deep Dive</a></li>
+      <li><a href="golden_dataset_review.html">Golden Dataset Review</a></li>
+      <li><a href="golden_eval_review.html">Golden Eval Review</a></li>
+      <li><a href="sourcy_wa_bot_prototype_report.html">Sourcy WA Bot Prototype Report</a></li>
+    </ul>
+  </div>
+</body>
+</html>
