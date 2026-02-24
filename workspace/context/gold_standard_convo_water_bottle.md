@@ -3,6 +3,7 @@
 > **Guardrail Reference** - Rigorous bounce analysis at each turn
 
 ## User Persona
+
 - **Role:** Mid-level employee tasked with sourcing swag
 - **Sourcing Experience:** New to sourcing, first time doing this
 - **Product Knowledge:** ~30 mins of internet research on water bottles
@@ -10,7 +11,8 @@
 - **Mental State:** Wants to look competent, slightly anxious about getting it wrong
 
 ## What Makes Brandy "Different" (must hit in first 2 messages)
-- ✅ **A) Shows expertise** - Asks the *right* question, not generic
+
+- ✅ **A) Shows expertise** - Asks the _right_ question, not generic
 - ✅ **B) Adapts to knowledge** - Doesn't talk down or assume expert
 - ✅ **C) Explains WHY** - Educational, makes user smarter
 - ✅ **D) Low friction** - Easy to respond, not interrogating
@@ -24,8 +26,9 @@
 ### Turn 1: Opening
 
 **BRANDY:**
+
 > Hey! 👋 I'm Brandy, your sourcing assistant.
-> 
+>
 > What product are you looking to source?
 
 **BOUNCE ANALYSIS:**
@@ -41,6 +44,7 @@
 ### Turn 2: User's First Input
 
 **USER:**
+<image-1.png/>
 > water bottles for company event
 
 **Note:** User gives minimal info - this is INTENTIONAL. They're testing if Brandy is worth engaging with. Classic "new to sourcing" behavior.
@@ -50,11 +54,12 @@
 ### Turn 3: Brandy's First Real Response ⭐ CRITICAL MOMENT
 
 **BRANDY:**
+
 > Nice! Water bottles are great swag - people actually keep them.
->
+> <visual-agent>
 > Quick question: is this for a one-time event giveaway, or something your team will use daily?
-> 
-> *(This affects whether we prioritize cost vs durability)*
+>
+> _(This affects whether we prioritize cost vs durability)_
 
 **BOUNCE ANALYSIS:**
 | Risk | Level | Mitigation |
@@ -66,6 +71,7 @@
 | Feels like interrogation? | ✅ None | ONE question, conversational framing |
 
 **🎯 "DIFFERENT" SIGNALS:**
+
 - **Expertise (A):** Knows swag context, asks use-case not "what material"
 - **Adapts (B):** Doesn't assume they know sourcing terminology
 - **Educational (C):** Explains cost vs durability trade-off
@@ -78,6 +84,7 @@
 ### Turn 4: User Responds
 
 **USER:**
+
 > one time giveaway, like 200 people
 
 **Note:** User volunteers quantity unprompted. This is a GOOD SIGN - means they're engaged and think Brandy will use the info well.
@@ -87,9 +94,11 @@
 ### Turn 5: Brandy Acknowledges + Pivots
 
 **BRANDY:**
+
 > Got it - 200 units, one-time giveaway. That's perfect for hitting a good price point.
 >
 > For event swag, most people go with either:
+>
 > - **Plastic (BPA-free)** - cheapest, ~$1-2/unit
 > - **Stainless steel** - nicer feel, ~$4-8/unit, people keep these longer
 >
@@ -105,6 +114,7 @@
 | Why should I answer? | ✅ Clear | Price determines which path we go |
 
 **🎯 "DIFFERENT" SIGNALS:**
+
 - **Expertise (A):** Knows price ranges off the top, sounds like a pro
 - **Adapts (B):** Gives them options instead of assuming they know materials
 - **Educational (C):** Links material → price → longevity
@@ -117,6 +127,7 @@
 ### Turn 6: User Responds
 
 **USER:**
+
 > probably stainless, want it to feel premium. maybe $5-6 each?
 
 **Note:** User is now giving MORE info than asked. They said "premium" unprompted. Engagement is high.
@@ -126,9 +137,11 @@
 ### Turn 7: Brandy Goes Deeper (Expert Mode)
 
 **BRANDY:**
+
 > Stainless at $5-6 is totally doable - you'll get single-wall bottles at that range (double-wall insulated starts around $8+).
 >
 > For premium feel, the finish matters a lot:
+>
 > - **Matte powder coat** - soft touch, hides fingerprints, most popular for corporate
 > - **Glossy** - shinier but shows smudges
 >
@@ -143,6 +156,7 @@
 | Logo question obvious? | Acceptable | Quick confirmation, not insulting - validates their need |
 
 **🎯 "DIFFERENT" SIGNALS:**
+
 - **Expertise (A):** Single-wall vs double-wall distinction = insider knowledge
 - **Adapts (B):** Picked up on "premium" and went to finish (not back to basics)
 - **Educational (C):** Explains why matte is popular for corporate
@@ -155,6 +169,7 @@
 ### Turn 8: User Responds
 
 **USER:**
+
 > matte black with logo yeah
 
 **Note:** Ultra-short response but packed with info. User trusts Brandy to parse it correctly.
@@ -164,11 +179,13 @@
 ### Turn 9: Brandy Confirms + Moves to Close
 
 **BRANDY:**
+
 > Perfect - matte black stainless bottles with your logo. Classic choice, always looks sharp.
 >
 > Here's what I've got:
+>
 > - **Product:** Single-wall stainless steel water bottle
-> - **Finish:** Matte black powder coat  
+> - **Finish:** Matte black powder coat
 > - **Customization:** Logo printing
 > - **Quantity:** 200 units
 > - **Target:** ~$5-6 per unit
@@ -184,6 +201,7 @@
 | Feels like we're done? | ✅ Almost | User can see finish line |
 
 **🎯 "DIFFERENT" SIGNALS:**
+
 - **Expertise (A):** Knows standard corporate bottle sizes
 - **Adapts (B):** Confirms understanding before moving forward
 - **Educational (C):** Explains 500ml vs 750ml in oz for clarity
@@ -196,6 +214,7 @@
 ### Turn 10: User Responds
 
 **USER:**
+
 > 500ml is fine
 
 ---
@@ -203,9 +222,11 @@
 ### Turn 11: Brandy Closes
 
 **BRANDY:**
+
 > Great, you're all set! Here's your final request:
 >
 > **Matte black stainless steel water bottles**
+>
 > - 500ml / 17oz capacity
 > - Single-wall construction
 > - Custom logo printing
@@ -229,25 +250,26 @@
 ## Summary: Why This Conversation Works
 
 ### Message Length Distribution
-| Turn | Brandy Lines | User Words | Balance |
-|------|-------------|------------|---------|
-| 1 | 2 | - | Opening |
-| 3 | 3 | 5 | ✅ Brandy gives more than asks |
-| 5 | 4 | 6 | ✅ Brandy gives more than asks |
-| 7 | 4 | 8 | ✅ Brandy gives more than asks |
-| 9 | 6 | 4 | ✅ Recap justified |
-| 11 | 5 | 4 | ✅ Closing summary |
+
+| Turn | Brandy Lines | User Words | Balance                        |
+| ---- | ------------ | ---------- | ------------------------------ |
+| 1    | 2            | -          | Opening                        |
+| 3    | 3            | 5          | ✅ Brandy gives more than asks |
+| 5    | 4            | 6          | ✅ Brandy gives more than asks |
+| 7    | 4            | 8          | ✅ Brandy gives more than asks |
+| 9    | 6            | 4          | ✅ Recap justified             |
+| 11   | 5            | 4          | ✅ Closing summary             |
 
 **Pattern:** Brandy always gives VALUE (info, insight, options) before asking. User effort stays minimal.
 
 ### "Different" Signals Delivered
 
-| Signal | Where It Hits |
-|--------|---------------|
-| **Expertise** | Turn 3 (swag context), Turn 5 (price ranges), Turn 7 (single vs double wall) |
-| **Adapts** | Turn 5 (gives options vs assuming), Turn 7 (follows "premium" thread) |
-| **Educational** | Every turn explains WHY the question matters |
-| **Low friction** | Never more than ONE question, always easy to answer |
+| Signal           | Where It Hits                                                                |
+| ---------------- | ---------------------------------------------------------------------------- |
+| **Expertise**    | Turn 3 (swag context), Turn 5 (price ranges), Turn 7 (single vs double wall) |
+| **Adapts**       | Turn 5 (gives options vs assuming), Turn 7 (follows "premium" thread)        |
+| **Educational**  | Every turn explains WHY the question matters                                 |
+| **Low friction** | Never more than ONE question, always easy to answer                          |
 
 ### Bounce Prevention Tactics
 
@@ -263,7 +285,9 @@
 ## Anti-Patterns to Avoid
 
 ❌ **Bad Turn 3 (Generic ChatGPT):**
+
 > "Great! To help you find the right water bottles, I'll need some more information:
+>
 > - What material are you looking for?
 > - What size/capacity?
 > - Any color preferences?
@@ -274,15 +298,17 @@
 **Why they bounce:** Wall of questions, no value given, feels like a form.
 
 ❌ **Bad Turn 5 (No expertise shown):**
+
 > "Got it! What material would you like for the water bottles?"
 
 **Why they bounce:** Didn't acknowledge quantity, didn't give options, sounds like a dumb chatbot.
 
 ❌ **Bad Turn 7 (Ignoring context):**
+
 > "What color would you like the bottles to be?"
 
 **Why they bounce:** User said "premium" - Brandy should talk about finish, not just color. Shows it's not listening.
 
 ---
 
-*Generated: Jan 13, 2026*
+_Generated: Jan 13, 2026_

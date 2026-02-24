@@ -5,26 +5,60 @@ WhatsApp conversational agent that qualifies sourcing leads and collects Sourcin
 ## Quick Start
 
 ### Prerequisites
+
 - Docker Desktop running
+- Anthropic API key
 - The OpenClaw Docker image built locally as `openclaw:local`
 
-### Run the bot locally
+### 1. Configure environment
+
+Create `.env` in the repo root:
 
 ```bash
-cd /tmp/sourcy-openclaw
+# Generate token: openssl rand -hex 32
+OPENCLAW_GATEWAY_TOKEN=<your-32-char-hex-token>
+ANTHROPIC_API_KEY=sk-ant-api03-...
+
+# Absolute paths (e.g. /path/to/sourcy-activation-bot)
+OPENCLAW_CONFIG_DIR=/path/to/sourcy-activation-bot/.openclaw
+OPENCLAW_WORKSPACE_DIR=/path/to/sourcy-activation-bot/workspace
+```
+
+```bash
+mkdir -p .openclaw
+```
+
+### 2. Build the image
+
+```bash
+docker build -t openclaw:local .
+```
+
+Rebuild after changing `Dockerfile` or `entrypoint.sh`.
+
+### 3. Start the gateway and WebChat
+
+```bash
 docker compose up -d openclaw-gateway
 ```
 
-Gateway runs at http://localhost:18789 (WebChat UI) and accepts CLI commands.
+**WebChat UI:** Open http://localhost:18789/?token=YOUR_OPENCLAW_GATEWAY_TOKEN in your browser (use the token from `.env`). Paste the token into Settings if prompted.
 
-### Send a test message
+Or run the helper script:
 
 ```bash
-cd /tmp/sourcy-openclaw
+./scripts/start-local.sh
+```
+
+### 4. Send a test message via CLI
+
+```bash
 docker compose run --rm openclaw-cli agent \
   --session-id test-1 \
   --message "Hi, I want to source some jewelry"
 ```
+
+The CLI discovers the gateway via `gateway.remote` in config (set by the entrypoint for Docker).
 
 Add `--json` to get structured output. Same `--session-id` across calls maintains conversation state.
 
@@ -35,7 +69,7 @@ The bot's personality and rules live in two files:
 - `workspace/SOUL.md` — who the bot is, what it knows, how it sounds
 - `workspace/AGENTS.md` — conversation rules, per-turn priority, message discipline
 
-Edit these files, then the running gateway picks up changes on the next message (no restart needed). The files are bind-mounted into the Docker container.
+Edit these files; the running gateway picks up changes on the next message (no restart needed). The files are bind-mounted into the Docker container.
 
 ## Architecture
 
@@ -55,22 +89,20 @@ Model: `anthropic/claude-opus-4-6`, thinking level: `low`.
 
 ### Docker Setup
 
-The Docker Compose file is at `/tmp/sourcy-openclaw/docker-compose.yml`. Two services:
+`docker-compose.yml` defines two services:
 
 - `openclaw-gateway` — always-on server, serves WebChat + handles conversations
 - `openclaw-cli` — ephemeral container for sending single messages via CLI
 
-Environment config in `/tmp/sourcy-openclaw/.env`:
-- `OPENCLAW_CONFIG_DIR` — path to .openclaw/ or openclaw-config/ on host
+Both share the same config and workspace (bind-mounted). Environment in `.env`:
+
+- `OPENCLAW_CONFIG_DIR` — path to .openclaw/ on host
 - `OPENCLAW_WORKSPACE_DIR` — path to workspace/ on host
-- `OPENCLAW_GATEWAY_TOKEN` — auth token for gateway API
+- `OPENCLAW_GATEWAY_TOKEN` — auth token for gateway API (required when bind=lan)
+- `ANTHROPIC_API_KEY` — Anthropic API key for Claude
+- `TELEGRAM_BOT_TOKEN` — (optional) if set, enables Telegram channel for chatting via Telegram app
 
-**Important:** The gateway and CLI mount DIFFERENT config directories. After editing `workspace/SOUL.md` or `workspace/AGENTS.md`, sync to the gateway mount:
-
-```bash
-cp workspace/AGENTS.md .openclaw/workspace/AGENTS.md
-cp workspace/SOUL.md .openclaw/workspace/SOUL.md
-```
+**Gateway vs channels:** The gateway is the core server; WebChat and CLI connect to it. Telegram/WhatsApp are *channels* — alternate ways to chat with the bot. For local dev, WebChat + CLI are enough; Telegram is disabled unless `TELEGRAM_BOT_TOKEN` is set.
 
 ## How the Bot Works
 
@@ -101,6 +133,7 @@ See `workspace/GOLD_STANDARD.md` for the full principles document.
 8 core personas from real WhatsApp chat data + 6 adversarial test-set personas from Reddit research:
 
 **Core 8 (from real chats):**
+
 1. Syed — VCare handwash, Pakistan, unrealistic pricing ($0.09/unit)
 2. Anam — zero specs, jewelry/bags/makeup, "no idea"
 3. Anthony — AirPods reseller, 50 units, Malaysia
@@ -111,6 +144,7 @@ See `workspace/GOLD_STANDARD.md` for the full principles document.
 8. Battery — restricted product (lead-acid), pushes back
 
 **Test Set 6 (from Reddit):**
+
 1. Ghost — says "Hi" then disappears
 2. Alibaba Veteran — "why should I pay your markup?"
 3. Burned Buyer — "I got scammed before"
@@ -138,23 +172,18 @@ Full rubric: `tests/ASSESSMENT_RUBRIC.md`.
 
 ```bash
 # 1. Start gateway (if not running)
-cd /tmp/sourcy-openclaw && docker compose up -d openclaw-gateway
+docker compose up -d openclaw-gateway
 
-# 2. Sync workspace files
-cp workspace/AGENTS.md .openclaw/workspace/AGENTS.md
-cp workspace/SOUL.md .openclaw/workspace/SOUL.md
-
-# 3. Run a persona conversation (one message at a time, same session-id)
-cd /tmp/sourcy-openclaw
+# 2. Run a persona conversation (one message at a time, same session-id)
 docker compose run --rm openclaw-cli agent \
   --session-id v7-syed \
   --message "Hi, I need price, moq, delivery time for 500ml handwash. Target 25-30 PKR."
 
-# 4. Session files persist at:
-#    openclaw-config/agents/main/sessions/v7-syed.jsonl
+# 3. Session files persist at:
+#    .openclaw/agents/main/sessions/v7-syed.jsonl
 
-# 5. Copy results to test run folder
-cp openclaw-config/agents/main/sessions/v7-*.jsonl tests/run-v7/results/
+# 4. Copy results to test run folder
+cp .openclaw/agents/main/sessions/v7-*.jsonl tests/run-v7/results/
 
 # 6. Write assessment using rubric, save to tests/run-v7/assessments/
 ```
@@ -163,29 +192,29 @@ cp openclaw-config/agents/main/sessions/v7-*.jsonl tests/run-v7/results/
 
 8/8 PASS. Average 8.8/10.
 
-| Persona | Turns | Score | Key Result |
-|---------|-------|-------|------------|
-| Anam | 5 | 7.8 | Prices-first fixed dead turns |
-| femmoraaa | 3 | 9.0 | No process dump, clean budget Q |
-| Jesus | 3 | 8.0 | Catalog one-liner, prices for all categories |
-| Syed | 2 | 8.5 | Honest math, specific exit door |
-| Battery | 2 | 8.5 | Held firm under pushback |
-| Anthony | 2 | 9.0 | Branded restriction + alternative |
-| Jammaica | 1 | 10.0 | Call handoff + value in parallel |
-| Candle | 2 | 8.5 | Respectful exit, specific re-entry door |
+| Persona   | Turns | Score | Key Result                                   |
+| --------- | ----- | ----- | -------------------------------------------- |
+| Anam      | 5     | 7.8   | Prices-first fixed dead turns                |
+| femmoraaa | 3     | 9.0   | No process dump, clean budget Q              |
+| Jesus     | 3     | 8.0   | Catalog one-liner, prices for all categories |
+| Syed      | 2     | 8.5   | Honest math, specific exit door              |
+| Battery   | 2     | 8.5   | Held firm under pushback                     |
+| Anthony   | 2     | 9.0   | Branded restriction + alternative            |
+| Jammaica  | 1     | 10.0  | Call handoff + value in parallel             |
+| Candle    | 2     | 8.5   | Respectful exit, specific re-entry door      |
 
 ### Version History
 
-| Version | Date | Personas | Pass | Avg Lines | Key Change |
-|---------|------|----------|------|-----------|------------|
-| v1 | Feb 12 | 6 | 67% | 12-18 | Baseline |
-| v2 | Feb 12 | 8 | 88% | 10-15 | Call handoff, budget math |
-| v3 | Feb 12 | 8 | 100% | 8-12 | WHY enforcement, restricted products |
-| v3-test | Feb 12 | 6 new | 100% | 8-12 | Generalization confirmed |
-| v4 | Feb 12 | 14 | Regressions | 6-10 | Strict persona testing |
-| v5 | Feb 12 | 4 fixes | 100% | 6-10 | Absolute restrictions, estimate budgets |
-| v6 | Feb 16 | 5 | 60% | 2-5 | Per-turn priority, hard cap (stricter rubric) |
-| v7 | Feb 16 | 8 | 100% | 1-4 | Prices-first, one-liner rules |
+| Version | Date   | Personas | Pass        | Avg Lines | Key Change                                    |
+| ------- | ------ | -------- | ----------- | --------- | --------------------------------------------- |
+| v1      | Feb 12 | 6        | 67%         | 12-18     | Baseline                                      |
+| v2      | Feb 12 | 8        | 88%         | 10-15     | Call handoff, budget math                     |
+| v3      | Feb 12 | 8        | 100%        | 8-12      | WHY enforcement, restricted products          |
+| v3-test | Feb 12 | 6 new    | 100%        | 8-12      | Generalization confirmed                      |
+| v4      | Feb 12 | 14       | Regressions | 6-10      | Strict persona testing                        |
+| v5      | Feb 12 | 4 fixes  | 100%        | 6-10      | Absolute restrictions, estimate budgets       |
+| v6      | Feb 16 | 5        | 60%         | 2-5       | Per-turn priority, hard cap (stricter rubric) |
+| v7      | Feb 16 | 8        | 100%        | 1-4       | Prices-first, one-liner rules                 |
 
 ## Repo Structure
 
@@ -198,12 +227,10 @@ workspace/
   USER.md               # User context
   TOOLS.md              # Available tools
   context/              # Gold standard conversation examples
-.openclaw/              # Docker-mounted OpenClaw config (gateway)
+.openclaw/              # Docker-mounted OpenClaw config
   openclaw.json         # Model, channels, gateway config
-  workspace/            # Bind-mounted workspace (keep synced)
-  agents/main/sessions/ # Gateway session files
-openclaw-config/        # CLI-specific OpenClaw config
-  agents/main/sessions/ # CLI session files (persist after tests)
+  workspace/            # Bind-mounted (same as workspace/)
+  agents/main/sessions/ # Persisted session files
 context/
   Good/                 # Real WA chats — successful leads
   Bad/                  # Real WA chats — failed/lost leads
@@ -234,6 +261,7 @@ The `Dockerfile` and `entrypoint.sh` in this repo handle everything:
 2. `entrypoint.sh` — writes `openclaw.json` (Telegram config) and `auth-profiles.json` (Anthropic key) from Railway env vars at startup, then runs the gateway
 
 **Railway env vars (set on the service):**
+
 - `ANTHROPIC_API_KEY` — Anthropic API key for Claude Opus
 - `TELEGRAM_BOT_TOKEN` — Telegram bot token from BotFather
 - `OPENCLAW_GATEWAY_TOKEN` — gateway auth token

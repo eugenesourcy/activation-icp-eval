@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eric Summary (v1-v7)</title>
+  <style>
+    :root {
+      --bg: #f4efe4;
+      --paper: #fffaf0;
+      --ink: #1f2a2a;
+      --muted: #5d6b6b;
+      --line: #d6ccba;
+      --brand: #1d7f72;
+      --brand-2: #d97b2d;
+      --ok: #2f8f46;
+      --warn: #b76f00;
+      --bad: #b33939;
+      --shadow: 0 10px 30px rgba(22, 27, 29, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 400px at 100% -20%, #ffd9a8 0%, transparent 70%),
+        radial-gradient(1100px 500px at -10% 0%, #bfe4de 0%, transparent 65%),
+        var(--bg);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+    .hero {
+      background: linear-gradient(140deg, #163a3a 0%, #1d7f72 55%, #2ca38f 100%);
+      color: #f7fffe;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      margin: 0 0 8px;
+      letter-spacing: 0.2px;
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 700;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 920px;
+      color: #e6fffb;
+    }
+    .row {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+    .kpi .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .kpi .value {
+      margin-top: 4px;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .kpi .sub {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th {
+      color: #13312e;
+      background: #e7f5f2;
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag.ok { background: #e6f7ea; color: var(--ok); }
+    .tag.warn { background: #fff5e5; color: var(--warn); }
+    .tag.bad { background: #ffe9e9; color: var(--bad); }
+    .tag.neutral { background: #ebf0f0; color: #4d5b5b; }
+    .version-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .version-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+    .version-card p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .version-card ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+    }
+    .version-card li + li { margin-top: 4px; }
+    .links {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .links a {
+      text-decoration: none;
+      color: #0f4f47;
+      border: 1px solid #b4d7d2;
+      background: #effaf8;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .links a:hover {
+      background: #dcf5f0;
+    }
+    .meaning {
+      background: linear-gradient(180deg, #fffaf0 0%, #fff6e8 100%);
+    }
+    .meaning h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+    .meaning p {
+      margin: 0;
+      color: #3f4a4a;
+      font-size: 14px;
+    }
+    .meaning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .bar-wrap {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+    .bar {
+      margin-top: 9px;
+      background: #e7eceb;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #1d7f72, #2ca38f);
+      width: 0%;
+    }
+    .foot {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    code { font-family: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace; }
+
+    @media (max-width: 980px) {
+      .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .version-grid { grid-template-columns: 1fr; }
+      .meaning-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Eric Summary (v1-v7)</h1>
+      <p>
+        Single-page reading view for all prompt/eval versions from <code>v1</code> to <code>v7</code>, including hold-out tests,
+        regressions, fixes, and current status.
+      </p>
+    </section>
+
+    <section class="row">
+      <article class="card kpi">
+        <div class="label">Latest Status</div>
+        <div class="value">v7: 8/8 PASS</div>
+        <div class="sub">Overall 8.8/10, all binary checks passed</div>
+      </article>
+      <article class="card kpi">
+        <div class="label">Trajectory</div>
+        <div class="value">67% → 100%</div>
+        <div class="sub">From v1 baseline to v7 stabilization</div>
+      </article>
+      <article class="card kpi">
+        <div class="label">Biggest Fail Period</div>
+        <div class="value">v4 / v6b</div>
+        <div class="sub">v4 exposed regressions, v6b scored 3/5 under stricter rubric</div>
+      </article>
+      <article class="card kpi">
+        <div class="label">Highest Leverage Fix</div>
+        <div class="value">Prices-First</div>
+        <div class="sub">Lead category mention now gets price range immediately</div>
+      </article>
+    </section>
+
+    <h2>Version Timeline</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>Date</th>
+            <th>Scope</th>
+            <th>Main Result</th>
+            <th>Status</th>
+            <th>Key Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>v1</strong></td>
+            <td>2026-02-12</td>
+            <td>6 core personas</td>
+            <td>4/6 pass (67%)</td>
+            <td><span class="tag bad">Baseline Issues</span></td>
+            <td>Bot could answer basics, but mishandled call requests and wrongly exited a viable lead.</td>
+          </tr>
+          <tr>
+            <td><strong>v2</strong></td>
+            <td>2026-02-12</td>
+            <td>8 personas</td>
+            <td>7/8 pass (88%)</td>
+            <td><span class="tag warn">Major Fixes</span></td>
+            <td>Fixed call handoff, budget math, and no-company handling; introduced battery restricted-product miss.</td>
+          </tr>
+          <tr>
+            <td><strong>v3</strong></td>
+            <td>2026-02-12</td>
+            <td>8 personas</td>
+            <td>8/8 pass (100%)</td>
+            <td><span class="tag ok">Strong</span></td>
+            <td>Restricted-product handling fixed; better message discipline and WHY explanations.</td>
+          </tr>
+          <tr>
+            <td><strong>v3-test</strong></td>
+            <td>2026-02-12</td>
+            <td>6 unseen personas</td>
+            <td>6/6 pass (100%)</td>
+            <td><span class="tag ok">Generalized</span></td>
+            <td>Prompt transferred to unseen scenarios (Bahasa, timeline pressure, skeptical leads).</td>
+          </tr>
+          <tr>
+            <td><strong>v4</strong></td>
+            <td>2026-02-12</td>
+            <td>14 personas (8 core + 6 adversarial)</td>
+            <td>Regressions found</td>
+            <td><span class="tag bad">Regression Exposed</span></td>
+            <td>Strict replay revealed key failures: battery reversal under pushback, weak closing behavior.</td>
+          </tr>
+          <tr>
+            <td><strong>v5</strong></td>
+            <td>2026-02-12</td>
+            <td>4 failed personas rerun</td>
+            <td>4/4 fixes verified</td>
+            <td><span class="tag ok">Recovered</span></td>
+            <td>Holds restrictions, estimates budgets for unclear leads, leaves specific re-entry doors.</td>
+          </tr>
+          <tr>
+            <td><strong>v6b</strong></td>
+            <td>2026-02-16</td>
+            <td>5 personas with scored rubric</td>
+            <td>3/5 pass, avg 6.5/10</td>
+            <td><span class="tag bad">Rubric Failure</span></td>
+            <td>Became concise but still had low-value narrowing and process dumps in critical turns.</td>
+          </tr>
+          <tr>
+            <td><strong>v7</strong></td>
+            <td>2026-02-16</td>
+            <td>8 core personas</td>
+            <td>8/8 pass, avg 8.8/10</td>
+            <td><span class="tag ok">Current Best</span></td>
+            <td>Prices-first + one-line catalog/process replies resolved major v6b failures.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Pass-Rate Trend</h2>
+    <div class="bar-wrap">
+      <div><strong>v1:</strong> 67%</div>
+      <div class="bar"><span style="width:67%"></span></div>
+      <div><strong>v2:</strong> 88%</div>
+      <div class="bar"><span style="width:88%"></span></div>
+      <div><strong>v3:</strong> 100%</div>
+      <div class="bar"><span style="width:100%"></span></div>
+      <div><strong>v3-test:</strong> 100%</div>
+      <div class="bar"><span style="width:100%"></span></div>
+      <div><strong>v6b:</strong> 60% (scored rubric)</div>
+      <div class="bar"><span style="width:60%"></span></div>
+      <div><strong>v7:</strong> 100% (core set)</div>
+      <div class="bar"><span style="width:100%"></span></div>
+    </div>
+
+    <h2>Version Cards + Links</h2>
+    <div class="version-grid">
+      <article class="card version-card">
+        <h3>v1 (Baseline)</h3>
+        <p>First practical benchmark. Showed early wins and critical failures in handling real lead intent.</p>
+        <ul>
+          <li>Failed on call handoff and wrong exit for qualified budget lead.</li>
+          <li>Formatting issues (tables, verbosity) for WhatsApp.</li>
+        </ul>
+        <div class="links">
+          <a href="tests/run-v1/run_summary_v1.md">Run Summary</a>
+          <a href="tests/run-v1/results/">Results Folder</a>
+        </div>
+      </article>
+
+      <article class="card version-card">
+        <h3>v2 (Operational Fixes)</h3>
+        <p>Applied direct fixes from v1 failures and improved trust/conversion behavior.</p>
+        <ul>
+          <li>Calls handled correctly, budget math applied, no-company false negatives reduced.</li>
+          <li>New battery restriction miss appeared.</li>
+        </ul>
+        <div class="links">
+          <a href="tests/run-v2/run_summary_v2.md">Run Summary</a>
+          <a href="tests/run-v2/results/">Results Folder</a>
+        </div>
+      </article>
+
+      <article class="card version-card">
+        <h3>v3 + v3-test (Generalization)</h3>
+        <p>Prompt behavior became stable across known and unseen personas.</p>
+        <ul>
+          <li>Restricted-products fixed and held.</li>
+          <li>6/6 hold-out personas passed (including skeptical and multilingual flows).</li>
+        </ul>
+        <div class="links">
+          <a href="tests/run-v3/run_summary_v3.md">v3 Summary</a>
+          <a href="tests/run-v3-test/run_summary_v3_test.md">v3-test Summary</a>
+        </div>
+      </article>
+
+      <article class="card version-card">
+        <h3>v4 + v4-fullsr (Stress + Closing)</h3>
+        <p>Strict replay and adversarial scenarios exposed hidden weaknesses despite earlier strong pass rates.</p>
+        <ul>
+          <li>Battery reversal under pushback was a high-risk regression.</li>
+          <li>Highlighted closing weakness: conversations stayed alive but did not always convert to SR completion.</li>
+        </ul>
+        <div class="links">
+          <a href="tests/run-v4-fullsr/run_summary_v4.md">v4 Summary</a>
+          <a href="tests/run-v4-fullsr/run_summary_v4_fullsr.md">v4 Full SR</a>
+          <a href="tests/run-v4-fullsr/personas_testset.md">Adversarial Personas</a>
+        </div>
+      </article>
+
+      <article class="card version-card">
+        <h3>v5 (Fix Verification)</h3>
+        <p>Targeted rerun focused only on known failures from v4.</p>
+        <ul>
+          <li>4/4 issues fixed: restrictions, unclear budget handling, specific exit doors, closing drive.</li>
+          <li>Good recovery release.</li>
+        </ul>
+        <div class="links">
+          <a href="tests/run-v5/run_summary_v5.md">Run Summary</a>
+          <a href="tests/run-v5/results/">Results Folder</a>
+        </div>
+      </article>
+
+      <article class="card version-card">
+        <h3>v6b (New Rubric Shock)</h3>
+        <p>Switched to strict scored dimensions; quality bar increased.</p>
+        <ul>
+          <li>3/5 pass under scoring, with D2/D5 failures in key turns.</li>
+          <li>Core issue: asking narrowing questions before giving prices.</li>
+        </ul>
+        <div class="links">
+          <a href="tests/run-v6/run_summary_v6.md">Run Summary</a>
+          <a href="tests/ASSESSMENT_RUBRIC.md">Assessment Rubric</a>
+        </div>
+      </article>
+
+      <article class="card version-card">
+        <h3>v7 (Current Best)</h3>
+        <p>Highest consistency so far under the scored rubric.</p>
+        <ul>
+          <li>8/8 pass, average 8.8/10, all binary checks passed.</li>
+          <li>Main winning rule: prices-first whenever lead names a category.</li>
+        </ul>
+        <div class="links">
+          <a href="tests/run-v7/run_summary_v7.md">Run Summary</a>
+          <a href="tests/run-v7/assessments/">Assessments</a>
+          <a href="tests/run-v7/results/">Results</a>
+        </div>
+      </article>
+    </div>
+
+    <h2>What This Means (Plain Language)</h2>
+    <div class="meaning-grid">
+      <article class="card meaning">
+        <h3>1) ICP Clarity Improved</h3>
+        <p>
+          The bot now distinguishes much better between viable leads (keep and advance), non-ICP leads (exit with specific doors),
+          and handoff cases (calls, complex projects). Earlier versions confused these paths.
+        </p>
+      </article>
+      <article class="card meaning">
+        <h3>2) Conversation Efficiency Improved</h3>
+        <p>
+          v7 is much closer to WhatsApp-native behavior: short messages, one question, direct value first. This reduced dead turns
+          and improved confidence in early lead engagement.
+        </p>
+      </article>
+      <article class="card meaning">
+        <h3>3) Remaining Risk Is Coverage</h3>
+        <p>
+          v7 core personas are strong, but adversarial personas from v4 were not re-run on v7. The next important step is re-running
+          those skeptical buyer profiles to confirm the current prompt is robust.
+        </p>
+      </article>
+    </div>
+
+    <h2>Data & Context Links</h2>
+    <div class="card">
+      <div class="links">
+        <a href="golden_dataset_review.html">Unified Golden Review</a>
+        <a href="golden_eval_review.html">Golden Eval Framework</a>
+        <a href="icp_eval_deep_dive.html">Deep Dive HTML</a>
+        <a href="README.md">README</a>
+        <a href="workspace/AGENTS.md">Current AGENTS.md</a>
+        <a href="workspace/GOLD_STANDARD.md">GOLD_STANDARD.md</a>
+        <a href="workspace/SOUL.md">SOUL.md</a>
+        <a href="workspace/USER.md">USER.md</a>
+        <a href="context/">Raw Context Folder</a>
+        <a href="context/Decision%20Backlog%201%202efda18fc0a580e3be46e703ba9c9d79_all.csv">Decision Backlog CSV</a>
+        <a href="sourcy_wa_bot_prototype_report.html">Prototype Report HTML</a>
+      </div>
+      <p class="foot">
+        Tip: open this dashboard via local file URL:<br />
+        <code>file:///Users/eugeneclarance/Downloads/activation-icp-eval/icp_eval_dashboard.html</code>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

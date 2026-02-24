@@ -1,0 +1,1147 @@
+{
+  "dataset_name": "golden-eugene-v1-eval-comparison",
+  "version": "0.3.0",
+  "generated_at": "2026-02-23T07:22:06.631Z",
+  "threshold": {
+    "quality_average_min": 7,
+    "required_check_fail_max": 0,
+    "endpoint_match_required": true
+  },
+  "judge_mode": "same-definition-heuristic-v1 (shared evaluator for Awsaf and Eric)",
+  "notes": [
+    "Both sets are scored with the same turn-quality rubric and the same required-check logic.",
+    "Required checks come from each mapped case's must_pass_checks in cases.seed.json.",
+    "Eric examples are mapped to GD cases to enforce endpoint and policy alignment under one definition.",
+    "Awsaf baseline reference (v0.1) is included to show post-improvement transcript lift after rerun."
+  ],
+  "framework": {
+    "source_checks_file": "tests/golden-eugene-v1/cases.seed.json",
+    "check_ids": [
+      "CK-001",
+      "CK-002",
+      "CK-003",
+      "CK-004",
+      "CK-005",
+      "CK-006",
+      "CK-007",
+      "CK-008",
+      "CK-009",
+      "CK-010",
+      "CK-011",
+      "CK-012",
+      "CK-013",
+      "CK-014",
+      "CK-015",
+      "CK-016",
+      "CK-017",
+      "CK-018",
+      "CK-019",
+      "CK-020",
+      "CK-021",
+      "CK-022",
+      "CK-023",
+      "CK-024"
+    ],
+    "scoring_formula": "composite = 0.6 * quality_average + 0.4 * check_score"
+  },
+  "mappings": {
+    "eric_case_map": {
+      "v7-jesus.jsonl": "GD-017",
+      "v7-syed.jsonl": "GD-005",
+      "v7-battery.jsonl": "GD-016",
+      "v7-candle.jsonl": "GD-024",
+      "v7-anthony.jsonl": "GD-023",
+      "v7-jammaica.jsonl": "GD-007"
+    }
+  },
+  "awsaf_baseline_v01": {
+    "quality_average": 6.9,
+    "check_average": 8.67,
+    "composite_average": 7.61,
+    "pass_rate": 60,
+    "endpoint_match_rate": 80
+  },
+  "awsaf_delta_vs_v01": {
+    "quality_average": 1.05,
+    "check_average": 1.33,
+    "composite_average": 1.16,
+    "pass_rate": 40,
+    "endpoint_match_rate": 20
+  },
+  "groups": [
+    {
+      "label": "Awsaf Golden Transcripts",
+      "source": "tests/golden-eugene-v1/transcripts.seed.json",
+      "count": 5,
+      "quality_average": 7.95,
+      "check_average": 10,
+      "composite_average": 8.77,
+      "pass_rate": 100,
+      "endpoint_match_rate": 100,
+      "items": [
+        {
+          "conversation_id": "TR-001",
+          "title": "Spam / Non-sourcing redirect",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-001",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "assistant_turns": 2,
+          "quality_average": 8,
+          "required_checks": [
+            {
+              "id": "CK-012",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-020",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.8,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-002",
+          "title": "Image-led medium-intent founder flow",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-013",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "assistant_turns": 8,
+          "quality_average": 7.88,
+          "required_checks": [
+            {
+              "id": "CK-002",
+              "result": true
+            },
+            {
+              "id": "CK-003",
+              "result": true
+            },
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-017",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 5,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.73,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 6,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 9,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 18,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 20,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 24,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 26,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 28,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-003",
+          "title": "High-intent link-led ICP flow",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-010",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "assistant_turns": 8,
+          "quality_average": 7.88,
+          "required_checks": [
+            {
+              "id": "CK-001",
+              "result": true
+            },
+            {
+              "id": "CK-002",
+              "result": true
+            },
+            {
+              "id": "CK-003",
+              "result": true
+            },
+            {
+              "id": "CK-014",
+              "result": true
+            },
+            {
+              "id": "CK-017",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 6,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.73,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 5,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 8,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 14,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 16,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 20,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 22,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 24,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-004",
+          "title": "Restricted battery request with pushback",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-016",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "assistant_turns": 5,
+          "quality_average": 8.2,
+          "required_checks": [
+            {
+              "id": "CK-006",
+              "result": true
+            },
+            {
+              "id": "CK-012",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.92,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 1,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 6,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 1,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 8,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 1,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 9,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 11,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-005",
+          "title": "Multi-product flow with add-another-product loop",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-020",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "assistant_turns": 15,
+          "quality_average": 7.8,
+          "required_checks": [
+            {
+              "id": "CK-003",
+              "result": true
+            },
+            {
+              "id": "CK-014",
+              "result": true
+            },
+            {
+              "id": "CK-016",
+              "result": true
+            },
+            {
+              "id": "CK-017",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 5,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.68,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 5,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 8,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 12,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 14,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 17,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 19,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 22,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 25,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 28,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 32,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 34,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 37,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 39,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 41,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Eric Chat Examples (v7)",
+      "source": "tests/run-v7/results/*.jsonl",
+      "count": 6,
+      "quality_average": 6.28,
+      "check_average": 7.64,
+      "composite_average": 6.82,
+      "pass_rate": 16.67,
+      "endpoint_match_rate": 66.67,
+      "items": [
+        {
+          "conversation_id": "v7-jesus",
+          "title": "v7-jesus",
+          "source_group": "Eric",
+          "source_file": "tests/run-v7/results/v7-jesus.jsonl",
+          "case_id": "GD-017",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": false,
+          "assistant_turns": 3,
+          "quality_average": 6.67,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": true
+            },
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-009",
+              "result": true
+            },
+            {
+              "id": "CK-014",
+              "result": null
+            },
+            {
+              "id": "CK-017",
+              "result": null
+            },
+            {
+              "id": "CK-015",
+              "result": false
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 1,
+          "required_checks_na": 2,
+          "required_check_pass_rate": 75,
+          "check_score": 7.5,
+          "composite_score": 7,
+          "pass": false,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 6,
+              "score": 6,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 1,
+                "D5": 0
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Endpoint mismatch: expected COMPLETE_SR, got QUALIFY_AND_ADVANCE. End with explicit COMPLETE_SR behavior.",
+            "Fix CK-015: Align ending behavior with expected endpoint.",
+            "Increase concrete value per turn (constraint, range, or rationale).",
+            "End each assistant turn with clear next-step language."
+          ]
+        },
+        {
+          "conversation_id": "v7-syed",
+          "title": "v7-syed",
+          "source_group": "Eric",
+          "source_file": "tests/run-v7/results/v7-syed.jsonl",
+          "case_id": "GD-005",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": false,
+          "assistant_turns": 2,
+          "quality_average": 7,
+          "required_checks": [
+            {
+              "id": "CK-001",
+              "result": null
+            },
+            {
+              "id": "CK-002",
+              "result": null
+            },
+            {
+              "id": "CK-003",
+              "result": null
+            },
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-014",
+              "result": null
+            },
+            {
+              "id": "CK-015",
+              "result": false
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 1,
+          "required_checks_na": 4,
+          "required_check_pass_rate": 50,
+          "check_score": 5,
+          "composite_score": 6.2,
+          "pass": false,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 0,
+                "D2": 2,
+                "D3": 2,
+                "D4": 1,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 0,
+                "D2": 2,
+                "D3": 2,
+                "D4": 1,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Endpoint mismatch: expected EXIT_POLITE, got QUALIFY_AND_ADVANCE. End with explicit EXIT_POLITE behavior.",
+            "Fix CK-015: Align ending behavior with expected endpoint."
+          ]
+        },
+        {
+          "conversation_id": "v7-battery",
+          "title": "v7-battery",
+          "source_group": "Eric",
+          "source_file": "tests/run-v7/results/v7-battery.jsonl",
+          "case_id": "GD-016",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "assistant_turns": 2,
+          "quality_average": 5,
+          "required_checks": [
+            {
+              "id": "CK-006",
+              "result": true
+            },
+            {
+              "id": "CK-012",
+              "result": false
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 1,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 66.67,
+          "check_score": 6.67,
+          "composite_score": 5.67,
+          "pass": false,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 5,
+              "dimensions": {
+                "D1": 0,
+                "D2": 1,
+                "D3": 2,
+                "D4": 1,
+                "D5": 1
+              }
+            },
+            {
+              "seq": 4,
+              "score": 5,
+              "dimensions": {
+                "D1": 0,
+                "D2": 2,
+                "D3": 2,
+                "D4": 0,
+                "D5": 1
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Fix CK-012: Shorten messages to concise transition style.",
+            "Shorten longer assistant turns; keep under transition-length target.",
+            "Increase concrete value per turn (constraint, range, or rationale).",
+            "Reduce multi-branch wording; keep one move per turn.",
+            "End each assistant turn with clear next-step language."
+          ]
+        },
+        {
+          "conversation_id": "v7-candle",
+          "title": "v7-candle",
+          "source_group": "Eric",
+          "source_file": "tests/run-v7/results/v7-candle.jsonl",
+          "case_id": "GD-024",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "assistant_turns": 2,
+          "quality_average": 5.5,
+          "required_checks": [
+            {
+              "id": "CK-008",
+              "result": null
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-020",
+              "result": null
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 2,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 7.3,
+          "pass": false,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 6,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 1,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 5,
+              "dimensions": {
+                "D1": 0,
+                "D2": 2,
+                "D3": 0,
+                "D4": 1,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Shorten longer assistant turns; keep under transition-length target.",
+            "Add one qualification/routing question where flow allows.",
+            "Reduce multi-branch wording; keep one move per turn.",
+            "End each assistant turn with clear next-step language.",
+            "Required checks are passing; focus on per-turn quality lift above 7.0."
+          ]
+        },
+        {
+          "conversation_id": "v7-anthony",
+          "title": "v7-anthony",
+          "source_group": "Eric",
+          "source_file": "tests/run-v7/results/v7-anthony.jsonl",
+          "case_id": "GD-023",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "assistant_turns": 2,
+          "quality_average": 7.5,
+          "required_checks": [
+            {
+              "id": "CK-007",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-018",
+              "result": true
+            },
+            {
+              "id": "CK-020",
+              "result": null
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.5,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 1
+              }
+            },
+            {
+              "seq": 4,
+              "score": 6,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 1,
+                "D5": 0
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "v7-jammaica",
+          "title": "v7-jammaica",
+          "source_group": "Eric",
+          "source_file": "tests/run-v7/results/v7-jammaica.jsonl",
+          "case_id": "GD-007",
+          "expected_endpoint": "HUMAN_HANDOFF",
+          "actual_endpoint": "HUMAN_HANDOFF",
+          "endpoint_match": true,
+          "assistant_turns": 1,
+          "quality_average": 6,
+          "required_checks": [
+            {
+              "id": "CK-010",
+              "result": true
+            },
+            {
+              "id": "CK-012",
+              "result": false
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 1,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 66.67,
+          "check_score": 6.67,
+          "composite_score": 6.27,
+          "pass": false,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 6,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 1,
+                "D5": 0
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Fix CK-012: Shorten messages to concise transition style.",
+            "Shorten longer assistant turns; keep under transition-length target.",
+            "Reduce multi-branch wording; keep one move per turn.",
+            "End each assistant turn with clear next-step language."
+          ]
+        }
+      ]
+    }
+  ]
+}

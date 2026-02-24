@@ -1,0 +1,866 @@
+{
+  "dataset_name": "golden-eugene-v1-transcripts",
+  "version": "0.1.0",
+  "owner": "Analysis draft",
+  "purpose": "Exemplar transcripts for team calibration before eval runs",
+  "transcripts": [
+    {
+      "transcript_id": "TR-001",
+      "case_id": "GD-001",
+      "title": "Spam / Non-sourcing redirect",
+      "profile_band": "low-intent non-buyer",
+      "goal": "Demonstrate polite out-of-scope handling without tool usage.",
+      "expected_endpoint": "EXIT_POLITE",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Are you hiring for remote jobs?"
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great question. I can help with sourcing requests. What product are you looking to source?"
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "No, I need a job."
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Understood. This chat handles sourcing only, so please check Sourcy careers channels. If you need sourcing later, share product and quantity."
+        }
+      ],
+      "notes": [
+        "No product tools should be called.",
+        "Conversation stays concise and respectful.",
+        "Clear endpoint: polite exit."
+      ]
+    },
+    {
+      "transcript_id": "TR-002",
+      "case_id": "GD-013",
+      "title": "Image-led medium-intent founder flow",
+      "profile_band": "mid-intent startup ICP",
+      "goal": "Show complete stage behavior with image upload, AHA sequence, feasibility, and stage-4 contact flow.",
+      "expected_endpoint": "COMPLETE_SR",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "I want to source minimalist gold jewelry for my new Instagram brand."
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great category. Do you have a reference image? Upload one, or say skip so I can run product analysis."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "[Reference image uploaded]"
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "userDescription + imageBase64=pending"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "productIntelligence",
+          "output_summary": "Product identified: stainless PVD jewelry. Chip groups: material, branding, color. MOQ guidance included."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 7,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: material=PVD stainless, branding=logo card, color=gold."
+        },
+        {
+          "seq": 8,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2"
+        },
+        {
+          "seq": 9,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Building your offering now. I’ll run product, pricing, and concepts, then you can pick one."
+        },
+        {
+          "seq": 10,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "selected customizations + current product context"
+        },
+        {
+          "seq": 11,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "This is a style-sensitive jewelry SKU. PVD improves durability for daily wear. Branding via card keeps MOQ practical."
+        },
+        {
+          "seq": 12,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product + specs + customizations"
+        },
+        {
+          "seq": 13,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "pricingIntelligence",
+          "output_summary": "Sourcy DDP range generated with cost tips and destination estimates."
+        },
+        {
+          "seq": 14,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Pricing is competitive for starter quantity. Biggest lever is order volume per design. Logistics remains manageable for this category."
+        },
+        {
+          "seq": 15,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "product + specs + customizations"
+        },
+        {
+          "seq": 16,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "visualConceptGeneration",
+          "output_summary": "3 concept labels rendered with images and prompts."
+        },
+        {
+          "seq": 17,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Concepts vary by finish and silhouette while preserving your minimal aesthetic. This helps validate fit before refinement."
+        },
+        {
+          "seq": 18,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your offering is ready — $1.90-$3.60 DDP. Pick a visual concept below."
+        },
+        {
+          "seq": 19,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "I picked concept 2. Let's refine."
+        },
+        {
+          "seq": 20,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great choice! Your estimate is $1.90-$3.60/unit. Fill in the details below to refine."
+        },
+        {
+          "seq": 21,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 300, Destination: Pakistan, Timeline: 8 weeks"
+        },
+        {
+          "seq": 22,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "quantity + destination + timeline + pricing context"
+        },
+        {
+          "seq": 23,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "feasibilityAssessment",
+          "output_summary": "Status: yellow. Suggestion: increase MOQ or simplify finish for lower unit cost."
+        },
+        {
+          "seq": 24,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility is workable with small adjustments. Want to add another product, or ready to finalize?"
+        },
+        {
+          "seq": 25,
+          "stage": "stage3_to_stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Ready to finalize."
+        },
+        {
+          "seq": 26,
+          "stage": "stage4",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Let's finalize — please fill in your details below."
+        },
+        {
+          "seq": 27,
+          "stage": "stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Name: Fatima, Email: fatima@femmoraaa.co, Company: femmoraaa, Phone: +92..."
+        },
+        {
+          "seq": 28,
+          "stage": "complete",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Confirmed: PVD jewelry, 300 units, delivery to Pakistan. We’ll proceed with supplier outreach and send next steps."
+        }
+      ],
+      "notes": [
+        "No pricing/visual tools are called before step1Complete.",
+        "Feasibility is called immediately after structured form message.",
+        "No contact request appears before stage 4."
+      ]
+    },
+    {
+      "transcript_id": "TR-003",
+      "case_id": "GD-010",
+      "title": "High-intent link-led ICP flow",
+      "profile_band": "high-intent qualified ICP",
+      "goal": "Demonstrate fast progression from clear lead input to complete SR with correct stage/tool orchestration.",
+      "expected_endpoint": "COMPLETE_SR",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "I need custom dog harnesses, 500 units. Reference link: Alibaba listing above."
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great brief. Do you have a reference image? Upload one, or say skip so I can run product analysis."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Skip. Use the link details."
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "userDescription from link context (no image)"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: material=nylon+mesh, branding=woven label, color=black+orange."
+        },
+        {
+          "seq": 7,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2"
+        },
+        {
+          "seq": 8,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Building your offering now. I’ll run product, pricing, and concepts, then you can pick one."
+        },
+        {
+          "seq": 9,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "locked customizations and harness context"
+        },
+        {
+          "seq": 10,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "This specification is production-ready. Nylon mesh balances durability and comfort. Woven labels scale well at this MOQ."
+        },
+        {
+          "seq": 11,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product + selected specs + quantity signal"
+        },
+        {
+          "seq": 12,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "At 500 units, pricing should be stable. Material and buckle quality are primary cost drivers. Destination will sharpen landed range."
+        },
+        {
+          "seq": 13,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "harness design direction + custom colors + branding"
+        },
+        {
+          "seq": 14,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your offering is ready — $4.30-$5.70 DDP. Pick a visual concept below."
+        },
+        {
+          "seq": 15,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Picked concept 1."
+        },
+        {
+          "seq": 16,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great choice! Your estimate is $4.30-$5.70/unit. Fill in the details below to refine."
+        },
+        {
+          "seq": 17,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 500, Destination: UK, Timeline: 6 weeks"
+        },
+        {
+          "seq": 18,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "quantity + destination + timeline + current pricing"
+        },
+        {
+          "seq": 19,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "feasibilityAssessment",
+          "output_summary": "Status: green. Feasible with current specs and timeline."
+        },
+        {
+          "seq": 20,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility looks good. Want to add another product, or ready to finalize?"
+        },
+        {
+          "seq": 21,
+          "stage": "stage3_to_stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Finalize."
+        },
+        {
+          "seq": 22,
+          "stage": "stage4",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Let's finalize — please fill in your details below."
+        },
+        {
+          "seq": 23,
+          "stage": "stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Name: Roy Weissbach, Email: roy@brand.co, Company: UK Pet Co, Phone: +44..."
+        },
+        {
+          "seq": 24,
+          "stage": "complete",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Confirmed: custom dog harness, 500 units, delivery to UK. Your sourcing request is finalized for supplier quoting."
+        }
+      ],
+      "notes": [
+        "Uses skip branch correctly before PI in stage 1.",
+        "Stage 2 includes AHA close with DDP mention.",
+        "Stage 4 transition text is exact and isolated."
+      ]
+    },
+    {
+      "transcript_id": "TR-004",
+      "case_id": "GD-016",
+      "title": "Restricted battery request with pushback",
+      "profile_band": "compliance-critical lead",
+      "goal": "Show firm restricted-category hold with clear rationale and safe pivot options.",
+      "expected_endpoint": "EXIT_POLITE",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Need Long 12/7 original batteries. Can source?"
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Got it. Do you have a reference image? Upload one or just say skip."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "[Reference image uploaded]"
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "battery request + imageBase64=pending"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "productIntelligence",
+          "output_summary": "Product classified as lead-acid battery; related accessories recognized."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "I can’t support battery sourcing due dangerous-goods shipping restrictions. To avoid seizure risk, I must decline this request. Should I close this now?"
+        },
+        {
+          "seq": 7,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Importing batteries here is allowed. Why not source?"
+        },
+        {
+          "seq": 8,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Understood. Even if local import is allowed, carrier and transit safety rules still block this lane. Should I close this battery request now?"
+        },
+        {
+          "seq": 9,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Thanks for understanding. Do you want to continue with a non-restricted product instead?"
+        },
+        {
+          "seq": 10,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "No, that is fine."
+        },
+        {
+          "seq": 11,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Appreciate it. We can’t ship batteries under dangerous-goods rules, so this request stays closed. When ready, tell me product and quantity."
+        }
+      ],
+      "notes": [
+        "No pricing/visual tools should run for restricted battery request.",
+        "Restriction stays firm under pushback.",
+        "Outcome is compliant, polite exit with optional safe pivot."
+      ]
+    },
+    {
+      "transcript_id": "TR-005",
+      "case_id": "GD-020",
+      "title": "Multi-product flow with add-another-product loop",
+      "profile_band": "high-intent multi-SKU ICP",
+      "goal": "Show product 1 completion, add-another-product reset, product 2 flow, then finalization.",
+      "expected_endpoint": "COMPLETE_SR",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Need custom tote bags for event giveaways."
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great use case. Do you have a reference image? Upload one, or say skip so I can run product analysis."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Skip."
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "tote bag request (no image)"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: material=canvas, branding=screen print, color=beige."
+        },
+        {
+          "seq": 7,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2"
+        },
+        {
+          "seq": 8,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Building your offering now. I’ll run product, pricing, and concepts, then you can pick one."
+        },
+        {
+          "seq": 9,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "product1 selected customizations"
+        },
+        {
+          "seq": 10,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product1 pricing run"
+        },
+        {
+          "seq": 11,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "product1 visual concepts"
+        },
+        {
+          "seq": 12,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your offering is ready — $0.80-$1.20 DDP. Pick a visual concept below."
+        },
+        {
+          "seq": 13,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Picked concept 3. Let’s refine."
+        },
+        {
+          "seq": 14,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great choice! Your estimate is $0.80-$1.20/unit. Fill in the details below to refine."
+        },
+        {
+          "seq": 15,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 2000, Destination: Philippines, Timeline: 7 weeks"
+        },
+        {
+          "seq": 16,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "product1 quantity/destination/timeline"
+        },
+        {
+          "seq": 17,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility looks good. Want to add another product to this request, or ready to finalize?"
+        },
+        {
+          "seq": 18,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Add another product."
+        },
+        {
+          "seq": 19,
+          "stage": "stage3_to_stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Tell me about your next product, and share an image or link if you have one."
+        },
+        {
+          "seq": 20,
+          "stage": "stage3_to_stage1",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "SAVE_AND_ADD_PRODUCT; stage reset to 1"
+        },
+        {
+          "seq": 21,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Also need branded stainless tumblers."
+        },
+        {
+          "seq": 22,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great add-on. Do you have a reference image? Upload one, or say skip so I can run product analysis."
+        },
+        {
+          "seq": 23,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "[Reference image uploaded]"
+        },
+        {
+          "seq": 24,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "tumbler request + imageBase64=pending"
+        },
+        {
+          "seq": 25,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 26,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: material=stainless, branding=laser logo, color=matte black."
+        },
+        {
+          "seq": 27,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2 (product2)"
+        },
+        {
+          "seq": 28,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Building your offering now. I’ll run product, pricing, and concepts, then you can pick one."
+        },
+        {
+          "seq": 29,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "product2 selected customizations"
+        },
+        {
+          "seq": 30,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product2 pricing run"
+        },
+        {
+          "seq": 31,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "product2 visual concepts"
+        },
+        {
+          "seq": 32,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your offering is ready — $2.40-$3.40 DDP. Pick a visual concept below."
+        },
+        {
+          "seq": 33,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Concept 1 works. Continue."
+        },
+        {
+          "seq": 34,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Great choice! Your estimate is $2.40-$3.40/unit. Fill in the details below to refine."
+        },
+        {
+          "seq": 35,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 1000, Destination: Philippines, Timeline: 8 weeks"
+        },
+        {
+          "seq": 36,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "product2 quantity/destination/timeline"
+        },
+        {
+          "seq": 37,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility looks good. Want to add another product, or ready to finalize?"
+        },
+        {
+          "seq": 38,
+          "stage": "stage3_to_stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Ready to finalize."
+        },
+        {
+          "seq": 39,
+          "stage": "stage4",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Let's finalize — please fill in your details below."
+        },
+        {
+          "seq": 40,
+          "stage": "stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Name: Maria, Email: maria@brand.co, Company: Brand Co, Phone: +63..."
+        },
+        {
+          "seq": 41,
+          "stage": "complete",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Confirmed two products: tote bags + tumblers, with Philippines delivery. Request finalized for supplier quoting."
+        }
+      ],
+      "notes": [
+        "Demonstrates SAVE_AND_ADD_PRODUCT loop behavior.",
+        "Each product follows sequential tool order before feasibility.",
+        "Finalization happens only after explicit user confirmation."
+      ]
+    }
+  ]
+}

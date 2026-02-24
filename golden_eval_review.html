@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Golden Eval Framework + Unified Comparison</title>
+  <style>
+    :root { --bg:#f3efe5; --panel:#fffaf0; --line:#d7ccba; --ink:#1f2b2b; --muted:#5f6d6d; --brand:#126d60; --shadow:0 10px 30px rgba(20,25,27,.08); --ok:#2f8e45; --bad:#9f3b2f; --na:#6b7680; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); font-family:"Avenir Next","Segoe UI","Helvetica Neue",sans-serif; background:radial-gradient(860px 300px at 90% -15%, #ffd9b2 0%, transparent 70%),radial-gradient(1000px 450px at -10% 0%, #bfe5dd 0%, transparent 65%),var(--bg); }
+    .wrap { max-width:1360px; margin:0 auto; padding:16px; }
+    .hero { border-radius:14px; background:linear-gradient(135deg,#143534 0%,#126d60 50%,#28a38c 100%); color:#f3fffc; box-shadow:var(--shadow); padding:16px; }
+    .hero h1 { margin:0 0 6px; font-size:clamp(22px,3vw,33px); }
+    .hero p { margin:0; color:#ddf9f3; font-size:14px; }
+    .kpis { margin-top:12px; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:10px; }
+    .num { font-size:24px; font-weight:700; color:var(--brand); line-height:1; }
+    .label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; font-weight:700; margin-top:4px; }
+    h2 { margin:18px 0 8px; font-size:18px; }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .meta { margin:4px 0; color:#344242; }
+    .small { font-size:12px; color:#596666; }
+    .tag { display:inline-block; font-size:11px; border-radius:999px; border:1px solid #d6dede; background:#edf1f1; color:#4c5959; padding:2px 8px; margin-right:4px; margin-bottom:4px; }
+    .tag.ok { background:#e8f7eb; border-color:#bde3c5; color:var(--ok); }
+    .tag.bad { background:#fff0ec; border-color:#efc8be; color:var(--bad); }
+    .tag.na { background:#eff2f4; border-color:#d5dde3; color:var(--na); }
+    .table-wrap { overflow:auto; }
+    table { width:100%; border-collapse:collapse; min-width:1080px; }
+    th, td { border-bottom:1px solid var(--line); border-right:1px solid var(--line); padding:8px 10px; font-size:13px; text-align:left; vertical-align:top; }
+    th { background:#ecf8f5; font-weight:700; color:#173635; }
+    tr:last-child td { border-bottom:0; }
+    tr td:last-child, tr th:last-child { border-right:0; }
+    ul { margin:0; padding-left:18px; }
+    li + li { margin-top:4px; }
+    pre { margin:0; white-space:pre-wrap; background:#fbf5e8; border:1px solid #e6dccb; border-radius:8px; padding:10px; font-size:12px; }
+    code { background:#f3efe6; border:1px solid #e0d7c6; border-radius:6px; padding:1px 6px; }
+    @media (max-width: 1000px) { .kpis, .grid2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Golden Eval Framework + Unified Comparison</h1>
+      <p>golden-eugene-v1-seed v0.1.0 | Rubric + judge prompt first, then shared Awsaf/Eric results</p>
+    </section>
+
+    <section class="kpis">
+      <article class="card"><div class="num">27</div><div class="label">Golden Cases</div></article>
+      <article class="card"><div class="num">24</div><div class="label">Checks</div></article>
+      <article class="card"><div class="num">5</div><div class="label">B4 ICP Cases</div></article>
+      <article class="card"><div class="num">5 / 3</div><div class="label">B5/B6 Stress</div></article>
+      <article class="card"><div class="num">11</div><div class="label">Conversations Scored</div></article>
+    </section>
+
+    <h2>Eval Prompt Logic (Used for Scoring)</h2>
+    <section class="card">
+      <ul>
+        <li>Judge scores assistant turns on D1-D5 (0-2 each), then averages per conversation.</li>
+        <li>Conversation pass requires: quality average >= 7, zero required-check fails, and endpoint match.</li>
+        <li>Required checks are taken from each mapped GD case in <code>cases.seed.json</code>.</li>
+      </ul>
+      <p class="small" style="margin-top:8px;"><strong>Prompt template file:</strong> <code>tests/golden-eugene-v1/GPT_JUDGE_PROMPT.md</code></p>
+      <pre># GPT Judge Prompt (Golden Transcript Eval)
+
+Use this prompt to evaluate transcript quality using the same v6/v7 rubric style.
+
+---
+
+You are an evaluation judge for Sourcy activation chat transcripts.
+
+## Rubric
+Score each **assistant message turn** on 5 dimensions, each 0-2:
+- D1 Message Length
+- D2 Value Delivery
+- D3 Qualification
+- D4 Conversation Discipline
+- D5 Last Message Test
+
+Per turn max = 10.
+Conversation score = average turn score.
+Pass threshold = average &gt;= 7.0.
+
+## Binary Checks (conversation-level)
+- RESTRICTED_HOLD (Y/N/NA)
+- BUDGET_MATH (Y/N/NA)
+- EXIT_DOOR (Y/N/NA)
+- LANGUAGE_MATCH (Y/N)
+- FORMAT_OK (Y/N)
+
+## Instructions
+1. Evaluate only the transcript provided.
+2. Use concise factual reasoning.
+3. If a turn is a system/tool step, skip scoring that turn.
+4. Score assistant *message* turns only.
+5. Return strict JSON only.
+
+## Required JSON Output
+{
+  &quot;conversation_id&quot;: &quot;...&quot;,
+  &quot;assistant_turns_scored&quot;: 0,
+  &quot;turns&quot;: [
+    {
+      &quot;seq&quot;: 0,
+      &quot;score&quot;: 0,
+      &quot;dimensions&quot;: {
+        &quot;D1&quot;: 0,
+        &quot;D2&quot;: 0,
+        &quot;D3&quot;: 0,
+        &quot;D4&quot;: 0,
+        &quot;D5&quot;: 0
+      },
+      &quot;reason&quot;: &quot;short reason&quot;
+    }
+  ],
+  &quot;conversation_average&quot;: 0,
+  &quot;pass&quot;: false,
+  &quot;binary_checks&quot;: {
+    &quot;RESTRICTED_HOLD&quot;: &quot;Y&quot;,
+    &quot;BUDGET_MATH&quot;: &quot;NA&quot;,
+    &quot;EXIT_DOOR&quot;: &quot;NA&quot;,
+    &quot;LANGUAGE_MATCH&quot;: &quot;Y&quot;,
+    &quot;FORMAT_OK&quot;: &quot;Y&quot;
+  },
+  &quot;summary&quot;: &quot;1-3 sentence summary&quot;
+}
+
+---
+
+Input transcript:
+{{TRANSCRIPT_JSON}}
+</pre>
+    </section>
+
+    <h2>Rubric Dimensions (Displayed Before Results)</h2>
+    <section class="card table-wrap">
+      <table>
+        <thead><tr><th>Dimension</th><th>Definition</th><th>0-2 behavior</th></tr></thead>
+        <tbody>
+          <tr><td><strong>D1</strong></td><td>Message Length (0-2)</td><td><ul><li>2 = 1-3 lines. No bullet lists, no numbered steps, no price tables.</li><li>1 = 4-5 lines. Slight overrun but still scannable.</li><li>0 = 6+ lines, bullet dumps, process explanations, or walls of text.</li></ul></td></tr><tr><td><strong>D2</strong></td><td>Value Delivery (0-2)</td><td><ul><li>2 = Specific price, material tradeoff, or market insight relevant to their category. Lead learns something.</li><li>1 = Generic but useful (e.g., &quot;jewelry is a good category&quot;). Some value but not specific.</li><li>0 = No value delivered. Only asked a question, narrowed scope, or explained process.</li></ul></td></tr><tr><td><strong>D3</strong></td><td>Qualification (0-2)</td><td><ul><li>2 = Got a qualifying signal (budget, quantity, intent, use case) or correctly identified non-ICP.</li><li>1 = Asked a qualifying question but didn&#39;t get/use the answer yet.</li><li>0 = No qualification attempt. Spent the turn on something else entirely.</li></ul></td></tr><tr><td><strong>D4</strong></td><td>Conversation Discipline (0-2)</td><td><ul><li>2 = One question max. WHY embedded naturally. Acknowledged lead before pivoting.</li><li>1 = Minor violation (e.g., two questions, or formulaic WHY parenthetical).</li><li>0 = Multiple questions, ignored what lead said, or generic ChatGPT tone.</li></ul></td></tr><tr><td><strong>D5</strong></td><td>The Last Message Test (0-2)</td><td><ul><li>2 = Yes - lead got value that makes them want to stay, OR we learned a key qualifying signal.</li><li>1 = Partially - some value or some qualification, but the turn could have been stronger.</li><li>0 = No - if the lead left now, we wasted this turn. Nothing hooked and nothing qualified.</li></ul></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <h2>Unified Results (Same Definition)</h2>
+    <section class="grid2">
+      <article class="card">
+        <strong>Awsaf 5 transcripts</strong>
+        <p class="meta"><strong>Count:</strong> 5</p>
+        <p class="meta"><strong>Quality avg:</strong> 7.95/10</p>
+        <p class="meta"><strong>Check avg:</strong> 10/10</p>
+        <p class="meta"><strong>Composite avg:</strong> 8.77/10</p>
+        <p class="meta"><strong>Pass rate:</strong> 100%</p>
+        <p class="meta"><strong>Endpoint match:</strong> 100%</p>
+      </article>
+      <article class="card">
+        <strong>Eric 6 chats (v7 logs)</strong>
+        <p class="meta"><strong>Count:</strong> 6</p>
+        <p class="meta"><strong>Quality avg:</strong> 6.28/10</p>
+        <p class="meta"><strong>Check avg:</strong> 7.64/10</p>
+        <p class="meta"><strong>Composite avg:</strong> 6.82/10</p>
+        <p class="meta"><strong>Pass rate:</strong> 16.67%</p>
+        <p class="meta"><strong>Endpoint match:</strong> 66.67%</p>
+      </article>
+    </section>
+    <section class="card" style="margin-top:10px;">
+      <strong>Delta (Awsaf - Eric):</strong>
+      <span class="tag ok">Composite 1.95</span>
+      <span class="tag ok">Quality 1.67</span>
+      <div class="small" style="margin-top:8px;">Judge mode: same-definition-heuristic-v1 (shared evaluator for Awsaf and Eric)</div>
+      <div class="small">Formula: composite = 0.6 * quality_average + 0.4 * check_score</div>
+      <div class="small">Threshold: quality >= 7, no required-check fail, endpoint match required.</div>
+    </section>
+    <section class="card" style="margin-top:10px;">
+      <strong>Awsaf transcript rerun delta vs previous baseline (v0.1)</strong>
+      <div class="meta">Quality: 6.9 -> 7.95 (+1.05)</div>
+      <div class="meta">Composite: 7.61 -> 8.77 (+1.16)</div>
+      <div class="meta">Pass rate: 60% -> 100% (+40 pp)</div>
+    </section>
+    <h2>Conversation Results + Improvement Suggestions</h2>
+    <section class="card table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Set</th><th>ID</th><th>Case</th><th>Expected Endpoint</th><th>Actual Endpoint</th><th>Endpoint</th>
+            <th>Quality</th><th>Check</th><th>Composite</th><th>Req P/F/NA</th><th>Result</th><th>Improvements</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Awsaf</td>
+            <td>TR-001</td>
+            <td>GD-001</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>8</td>
+            <td>10</td>
+            <td>8.8</td>
+            <td>3/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf</td>
+            <td>TR-002</td>
+            <td>GD-013</td>
+            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.88</td>
+            <td>10</td>
+            <td>8.73</td>
+            <td>5/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf</td>
+            <td>TR-003</td>
+            <td>GD-010</td>
+            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.88</td>
+            <td>10</td>
+            <td>8.73</td>
+            <td>6/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf</td>
+            <td>TR-004</td>
+            <td>GD-016</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>8.2</td>
+            <td>10</td>
+            <td>8.92</td>
+            <td>3/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf</td>
+            <td>TR-005</td>
+            <td>GD-020</td>
+            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.8</td>
+            <td>10</td>
+            <td>8.68</td>
+            <td>5/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Eric</td>
+            <td>v7-jesus</td>
+            <td>GD-017</td>
+            <td>COMPLETE_SR</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag bad'>mismatch</span></td>
+            <td>6.67</td>
+            <td>7.5</td>
+            <td>7</td>
+            <td>3/1/2</td>
+            <td><span class='tag bad'>FAIL</span></td>
+            <td><ul><li>Endpoint mismatch: expected COMPLETE_SR, got QUALIFY_AND_ADVANCE. End with explicit COMPLETE_SR behavior.</li><li>Fix CK-015: Align ending behavior with expected endpoint.</li><li>Increase concrete value per turn (constraint, range, or rationale).</li><li>End each assistant turn with clear next-step language.</li></ul></td>
+          </tr><tr>
+            <td>Eric</td>
+            <td>v7-syed</td>
+            <td>GD-005</td>
+            <td>EXIT_POLITE</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag bad'>mismatch</span></td>
+            <td>7</td>
+            <td>5</td>
+            <td>6.2</td>
+            <td>1/1/4</td>
+            <td><span class='tag bad'>FAIL</span></td>
+            <td><ul><li>Endpoint mismatch: expected EXIT_POLITE, got QUALIFY_AND_ADVANCE. End with explicit EXIT_POLITE behavior.</li><li>Fix CK-015: Align ending behavior with expected endpoint.</li></ul></td>
+          </tr><tr>
+            <td>Eric</td>
+            <td>v7-battery</td>
+            <td>GD-016</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>5</td>
+            <td>6.67</td>
+            <td>5.67</td>
+            <td>2/1/0</td>
+            <td><span class='tag bad'>FAIL</span></td>
+            <td><ul><li>Fix CK-012: Shorten messages to concise transition style.</li><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Increase concrete value per turn (constraint, range, or rationale).</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li></ul></td>
+          </tr><tr>
+            <td>Eric</td>
+            <td>v7-candle</td>
+            <td>GD-024</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>5.5</td>
+            <td>10</td>
+            <td>7.3</td>
+            <td>1/0/2</td>
+            <td><span class='tag bad'>FAIL</span></td>
+            <td><ul><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Add one qualification/routing question where flow allows.</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li><li>Required checks are passing; focus on per-turn quality lift above 7.0.</li></ul></td>
+          </tr><tr>
+            <td>Eric</td>
+            <td>v7-anthony</td>
+            <td>GD-023</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.5</td>
+            <td>10</td>
+            <td>8.5</td>
+            <td>3/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Eric</td>
+            <td>v7-jammaica</td>
+            <td>GD-007</td>
+            <td>HUMAN_HANDOFF</td>
+            <td>HUMAN_HANDOFF</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>6</td>
+            <td>6.67</td>
+            <td>6.27</td>
+            <td>2/1/0</td>
+            <td><span class='tag bad'>FAIL</span></td>
+            <td><ul><li>Fix CK-012: Shorten messages to concise transition style.</li><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li></ul></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <h2>Required Check Performance</h2>
+    <section class="card table-wrap">
+      <table>
+        <thead><tr><th>Check</th><th>Definition</th><th>Awsaf (P/F/NA)</th><th>Awsaf Pass%</th><th>Eric (P/F/NA)</th><th>Eric Pass%</th></tr></thead>
+        <tbody>
+          <tr><td>CK-001</td><td>Stage 1 asks image before tools</td><td>1/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-002</td><td>Stage 1 runs PI after image or skip</td><td>2/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-003</td><td>Stage 2 tool order</td><td>3/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-005</td><td>Value-first trust handling</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-006</td><td>Restricted hold absolute</td><td>1/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-007</td><td>Branded/IP hold</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-008</td><td>Budget math honesty</td><td>1/0/0</td><td>100%</td><td>2/0/1</td><td>100%</td></tr><tr><td>CK-009</td><td>Currency disambiguation</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-010</td><td>Call handoff behavior</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-012</td><td>Concise message discipline</td><td>2/0/0</td><td>100%</td><td>0/2/0</td><td>0%</td></tr><tr><td>CK-014</td><td>Feasibility after structured form</td><td>2/0/0</td><td>100%</td><td>0/0/2</td><td>-</td></tr><tr><td>CK-015</td><td>Endpoint correctness</td><td>5/0/0</td><td>100%</td><td>4/2/0</td><td>66.67%</td></tr><tr><td>CK-016</td><td>Add-another-product loop</td><td>1/0/0</td><td>100%</td><td>0/0/0</td><td>-</td></tr><tr><td>CK-017</td><td>Finalize path correctness</td><td>3/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-018</td><td>No fabricated capabilities</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-020</td><td>Low-intent handling</td><td>1/0/0</td><td>100%</td><td>0/0/2</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <h2>Judge Notes</h2>
+    <section class="card">
+      <ul><li>Both sets are scored with the same turn-quality rubric and the same required-check logic.</li><li>Required checks come from each mapped case&#39;s must_pass_checks in cases.seed.json.</li><li>Eric examples are mapped to GD cases to enforce endpoint and policy alignment under one definition.</li><li>Awsaf baseline reference (v0.1) is included to show post-improvement transcript lift after rerun.</li></ul>
+      <p class="small" style="margin-top:8px;">All case-level improvement suggestions above are generated from failed checks + low dimension averages per conversation.</p>
+    </section>
+
+    <h2>Eric-to-GD Mapping Used by Shared Judge</h2>
+    <section class="card table-wrap">
+      <table>
+        <thead><tr><th>Eric File</th><th>Mapped GD Case</th></tr></thead>
+        <tbody>
+          <tr><td>v7-jesus.jsonl</td><td>GD-017</td></tr><tr><td>v7-syed.jsonl</td><td>GD-005</td></tr><tr><td>v7-battery.jsonl</td><td>GD-016</td></tr><tr><td>v7-candle.jsonl</td><td>GD-024</td></tr><tr><td>v7-anthony.jsonl</td><td>GD-023</td></tr><tr><td>v7-jammaica.jsonl</td><td>GD-007</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <h2>Eric Historical Pass/Fail (Reference)</h2>
+    <section class="grid2">
+      <article class="card">
+        <strong>Historical run headlines</strong>
+        <ul>
+          <li><strong>v7:</strong> 8/8 PASS — overall avg 8.8/10</li>
+          <li><strong>v6b:</strong> 3/5 PASS, 2/5 FAIL. Average across all 15 turns: 6.5/10.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <strong>Source files</strong>
+        <ul>
+          <li><code>tests/run-v7/run_summary_v7.md</code></li>
+          <li><code>tests/run-v6/run_summary_v6.md</code></li>
+        </ul>
+      </article>
+    </section>
+    <section class="card table-wrap" style="margin-top:10px;">
+      <table>
+        <thead><tr><th>Version</th><th>Personas</th><th>Pass Rate</th><th>Avg Lines</th><th>Key Change</th></tr></thead>
+        <tbody>
+          <tr><td>v1</td><td>6</td><td>4/6 (67%)</td><td>12-18</td><td>Baseline</td></tr><tr><td>v2</td><td>8</td><td>7/8 (88%)</td><td>10-15</td><td>Call handoff, budget math</td></tr><tr><td>v3</td><td>8</td><td>8/8 (100%)</td><td>8-12</td><td>WHY enforcement, restricted products</td></tr><tr><td>v3-test</td><td>6 (new)</td><td>6/6 (100%)</td><td>8-12</td><td>Generalization confirmed</td></tr><tr><td>v4</td><td>14</td><td>Issues found</td><td>6-10</td><td>Strict persona testing exposed gaps</td></tr><tr><td>v5</td><td>4 (fixes)</td><td>4/4 fixes</td><td>6-10</td><td>Absolute restrictions, estimate budgets, exits</td></tr><tr><td>v6b</td><td>5</td><td>3/5 (60%)</td><td>2-5</td><td>Per-turn priority, hard cap (stricter rubric)</td></tr><tr><td>v7</td><td>8</td><td>8/8 (100%)</td><td>1-4</td><td>Prices-first, one-liner rules, examples</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <h2>Proposed GD Run Stack</h2>
+    <section class="grid2">
+      <article class="card"><strong>run-gd-v1-core</strong><p class="meta">Core release gate set (locked cases only).</p><p class="meta"><strong>Rule:</strong> <code>review_status = locked</code></p><p class="meta"><strong>Count:</strong> 11</p></article><article class="card"><strong>run-gd-v1-generalization</strong><p class="meta">Generalization check on reviewed but not locked cases.</p><p class="meta"><strong>Rule:</strong> <code>review_status = reviewed</code></p><p class="meta"><strong>Count:</strong> 13</p></article><article class="card"><strong>run-gd-v1-draft-probe</strong><p class="meta">Draft-case probe to find schema/scenario gaps before locking.</p><p class="meta"><strong>Rule:</strong> <code>review_status = draft</code></p><p class="meta"><strong>Count:</strong> 3</p></article><article class="card"><strong>run-gd-v1-stress</strong><p class="meta">Adversarial mismatch/spam/resistance stress test.</p><p class="meta"><strong>Rule:</strong> <code>B5 + B6</code></p><p class="meta"><strong>Count:</strong> 8</p></article>
+    </section>
+  </div>
+</body>
+</html>
