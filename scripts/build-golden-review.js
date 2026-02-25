@@ -566,6 +566,7 @@ function buildHtml(payload) {
 
     <h2>Case Catalog</h2>
     <section class="filters">
+      <div class="field"><label for="fBucket">Behavior Bucket</label><select id="fBucket"></select></div>
       <div class="field"><label for="fPersona">Persona Type</label><select id="fPersona"></select></div>
       <div class="field"><label for="fMotivation">Motivation</label><select id="fMotivation"></select></div>
       <div class="field"><label for="fProductMode">Product Mode</label><select id="fProductMode"></select></div>
@@ -608,6 +609,7 @@ function buildHtml(payload) {
       const heroMeta = document.getElementById("heroMeta");
       const priorityGrid = document.getElementById("priorityGrid");
 
+      const fBucket = document.getElementById("fBucket");
       const fPersona = document.getElementById("fPersona");
       const fMotivation = document.getElementById("fMotivation");
       const fProductMode = document.getElementById("fProductMode");
@@ -615,6 +617,15 @@ function buildHtml(payload) {
       const fStatus = document.getElementById("fStatus");
       const fTranscript = document.getElementById("fTranscript");
       const fSearch = document.getElementById("fSearch");
+
+      const BUCKET_LABELS = {
+        B1: "B1 - Budget/Qty",
+        B2: "B2 - Vague/No Specs",
+        B3: "B3 - Qualified",
+        B4: "B4 - Restricted",
+        B5: "B5 - Branded/IP",
+        B6: "B6 - Ghost",
+      };
 
       function uniq(values) {
         return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b));
@@ -762,6 +773,7 @@ function buildHtml(payload) {
       function filteredCases() {
         const q = (fSearch.value || "").toLowerCase().trim();
         return cases.filter((c) => {
+          if (fBucket.value !== "all" && c.behavior_bucket !== fBucket.value) return false;
           if (fPersona.value !== "all" && c.persona_type !== fPersona.value) return false;
           if (fMotivation.value !== "all" && c.motivation !== fMotivation.value) return false;
           if (fProductMode.value !== "all" && c.product_mode !== fProductMode.value) return false;
@@ -795,6 +807,7 @@ function buildHtml(payload) {
             "<div class='t'>" + c.case_id + " - " + c.title + "</div>" +
             "<div class='meta'>" + c.persona_type + " | " + c.motivation + " | " + c.expected_endpoint + "</div>" +
             (c.awsaf_priority_stars > 0 ? "<div class='starline'>" + stars(c.awsaf_priority_stars) + "</div>" : "") +
+            "<span class='tag' style='background:#e0e7ff;color:#3730a3;font-weight:600'>" + (BUCKET_LABELS[c.behavior_bucket] || c.behavior_bucket) + "</span>" +
             "<span class='tag " + statusClass(c.review_status) + "'>" + statusLabel(c.review_status) + "</span>" +
             "<span class='tag'>" + c.risk_class + "</span>" +
             "<span class='tag'>" + c.input_mode + "</span>" +
@@ -1008,13 +1021,26 @@ function buildHtml(payload) {
 
         const head = document.createElement("div");
         head.className = "detail-head";
+        var endpointRangeHtml = "";
+        if (c.acceptable_endpoints && c.acceptable_endpoints.length) {
+          endpointRangeHtml += "<span class='tag' style='background:#dcfce7;color:#166534'>acceptable: " + c.acceptable_endpoints.join(", ") + "</span>";
+        }
+        if (c.must_not_reach && c.must_not_reach.length) {
+          endpointRangeHtml += "<span class='tag' style='background:#fee2e2;color:#991b1b'>must NOT reach: " + c.must_not_reach.join(", ") + "</span>";
+        }
+        if (c.optimal_endpoint) {
+          endpointRangeHtml += "<span class='tag' style='background:#fef9c3;color:#854d0e'>optimal: " + c.optimal_endpoint + "</span>";
+        }
         head.innerHTML =
           "<h4>" + c.case_id + " - " + c.title + "</h4>" +
           (c.awsaf_priority_stars > 0 ? "<div class='starline'>" + stars(c.awsaf_priority_stars) + " Awsaf priority</div>" : "") +
+          "<span class='tag' style='background:#e0e7ff;color:#3730a3;font-weight:600'>" + (BUCKET_LABELS[c.behavior_bucket] || c.behavior_bucket) + "</span>" +
+          (c.channel ? "<span class='tag' style='background:#f0fdf4;color:#15803d;font-weight:600'>" + c.channel + "</span>" : "") +
           "<span class='tag " + statusClass(c.review_status) + "'>" + statusLabel(c.review_status) + "</span>" +
           "<span class='tag'>" + c.persona_type + "</span>" +
           "<span class='tag'>" + c.product_mode + "</span>" +
           "<span class='tag'>" + c.expected_endpoint + "</span>" +
+          endpointRangeHtml +
           "<span class='tag'>" + c.intent_level + " intent</span>" +
           "<span class='tag'>transcripts: " + c.linked_transcript_count + "</span>" +
           (c.awsaf_priority_reason ? "<p style='margin:8px 0 0; font-size:13px; color:#4a5757;'><strong>Why first:</strong> " + c.awsaf_priority_reason + "</p>" : "");
@@ -1097,6 +1123,19 @@ function buildHtml(payload) {
       }
 
       function initFilters() {
+        {
+          fBucket.innerHTML = "";
+          const allOpt = document.createElement("option");
+          allOpt.value = "all";
+          allOpt.textContent = "All behavior buckets";
+          fBucket.appendChild(allOpt);
+          uniq(cases.map((c) => c.behavior_bucket)).forEach((b) => {
+            const op = document.createElement("option");
+            op.value = b;
+            op.textContent = BUCKET_LABELS[b] || b;
+            fBucket.appendChild(op);
+          });
+        }
         fillSelect(fPersona, uniq(cases.map((c) => c.persona_type)), "All persona types");
         fillSelect(fMotivation, uniq(cases.map((c) => c.motivation)), "All motivations");
         fillSelect(fProductMode, uniq(cases.map((c) => c.product_mode)), "All product modes");
@@ -1127,7 +1166,7 @@ function buildHtml(payload) {
       }
 
       function wire() {
-        [fPersona, fMotivation, fProductMode, fRisk, fStatus, fTranscript, fSearch].forEach((el) => {
+        [fBucket, fPersona, fMotivation, fProductMode, fRisk, fStatus, fTranscript, fSearch].forEach((el) => {
           el.addEventListener("change", () => render(filteredCases()));
           el.addEventListener("input", () => render(filteredCases()));
         });

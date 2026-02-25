@@ -82,9 +82,9 @@ Each case in `cases.seed.json` follows this structure:
 - `optimal_endpoint` (optional): single endpoint for bonus/display; does not affect pass/fail.
 - `expected_stage_path` and `expected_tool_sequence` are required for Unified Activation flow correctness, not only chat quality.
 - `behavior_bucket` maps each case to the team's behavior taxonomy:
-  - `B1` Low-intent drop immediately
-  - `B2` Intent but not quality (cannot complete sourceable requirements)
-  - `B3` High-intent cooperative
-  - `B4` Quality + high-intent ICP
-  - `B5` Mismatch but responsive
-  - `B6` Irrelevant / spam / hostile
+  - `B1` Budget / Quantity Challenge — lead has a product but budget or MOQ is unrealistic
+  - `B2` Vague / No Specs — lead has not specified a product; bot should draw out specs
+  - `B3` Qualified / Defined Product — lead has real product, specs, and/or budget; drive toward SR
+  - `B4` Restricted / Impossible Product — product is restricted, not sourceable, or non-physical
+  - `B5` Branded / IP Products — lead asking for a branded product; clarify sourcing limitations
+  - `B6` Ghost / Non-responsive — lead stopped responding; follow up once, then exit

@@ -229,7 +229,7 @@
       "sources": [
         "context/Bad/bad example 4.txt"
       ],
-      "behavior_bucket": "B6",
+      "behavior_bucket": "B4",
       "bucket_pattern": "B6A",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after off-topic redirect",
@@ -293,7 +293,7 @@
       "sources": [
         "tests/run-v4-fullsr/personas_testset.md"
       ],
-      "behavior_bucket": "B5",
+      "behavior_bucket": "B1",
       "bucket_pattern": "B5A",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after MOQ/retail mismatch explained",
@@ -440,8 +440,13 @@
       "risk_class": "normal",
       "intent_level": "medium",
       "expected_endpoint": "EXIT_POLITE",
-      "acceptable_endpoints": ["EXIT_POLITE", "QUALIFY_AND_ADVANCE"],
-      "must_not_reach": ["COMPLETE_SR"],
+      "acceptable_endpoints": [
+        "EXIT_POLITE",
+        "QUALIFY_AND_ADVANCE"
+      ],
+      "must_not_reach": [
+        "COMPLETE_SR"
+      ],
       "expected_stage_path": [
         "splash_to_stage1",
         "stage1_ask_reference_image",
@@ -497,7 +502,7 @@
       "sources": [
         "context/Good/handwash SR.txt"
       ],
-      "behavior_bucket": "B2",
+      "behavior_bucket": "B1",
       "bucket_pattern": "B2C",
       "sourceability_status": "nurture",
       "expected_dropoff_point": "after economics mismatch shown",
@@ -638,7 +643,7 @@
       "sources": [
         "context/Good/P1 PH leads asking for a call.txt"
       ],
-      "behavior_bucket": "B4",
+      "behavior_bucket": "B3",
       "bucket_pattern": "B4A",
       "sourceability_status": "sourceable",
       "expected_dropoff_point": null,
@@ -710,7 +715,7 @@
       "sources": [
         "context/Bad/bad example 2.txt"
       ],
-      "behavior_bucket": "B2",
+      "behavior_bucket": "B1",
       "bucket_pattern": "B2A",
       "sourceability_status": "nurture",
       "expected_dropoff_point": "after user cannot provide specs/budget",
@@ -852,7 +857,7 @@
       "sources": [
         "tests/run-v3-test/results/t-uk-dog.jsonl"
       ],
-      "behavior_bucket": "B4",
+      "behavior_bucket": "B3",
       "bucket_pattern": "B4A",
       "sourceability_status": "sourceable",
       "expected_dropoff_point": null,
@@ -1077,7 +1082,7 @@
       "sources": [
         "context/Bad/bad example 5 - femmoraaa jewelry teenager.txt"
       ],
-      "behavior_bucket": "B2",
+      "behavior_bucket": "B1",
       "bucket_pattern": "B2B",
       "sourceability_status": "nurture",
       "expected_dropoff_point": "if budget/qty not clarified in stage 3",
@@ -1150,7 +1155,7 @@
       "sources": [
         "context/Good/WhatsApp Chat - Sourcy __ Bala Di Gala (1).txt"
       ],
-      "behavior_bucket": "B4",
+      "behavior_bucket": "B3",
       "bucket_pattern": "B4A",
       "sourceability_status": "sourceable",
       "expected_dropoff_point": null,
@@ -1223,7 +1228,7 @@
       "sources": [
         "context/Good/Edamama.txt"
       ],
-      "behavior_bucket": "B2",
+      "behavior_bucket": "B3",
       "bucket_pattern": "B2A",
       "sourceability_status": "nurture",
       "expected_dropoff_point": "after repeated unknown specs/budget",
@@ -1289,7 +1294,7 @@
       "sources": [
         "context/Bad/bad example 3.txt"
       ],
-      "behavior_bucket": "B5",
+      "behavior_bucket": "B4",
       "bucket_pattern": "B5C",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after restriction explanation + safe alternative",
@@ -1307,7 +1312,10 @@
       "risk_class": "normal",
       "intent_level": "high",
       "expected_endpoint": "COMPLETE_SR",
-      "acceptable_endpoints": ["COMPLETE_SR", "QUALIFY_AND_ADVANCE"],
+      "acceptable_endpoints": [
+        "COMPLETE_SR",
+        "QUALIFY_AND_ADVANCE"
+      ],
       "optimal_endpoint": "COMPLETE_SR",
       "expected_stage_path": [
         "splash_to_stage1",
@@ -1436,7 +1444,7 @@
       "sources": [
         "context/Trojan Horse Experiment_ WA Bot.md"
       ],
-      "behavior_bucket": "B5",
+      "behavior_bucket": "B2",
       "bucket_pattern": "B5D",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after complexity/tooling boundary set",
@@ -1589,7 +1597,7 @@
       "sources": [
         "README.md"
       ],
-      "behavior_bucket": "B4",
+      "behavior_bucket": "B3",
       "bucket_pattern": "B4B",
       "sourceability_status": "sourceable",
       "expected_dropoff_point": null,
@@ -1658,7 +1666,7 @@
       "sources": [
         "tests/run-v3-test/results/t-ghost.jsonl"
       ],
-      "behavior_bucket": "B1",
+      "behavior_bucket": "B6",
       "bucket_pattern": "B1A",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after first qualifier",
@@ -1721,7 +1729,7 @@
       "sources": [
         "context/Trojan Horse Experiment_ WA Bot.md"
       ],
-      "behavior_bucket": "B1",
+      "behavior_bucket": "B2",
       "bucket_pattern": "B1B",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after low-effort guidance prompt",
@@ -1787,7 +1795,7 @@
       "sources": [
         "context/Bad/bad example 4.txt"
       ],
-      "behavior_bucket": "B5",
+      "behavior_bucket": "B4",
       "bucket_pattern": "B5B",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after branded/IP restriction and alternatives",
@@ -1851,7 +1859,7 @@
       "sources": [
         "context/Bad/bad example 1.txt"
       ],
-      "behavior_bucket": "B5",
+      "behavior_bucket": "B1",
       "bucket_pattern": "B5A",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after MOQ/shipping economics explained",
@@ -1978,7 +1986,7 @@
       "sources": [
         "context/Good/P1 PH leads asking for a call.txt"
       ],
-      "behavior_bucket": "B4",
+      "behavior_bucket": "B3",
       "bucket_pattern": "B4A",
       "sourceability_status": "sourceable",
       "expected_dropoff_point": null,

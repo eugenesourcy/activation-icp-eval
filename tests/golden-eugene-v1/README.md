@@ -50,7 +50,33 @@ Then open:
 
 Current seed status:
 - 27 cases (GD-001 to GD-027)
-- Behavior buckets covered: B1-B6
+- Behavior buckets covered: B1-B6 (Eric's taxonomy)
+  - B1 (Budget/Qty): 5 cases
+  - B2 (Vague/No Specs): 4 cases
+  - B3 (Qualified): 12 cases
+  - B4 (Restricted): 3 cases
+  - B5 (Branded/IP): 0 cases — gap, needs Foxmont Owala-style case
+  - B6 (Ghost): 3 cases — gap, Eric has 5
+
+## `must_fail_checks`
+
+Some cases include `must_fail_checks` — an array of check IDs that the bot **must NOT pass** for the case to be valid. This is the inverse of `must_pass_checks`. Example: a job-seeker case (GD-001) must fail CK-011 (no pricing should be triggered). If the bot passes a must-fail check, the case is scored as a failure.
+
+## Integration Runner (Future)
+
+`expected_stage_path` and `expected_tool_sequence` in each case are designed for a **future integration-test runner**, not the current GPT judge. The GPT judge only uses D1-D5 dimensions and conversation-layer checks. A separate script (e.g. `build-integration-report.js`) can replay tool logs against these fields to verify pipeline correctness.
+
+## Endpoint Ranges
+
+Some cases use `acceptable_endpoints` instead of a single `expected_endpoint`. Currently:
+- GD-005 uses `acceptable_endpoints: ["EXIT_POLITE", "QUALIFY_AND_ADVANCE"]` with `must_not_reach: ["COMPLETE_SR"]`
+- GD-017 uses `acceptable_endpoints: ["COMPLETE_SR", "QUALIFY_AND_ADVANCE"]` with `optimal_endpoint: "COMPLETE_SR"`
+
+The team should expand endpoint ranges to more cases (especially B1 budget cases and B3 qualified leads where multiple outcomes are valid).
+
+## WA Golden Transcripts
+
+WA golden transcripts (`golden_type: "wa"`) are currently **placeholders**. To make them production-quality, the team needs real Eric-style WhatsApp conversation examples exported from Sourcy's live operations. The current `transcripts.seed.json` entries are all `golden_type: "web"` (Awsaf's architecture). Adding real WA transcripts will enable proper dual-channel calibration.
 
 ## Eval Layers (Outcome vs Process)
 

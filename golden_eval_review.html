@@ -47,8 +47,8 @@
     <section class="kpis">
       <article class="card"><div class="num">27</div><div class="label">Golden Cases</div></article>
       <article class="card"><div class="num">24</div><div class="label">Checks</div></article>
-      <article class="card"><div class="num">5</div><div class="label">B4 ICP Cases</div></article>
-      <article class="card"><div class="num">5 / 3</div><div class="label">B5/B6 Stress</div></article>
+      <article class="card"><div class="num">3</div><div class="label">B4 ICP Cases</div></article>
+      <article class="card"><div class="num">0 / 3</div><div class="label">B5/B6 Stress</div></article>
       <article class="card"><div class="num">11</div><div class="label">Conversations Scored</div></article>
     </section>
 
@@ -95,6 +95,16 @@ Pass threshold = average &gt;= 7.0.
 **D4 (Conversation Discipline):**
 - **2:** One question per turn, naturally embedded. E.g. &quot;Jerseys at $3–8/unit for 500+ — is that the range you&#39;re working with?&quot;
 - **0:** &quot;What&#39;s your budget? And what quantities? Also, do you need custom logos?&quot; (three questions in one turn.)
+
+**D3 (Qualification):**
+- **2:** Bot gathers a qualification signal (product, quantity, or budget data) in the turn without making it feel like an interrogation. E.g. &quot;500 jerseys at $3–8 — that&#39;s solidly in MOQ range. Are you looking at sublimation or screen print?&quot;
+- **1:** Bot advances the conversation but doesn&#39;t extract new qualification data. E.g. &quot;Great, jerseys are popular. Tell me more about what you need.&quot;
+- **0:** Bot asks an unrelated or premature question. E.g. &quot;What&#39;s your shipping address?&quot; before knowing the product.
+
+**D5 (Last Message Test):**
+- **2:** The last assistant message gives the lead a clear reason to reply — a specific question, a next step, or a call-to-action. E.g. &quot;I can get you samples in 2 weeks — want me to set that up?&quot;
+- **1:** Message is complete but the reply hook is weak. E.g. &quot;Let me know if you have any other questions.&quot;
+- **0:** Message is a dead end — no question, no next step, conversation dies. E.g. &quot;Thanks for your interest in Sourcy.&quot;
 
 ## Binary Checks (conversation-level)
 - RESTRICTED_HOLD (Y/N/NA)
@@ -403,7 +413,7 @@ Input transcript:
 
     <h2>Proposed GD Run Stack</h2>
     <section class="grid2">
-      <article class="card"><strong>run-gd-v1-core</strong><p class="meta">Core release gate set (locked cases only).</p><p class="meta"><strong>Rule:</strong> <code>review_status = locked</code></p><p class="meta"><strong>Count:</strong> 11</p></article><article class="card"><strong>run-gd-v1-generalization</strong><p class="meta">Generalization check on reviewed but not locked cases.</p><p class="meta"><strong>Rule:</strong> <code>review_status = reviewed</code></p><p class="meta"><strong>Count:</strong> 13</p></article><article class="card"><strong>run-gd-v1-draft-probe</strong><p class="meta">Draft-case probe to find schema/scenario gaps before locking.</p><p class="meta"><strong>Rule:</strong> <code>review_status = draft</code></p><p class="meta"><strong>Count:</strong> 3</p></article><article class="card"><strong>run-gd-v1-stress</strong><p class="meta">Adversarial mismatch/spam/resistance stress test.</p><p class="meta"><strong>Rule:</strong> <code>B5 + B6</code></p><p class="meta"><strong>Count:</strong> 8</p></article>
+      <article class="card"><strong>run-gd-v1-core</strong><p class="meta">Core release gate set (locked cases only).</p><p class="meta"><strong>Rule:</strong> <code>review_status = locked</code></p><p class="meta"><strong>Count:</strong> 11</p></article><article class="card"><strong>run-gd-v1-generalization</strong><p class="meta">Generalization check on reviewed but not locked cases.</p><p class="meta"><strong>Rule:</strong> <code>review_status = reviewed</code></p><p class="meta"><strong>Count:</strong> 13</p></article><article class="card"><strong>run-gd-v1-draft-probe</strong><p class="meta">Draft-case probe to find schema/scenario gaps before locking.</p><p class="meta"><strong>Rule:</strong> <code>review_status = draft</code></p><p class="meta"><strong>Count:</strong> 3</p></article><article class="card"><strong>run-gd-v1-stress</strong><p class="meta">Adversarial mismatch/spam/resistance stress test.</p><p class="meta"><strong>Rule:</strong> <code>B5 + B6</code></p><p class="meta"><strong>Count:</strong> 3</p></article>
     </section>
   </div>
 </body>

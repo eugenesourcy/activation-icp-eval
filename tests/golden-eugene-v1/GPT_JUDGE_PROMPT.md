@@ -34,6 +34,16 @@ Pass threshold = average >= 7.0.
 - **2:** One question per turn, naturally embedded. E.g. "Jerseys at $3–8/unit for 500+ — is that the range you're working with?"
 - **0:** "What's your budget? And what quantities? Also, do you need custom logos?" (three questions in one turn.)
 
+**D3 (Qualification):**
+- **2:** Bot gathers a qualification signal (product, quantity, or budget data) in the turn without making it feel like an interrogation. E.g. "500 jerseys at $3–8 — that's solidly in MOQ range. Are you looking at sublimation or screen print?"
+- **1:** Bot advances the conversation but doesn't extract new qualification data. E.g. "Great, jerseys are popular. Tell me more about what you need."
+- **0:** Bot asks an unrelated or premature question. E.g. "What's your shipping address?" before knowing the product.
+
+**D5 (Last Message Test):**
+- **2:** The last assistant message gives the lead a clear reason to reply — a specific question, a next step, or a call-to-action. E.g. "I can get you samples in 2 weeks — want me to set that up?"
+- **1:** Message is complete but the reply hook is weak. E.g. "Let me know if you have any other questions."
+- **0:** Message is a dead end — no question, no next step, conversation dies. E.g. "Thanks for your interest in Sourcy."
+
 ## Binary Checks (conversation-level)
 - RESTRICTED_HOLD (Y/N/NA)
 - BUDGET_MATH (Y/N/NA)
