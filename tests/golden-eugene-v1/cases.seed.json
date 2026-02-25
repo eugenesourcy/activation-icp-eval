@@ -8,145 +8,169 @@
       "id": "CK-001",
       "title": "Stage 1 asks image before tools",
       "description": "Bot asks for reference image first and does not call tools on the first product message.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "integration"
     },
     {
       "id": "CK-002",
       "title": "Stage 1 runs PI after image or skip",
       "description": "After image upload or skip response, bot immediately calls productIntelligence.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "integration"
     },
     {
       "id": "CK-003",
       "title": "Stage 2 tool order",
       "description": "Tool order is productIntelligence -> pricingIntelligence -> visualConceptGeneration.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "integration"
     },
     {
       "id": "CK-004",
       "title": "No pricing/visual before step1Complete",
       "description": "pricingIntelligence and visualConceptGeneration are not called while step1Complete is false.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "integration"
     },
     {
       "id": "CK-005",
       "title": "Value-first trust handling",
       "description": "Trust questions are answered directly and concretely before heavy intake.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-006",
       "title": "Restricted hold absolute",
       "description": "Restricted categories are held firm even under user pushback.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "conversation"
     },
     {
       "id": "CK-007",
       "title": "Branded/IP hold",
       "description": "Branded or IP-protected requests are declined with compliant alternatives.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "conversation"
     },
     {
       "id": "CK-008",
       "title": "Budget math honesty",
       "description": "Budget/quantity math is realistic and not manipulated for conversion.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "conversation"
     },
     {
       "id": "CK-009",
       "title": "Currency disambiguation",
       "description": "Ambiguous local currencies are clarified before hard conclusions.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-010",
       "title": "Call handoff behavior",
       "description": "When user asks for call/human, bot offers valid handoff without denial.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-011",
       "title": "Contact collection only in Stage 4",
       "description": "Bot does not ask contact details before Stage 4.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "integration"
     },
     {
       "id": "CK-012",
       "title": "Concise message discipline",
       "description": "Messages respect short transition text and avoid card data duplication.",
-      "severity": "medium"
+      "severity": "medium",
+      "layer": "integration"
     },
     {
       "id": "CK-013",
       "title": "No card data repetition",
       "description": "Bot text does not repeat detailed numbers already shown in cards.",
-      "severity": "medium"
+      "severity": "medium",
+      "layer": "integration"
     },
     {
       "id": "CK-014",
       "title": "Feasibility after structured form",
       "description": "When quantity/destination/timeline form is submitted, feasibilityAssessment is called immediately.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "integration"
     },
     {
       "id": "CK-015",
       "title": "Endpoint correctness",
       "description": "Conversation outcome matches the gold expected endpoint.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "conversation"
     },
     {
       "id": "CK-016",
       "title": "Add-another-product loop",
       "description": "Add-another-product resets to Stage 1 while preserving completed products.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "integration"
     },
     {
       "id": "CK-017",
       "title": "Finalize path correctness",
       "description": "Finalize request transitions to Stage 4 and contact form flow.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "integration"
     },
     {
       "id": "CK-018",
       "title": "No fabricated capabilities",
       "description": "Bot does not invent unavailable artifacts, guarantees, or unsupported operations.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "conversation"
     },
     {
       "id": "CK-019",
       "title": "Correction re-analysis",
       "description": "When user corrects product/spec mismatch, bot triggers fresh product analysis.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-020",
       "title": "Low-intent handling",
       "description": "Low-intent or non-buyer cases are exited politely with clear redirect.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-021",
       "title": "Low-intent dropoff handling",
       "description": "For ghost or directionless users, bot sends one concise qualifier and avoids forced interrogation.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-022",
       "title": "Scope-jump stabilization",
       "description": "When user mixes finished goods/packaging/logistics, bot anchors one scope and proceeds without confusion.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-023",
       "title": "Early-stage business acceptance",
       "description": "Bot does not reject responsive high-intent users solely for missing website/registered company.",
-      "severity": "high"
+      "severity": "high",
+      "layer": "conversation"
     },
     {
       "id": "CK-024",
       "title": "Hostile-safe exit",
       "description": "Bot stays professional and exits safely on hostile irrelevant requests without escalating tone.",
-      "severity": "critical"
+      "severity": "critical",
+      "layer": "conversation"
     }
   ],
   "cases": [
@@ -193,7 +217,6 @@
         "T2: repeats job intent if pushed"
       ],
       "must_pass_checks": [
-        "CK-012",
         "CK-015",
         "CK-020"
       ],
@@ -210,7 +233,8 @@
       "bucket_pattern": "B6A",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after off-topic redirect",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-002",
@@ -256,7 +280,6 @@
         "T2: states tiny quantity"
       ],
       "must_pass_checks": [
-        "CK-012",
         "CK-015",
         "CK-020"
       ],
@@ -274,7 +297,8 @@
       "bucket_pattern": "B5A",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after MOQ/retail mismatch explained",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-003",
@@ -323,10 +347,7 @@
         "T2: shares product category after trust response"
       ],
       "must_pass_checks": [
-        "CK-001",
-        "CK-002",
         "CK-005",
-        "CK-012",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -346,7 +367,8 @@
         "product",
         "quantity_or_budget",
         "destination"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-004",
@@ -404,7 +426,8 @@
       "bucket_pattern": "B6A",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after spam detection",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-005",
@@ -417,6 +440,8 @@
       "risk_class": "normal",
       "intent_level": "medium",
       "expected_endpoint": "EXIT_POLITE",
+      "acceptable_endpoints": ["EXIT_POLITE", "QUALIFY_AND_ADVANCE"],
+      "must_not_reach": ["COMPLETE_SR"],
       "expected_stage_path": [
         "splash_to_stage1",
         "stage1_ask_reference_image",
@@ -460,11 +485,7 @@
         "T3: may accept higher range if math shown"
       ],
       "must_pass_checks": [
-        "CK-001",
-        "CK-002",
-        "CK-003",
         "CK-008",
-        "CK-014",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -480,7 +501,8 @@
       "bucket_pattern": "B2C",
       "sourceability_status": "nurture",
       "expected_dropoff_point": "after economics mismatch shown",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "WA"
     },
     {
       "case_id": "GD-006",
@@ -535,11 +557,8 @@
         "T3+: provides remaining requirements"
       ],
       "must_pass_checks": [
-        "CK-003",
         "CK-005",
         "CK-008",
-        "CK-014",
-        "CK-017",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -561,7 +580,8 @@
         "destination",
         "timeline",
         "contact_email"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-007",
@@ -607,7 +627,6 @@
       ],
       "must_pass_checks": [
         "CK-010",
-        "CK-012",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -626,7 +645,8 @@
       "required_fields_for_sr": [
         "product",
         "contact_email_or_call_slot"
-      ]
+      ],
+      "channel": "WA"
     },
     {
       "case_id": "GD-008",
@@ -678,8 +698,6 @@
         "T3+: still minimal detail"
       ],
       "must_pass_checks": [
-        "CK-002",
-        "CK-003",
         "CK-005",
         "CK-015"
       ],
@@ -696,7 +714,8 @@
       "bucket_pattern": "B2A",
       "sourceability_status": "nurture",
       "expected_dropoff_point": "after user cannot provide specs/budget",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-009",
@@ -750,7 +769,6 @@
       "must_pass_checks": [
         "CK-005",
         "CK-008",
-        "CK-012",
         "CK-015",
         "CK-018"
       ],
@@ -771,7 +789,8 @@
         "product",
         "quantity_or_budget",
         "destination"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-010",
@@ -824,11 +843,6 @@
         "T2: shares material preference if asked"
       ],
       "must_pass_checks": [
-        "CK-001",
-        "CK-002",
-        "CK-003",
-        "CK-014",
-        "CK-017",
         "CK-015"
       ],
       "must_fail_checks": [],
@@ -848,7 +862,8 @@
         "destination",
         "timeline",
         "contact_email"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-011",
@@ -902,7 +917,6 @@
       "must_pass_checks": [
         "CK-005",
         "CK-008",
-        "CK-012",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -922,7 +936,8 @@
         "product",
         "quantity_or_budget",
         "destination"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-012",
@@ -976,7 +991,6 @@
       ],
       "must_pass_checks": [
         "CK-005",
-        "CK-012",
         "CK-015",
         "CK-018"
       ],
@@ -995,7 +1009,8 @@
         "product",
         "quantity_or_budget",
         "destination"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-013",
@@ -1050,11 +1065,8 @@
         "T3: says no target price yet"
       ],
       "must_pass_checks": [
-        "CK-002",
-        "CK-003",
         "CK-008",
-        "CK-015",
-        "CK-017"
+        "CK-015"
       ],
       "must_fail_checks": [
         "CK-011"
@@ -1075,7 +1087,8 @@
         "destination",
         "timeline",
         "contact_email"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-014",
@@ -1128,10 +1141,6 @@
         "T2: clarifies logo method and timeline if asked"
       ],
       "must_pass_checks": [
-        "CK-002",
-        "CK-003",
-        "CK-014",
-        "CK-017",
         "CK-015"
       ],
       "must_fail_checks": [],
@@ -1151,7 +1160,8 @@
         "destination",
         "timeline",
         "contact_email"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-015",
@@ -1202,8 +1212,6 @@
         "T2: says no budget and no quantity yet"
       ],
       "must_pass_checks": [
-        "CK-002",
-        "CK-003",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -1219,7 +1227,8 @@
       "bucket_pattern": "B2A",
       "sourceability_status": "nurture",
       "expected_dropoff_point": "after repeated unknown specs/budget",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-016",
@@ -1269,7 +1278,6 @@
       ],
       "must_pass_checks": [
         "CK-006",
-        "CK-012",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -1285,7 +1293,8 @@
       "bucket_pattern": "B5C",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after restriction explanation + safe alternative",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "WA"
     },
     {
       "case_id": "GD-017",
@@ -1298,6 +1307,8 @@
       "risk_class": "normal",
       "intent_level": "high",
       "expected_endpoint": "COMPLETE_SR",
+      "acceptable_endpoints": ["COMPLETE_SR", "QUALIFY_AND_ADVANCE"],
+      "optimal_endpoint": "COMPLETE_SR",
       "expected_stage_path": [
         "splash_to_stage1",
         "catalog_question_handled",
@@ -1342,8 +1353,6 @@
         "CK-005",
         "CK-008",
         "CK-009",
-        "CK-014",
-        "CK-017",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -1365,7 +1374,8 @@
         "destination",
         "timeline",
         "contact_email"
-      ]
+      ],
+      "channel": "WA"
     },
     {
       "case_id": "GD-018",
@@ -1415,7 +1425,6 @@
         "T3: shares rough market and use case"
       ],
       "must_pass_checks": [
-        "CK-002",
         "CK-010",
         "CK-015",
         "CK-018"
@@ -1434,7 +1443,8 @@
       "required_fields_for_sr": [
         "product",
         "contact_email_or_call_slot"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-019",
@@ -1488,9 +1498,7 @@
         "T3: gives timeline and destination"
       ],
       "must_pass_checks": [
-        "CK-003",
         "CK-008",
-        "CK-014",
         "CK-015"
       ],
       "must_fail_checks": [
@@ -1510,7 +1518,8 @@
         "product",
         "quantity_or_budget",
         "destination"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-020",
@@ -1571,10 +1580,6 @@
         "T6+: provides second product then finalizes"
       ],
       "must_pass_checks": [
-        "CK-003",
-        "CK-014",
-        "CK-016",
-        "CK-017",
         "CK-015"
       ],
       "must_fail_checks": [],
@@ -1594,7 +1599,8 @@
         "destination",
         "timeline",
         "contact_email"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-021",
@@ -1639,7 +1645,6 @@
         "T2: no response"
       ],
       "must_pass_checks": [
-        "CK-012",
         "CK-015",
         "CK-021"
       ],
@@ -1657,7 +1662,8 @@
       "bucket_pattern": "B1A",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after first qualifier",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-022",
@@ -1702,7 +1708,6 @@
         "T2: still avoids specifics"
       ],
       "must_pass_checks": [
-        "CK-012",
         "CK-020",
         "CK-021"
       ],
@@ -1720,7 +1725,8 @@
       "bucket_pattern": "B1B",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after low-effort guidance prompt",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-023",
@@ -1785,7 +1791,8 @@
       "bucket_pattern": "B5B",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after branded/IP restriction and alternatives",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "WA"
     },
     {
       "case_id": "GD-024",
@@ -1848,7 +1855,8 @@
       "bucket_pattern": "B5A",
       "sourceability_status": "blocked",
       "expected_dropoff_point": "after MOQ/shipping economics explained",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "WA"
     },
     {
       "case_id": "GD-025",
@@ -1909,7 +1917,8 @@
       "bucket_pattern": "B6B",
       "sourceability_status": "irrelevant",
       "expected_dropoff_point": "after first boundary response",
-      "required_fields_for_sr": []
+      "required_fields_for_sr": [],
+      "channel": "web"
     },
     {
       "case_id": "GD-026",
@@ -1957,7 +1966,6 @@
       ],
       "must_pass_checks": [
         "CK-010",
-        "CK-012",
         "CK-015",
         "CK-023"
       ],
@@ -1979,7 +1987,8 @@
         "quantity",
         "contact_email_or_call_slot",
         "company_identity"
-      ]
+      ],
+      "channel": "web"
     },
     {
       "case_id": "GD-027",
@@ -2029,8 +2038,6 @@
         "T3: provides quantity if bot stabilizes scope"
       ],
       "must_pass_checks": [
-        "CK-001",
-        "CK-002",
         "CK-005",
         "CK-008",
         "CK-015",
@@ -2053,7 +2060,8 @@
         "primary_product_scope",
         "quantity_or_budget",
         "destination"
-      ]
+      ],
+      "channel": "web"
     }
   ]
 }

@@ -18,6 +18,22 @@ Per turn max = 10.
 Conversation score = average turn score.
 Pass threshold = average >= 7.0.
 
+## Calibration Examples (use to set the bar)
+
+**D2 (Value Delivery):**
+- **2:** Lead asks about sportswear. Bot responds with price ranges for ALL 3 categories mentioned (e.g. jerseys $3–8, shorts $2–5, socks $0.50–1.50) in one turn. Exceptional — lead got specific data they can act on.
+- **1:** Bot says "sportswear is a good category, what specifically?" Some engagement but no concrete data.
+- **0:** Bot asks "what's your budget?" without delivering any value. Lead learns nothing.
+
+**D1 (Message Length):**
+- **2:** "Sportswear's popular — jerseys run $3–8/unit at 500+. What quantities are you thinking?" (2 lines, one fact + one question.)
+- **1:** Same content but in 4–5 lines with a brief intro line.
+- **0:** 8-line response with bullet list of categories, process explanation, and multiple questions.
+
+**D4 (Conversation Discipline):**
+- **2:** One question per turn, naturally embedded. E.g. "Jerseys at $3–8/unit for 500+ — is that the range you're working with?"
+- **0:** "What's your budget? And what quantities? Also, do you need custom logos?" (three questions in one turn.)
+
 ## Binary Checks (conversation-level)
 - RESTRICTED_HOLD (Y/N/NA)
 - BUDGET_MATH (Y/N/NA)

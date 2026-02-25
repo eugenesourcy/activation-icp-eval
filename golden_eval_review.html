@@ -80,6 +80,22 @@ Per turn max = 10.
 Conversation score = average turn score.
 Pass threshold = average &gt;= 7.0.
 
+## Calibration Examples (use to set the bar)
+
+**D2 (Value Delivery):**
+- **2:** Lead asks about sportswear. Bot responds with price ranges for ALL 3 categories mentioned (e.g. jerseys $3–8, shorts $2–5, socks $0.50–1.50) in one turn. Exceptional — lead got specific data they can act on.
+- **1:** Bot says &quot;sportswear is a good category, what specifically?&quot; Some engagement but no concrete data.
+- **0:** Bot asks &quot;what&#39;s your budget?&quot; without delivering any value. Lead learns nothing.
+
+**D1 (Message Length):**
+- **2:** &quot;Sportswear&#39;s popular — jerseys run $3–8/unit at 500+. What quantities are you thinking?&quot; (2 lines, one fact + one question.)
+- **1:** Same content but in 4–5 lines with a brief intro line.
+- **0:** 8-line response with bullet list of categories, process explanation, and multiple questions.
+
+**D4 (Conversation Discipline):**
+- **2:** One question per turn, naturally embedded. E.g. &quot;Jerseys at $3–8/unit for 500+ — is that the range you&#39;re working with?&quot;
+- **0:** &quot;What&#39;s your budget? And what quantities? Also, do you need custom logos?&quot; (three questions in one turn.)
+
 ## Binary Checks (conversation-level)
 - RESTRICTED_HOLD (Y/N/NA)
 - BUDGET_MATH (Y/N/NA)
@@ -156,15 +172,15 @@ Input transcript:
         <strong>Eric 6 chats (v7 logs)</strong>
         <p class="meta"><strong>Count:</strong> 6</p>
         <p class="meta"><strong>Quality avg:</strong> 6.28/10</p>
-        <p class="meta"><strong>Check avg:</strong> 7.64/10</p>
-        <p class="meta"><strong>Composite avg:</strong> 6.82/10</p>
-        <p class="meta"><strong>Pass rate:</strong> 16.67%</p>
-        <p class="meta"><strong>Endpoint match:</strong> 66.67%</p>
+        <p class="meta"><strong>Check avg:</strong> 10/10</p>
+        <p class="meta"><strong>Composite avg:</strong> 7.77/10</p>
+        <p class="meta"><strong>Pass rate:</strong> 33.33%</p>
+        <p class="meta"><strong>Endpoint match:</strong> 100%</p>
       </article>
     </section>
     <section class="card" style="margin-top:10px;">
       <strong>Delta (Awsaf - Eric):</strong>
-      <span class="tag ok">Composite 1.95</span>
+      <span class="tag ok">Composite 1</span>
       <span class="tag ok">Quality 1.67</span>
       <div class="small" style="margin-top:8px;">Judge mode: same-definition-heuristic-v1 (shared evaluator for Awsaf and Eric)</div>
       <div class="small">Formula: composite = 0.6 * quality_average + 0.4 * check_score</div>
@@ -187,7 +203,7 @@ Input transcript:
         </thead>
         <tbody>
           <tr>
-            <td>Awsaf</td>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
             <td>TR-001</td>
             <td>GD-001</td>
             <td>EXIT_POLITE</td>
@@ -196,11 +212,11 @@ Input transcript:
             <td>8</td>
             <td>10</td>
             <td>8.8</td>
-            <td>3/0/0</td>
+            <td>2/0/0</td>
             <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Awsaf</td>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
             <td>TR-002</td>
             <td>GD-013</td>
             <td>COMPLETE_SR</td>
@@ -209,11 +225,11 @@ Input transcript:
             <td>7.88</td>
             <td>10</td>
             <td>8.73</td>
-            <td>5/0/0</td>
+            <td>2/0/0</td>
             <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Awsaf</td>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
             <td>TR-003</td>
             <td>GD-010</td>
             <td>COMPLETE_SR</td>
@@ -222,11 +238,11 @@ Input transcript:
             <td>7.88</td>
             <td>10</td>
             <td>8.73</td>
-            <td>6/0/0</td>
+            <td>1/0/0</td>
             <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Awsaf</td>
+            <td>Awsaf <span class="tag na">WA golden</span></td>
             <td>TR-004</td>
             <td>GD-016</td>
             <td>EXIT_POLITE</td>
@@ -235,11 +251,11 @@ Input transcript:
             <td>8.2</td>
             <td>10</td>
             <td>8.92</td>
-            <td>3/0/0</td>
+            <td>2/0/0</td>
             <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Awsaf</td>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
             <td>TR-005</td>
             <td>GD-020</td>
             <td>COMPLETE_SR</td>
@@ -248,50 +264,50 @@ Input transcript:
             <td>7.8</td>
             <td>10</td>
             <td>8.68</td>
-            <td>5/0/0</td>
+            <td>1/0/0</td>
             <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Eric</td>
+            <td>Eric <span class="tag na">WA golden</span></td>
             <td>v7-jesus</td>
             <td>GD-017</td>
-            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR <span class="small">(ok: COMPLETE_SR, QUALIFY_AND_ADVANCE)</span></td>
             <td>QUALIFY_AND_ADVANCE</td>
-            <td><span class='tag bad'>mismatch</span></td>
+            <td><span class='tag ok'>match</span></td>
             <td>6.67</td>
-            <td>7.5</td>
-            <td>7</td>
-            <td>3/1/2</td>
+            <td>10</td>
+            <td>8</td>
+            <td>4/0/0</td>
             <td><span class='tag bad'>FAIL</span></td>
-            <td><ul><li>Endpoint mismatch: expected COMPLETE_SR, got QUALIFY_AND_ADVANCE. End with explicit COMPLETE_SR behavior.</li><li>Fix CK-015: Align ending behavior with expected endpoint.</li><li>Increase concrete value per turn (constraint, range, or rationale).</li><li>End each assistant turn with clear next-step language.</li></ul></td>
+            <td><ul><li>Increase concrete value per turn (constraint, range, or rationale).</li><li>End each assistant turn with clear next-step language.</li><li>Required checks are passing; focus on per-turn quality lift above 7.0.</li></ul></td>
           </tr><tr>
-            <td>Eric</td>
+            <td>Eric <span class="tag na">WA golden</span></td>
             <td>v7-syed</td>
             <td>GD-005</td>
-            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE <span class="small">(ok: EXIT_POLITE, QUALIFY_AND_ADVANCE; must not: COMPLETE_SR)</span></td>
             <td>QUALIFY_AND_ADVANCE</td>
-            <td><span class='tag bad'>mismatch</span></td>
+            <td><span class='tag ok'>match</span></td>
             <td>7</td>
-            <td>5</td>
-            <td>6.2</td>
-            <td>1/1/4</td>
-            <td><span class='tag bad'>FAIL</span></td>
-            <td><ul><li>Endpoint mismatch: expected EXIT_POLITE, got QUALIFY_AND_ADVANCE. End with explicit EXIT_POLITE behavior.</li><li>Fix CK-015: Align ending behavior with expected endpoint.</li></ul></td>
+            <td>10</td>
+            <td>8.2</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Eric</td>
+            <td>Eric <span class="tag na">WA golden</span></td>
             <td>v7-battery</td>
             <td>GD-016</td>
             <td>EXIT_POLITE</td>
             <td>EXIT_POLITE</td>
             <td><span class='tag ok'>match</span></td>
             <td>5</td>
-            <td>6.67</td>
-            <td>5.67</td>
-            <td>2/1/0</td>
+            <td>10</td>
+            <td>7</td>
+            <td>2/0/0</td>
             <td><span class='tag bad'>FAIL</span></td>
-            <td><ul><li>Fix CK-012: Shorten messages to concise transition style.</li><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Increase concrete value per turn (constraint, range, or rationale).</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li></ul></td>
+            <td><ul><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Increase concrete value per turn (constraint, range, or rationale).</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li><li>Required checks are passing; focus on per-turn quality lift above 7.0.</li></ul></td>
           </tr><tr>
-            <td>Eric</td>
+            <td>Eric <span class="tag na">WA golden</span></td>
             <td>v7-candle</td>
             <td>GD-024</td>
             <td>EXIT_POLITE</td>
@@ -304,7 +320,7 @@ Input transcript:
             <td><span class='tag bad'>FAIL</span></td>
             <td><ul><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Add one qualification/routing question where flow allows.</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li><li>Required checks are passing; focus on per-turn quality lift above 7.0.</li></ul></td>
           </tr><tr>
-            <td>Eric</td>
+            <td>Eric <span class="tag na">WA golden</span></td>
             <td>v7-anthony</td>
             <td>GD-023</td>
             <td>EXIT_POLITE</td>
@@ -315,20 +331,20 @@ Input transcript:
             <td>8.5</td>
             <td>3/0/1</td>
             <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Eric</td>
+            <td>Eric <span class="tag na">WA golden</span></td>
             <td>v7-jammaica</td>
             <td>GD-007</td>
             <td>HUMAN_HANDOFF</td>
             <td>HUMAN_HANDOFF</td>
             <td><span class='tag ok'>match</span></td>
             <td>6</td>
-            <td>6.67</td>
-            <td>6.27</td>
-            <td>2/1/0</td>
+            <td>10</td>
+            <td>7.6</td>
+            <td>2/0/0</td>
             <td><span class='tag bad'>FAIL</span></td>
-            <td><ul><li>Fix CK-012: Shorten messages to concise transition style.</li><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li></ul></td>
+            <td><ul><li>Shorten longer assistant turns; keep under transition-length target.</li><li>Reduce multi-branch wording; keep one move per turn.</li><li>End each assistant turn with clear next-step language.</li><li>Required checks are passing; focus on per-turn quality lift above 7.0.</li></ul></td>
           </tr>
         </tbody>
       </table>
@@ -338,7 +354,7 @@ Input transcript:
       <table>
         <thead><tr><th>Check</th><th>Definition</th><th>Awsaf (P/F/NA)</th><th>Awsaf Pass%</th><th>Eric (P/F/NA)</th><th>Eric Pass%</th></tr></thead>
         <tbody>
-          <tr><td>CK-001</td><td>Stage 1 asks image before tools</td><td>1/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-002</td><td>Stage 1 runs PI after image or skip</td><td>2/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-003</td><td>Stage 2 tool order</td><td>3/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-005</td><td>Value-first trust handling</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-006</td><td>Restricted hold absolute</td><td>1/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-007</td><td>Branded/IP hold</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-008</td><td>Budget math honesty</td><td>1/0/0</td><td>100%</td><td>2/0/1</td><td>100%</td></tr><tr><td>CK-009</td><td>Currency disambiguation</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-010</td><td>Call handoff behavior</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-012</td><td>Concise message discipline</td><td>2/0/0</td><td>100%</td><td>0/2/0</td><td>0%</td></tr><tr><td>CK-014</td><td>Feasibility after structured form</td><td>2/0/0</td><td>100%</td><td>0/0/2</td><td>-</td></tr><tr><td>CK-015</td><td>Endpoint correctness</td><td>5/0/0</td><td>100%</td><td>4/2/0</td><td>66.67%</td></tr><tr><td>CK-016</td><td>Add-another-product loop</td><td>1/0/0</td><td>100%</td><td>0/0/0</td><td>-</td></tr><tr><td>CK-017</td><td>Finalize path correctness</td><td>3/0/0</td><td>100%</td><td>0/0/1</td><td>-</td></tr><tr><td>CK-018</td><td>No fabricated capabilities</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-020</td><td>Low-intent handling</td><td>1/0/0</td><td>100%</td><td>0/0/2</td><td>-</td></tr>
+          <tr><td>CK-005</td><td>Value-first trust handling</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-006</td><td>Restricted hold absolute</td><td>1/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-007</td><td>Branded/IP hold</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-008</td><td>Budget math honesty</td><td>1/0/0</td><td>100%</td><td>2/0/1</td><td>100%</td></tr><tr><td>CK-009</td><td>Currency disambiguation</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-010</td><td>Call handoff behavior</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-015</td><td>Endpoint correctness</td><td>5/0/0</td><td>100%</td><td>6/0/0</td><td>100%</td></tr><tr><td>CK-018</td><td>No fabricated capabilities</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-020</td><td>Low-intent handling</td><td>1/0/0</td><td>100%</td><td>0/0/2</td><td>-</td></tr>
         </tbody>
       </table>
     </section>

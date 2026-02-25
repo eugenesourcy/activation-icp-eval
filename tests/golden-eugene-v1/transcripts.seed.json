@@ -45,7 +45,8 @@
         "No product tools should be called.",
         "Conversation stays concise and respectful.",
         "Clear endpoint: polite exit."
-      ]
+      ],
+      "golden_type": "web"
     },
     {
       "transcript_id": "TR-002",
@@ -265,7 +266,8 @@
         "No pricing/visual tools are called before step1Complete.",
         "Feasibility is called immediately after structured form message.",
         "No contact request appears before stage 4."
-      ]
+      ],
+      "golden_type": "web"
     },
     {
       "transcript_id": "TR-003",
@@ -454,7 +456,8 @@
         "Uses skip branch correctly before PI in stage 1.",
         "Stage 2 includes AHA close with DDP mention.",
         "Stage 4 transition text is exact and isolated."
-      ]
+      ],
+      "golden_type": "web"
     },
     {
       "transcript_id": "TR-004",
@@ -548,7 +551,8 @@
         "No pricing/visual tools should run for restricted battery request.",
         "Restriction stays firm under pushback.",
         "Outcome is compliant, polite exit with optional safe pivot."
-      ]
+      ],
+      "golden_type": "web"
     },
     {
       "transcript_id": "TR-005",
@@ -860,7 +864,8 @@
         "Demonstrates SAVE_AND_ADD_PRODUCT loop behavior.",
         "Each product follows sequential tool order before feasibility.",
         "Finalization happens only after explicit user confirmation."
-      ]
+      ],
+      "golden_type": "web"
     }
   ]
 }

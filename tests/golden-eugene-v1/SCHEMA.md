@@ -13,10 +13,14 @@ Each case in `cases.seed.json` follows this structure:
   "spec_clarity": "clear | partial | unclear",
   "risk_class": "normal | restricted | ip_branded | out_of_scope",
   "intent_level": "low | medium | high",
+  "channel": "web | WA",
   "behavior_bucket": "B1 | B2 | B3 | B4 | B5 | B6",
   "bucket_pattern": "e.g. B2A, B2B, B2C",
   "sourceability_status": "sourceable | nurture | blocked | irrelevant",
   "expected_endpoint": "EXIT_POLITE | EDUCATE_AND_NURTURE | QUALIFY_AND_ADVANCE | HUMAN_HANDOFF | COMPLETE_SR",
+  "acceptable_endpoints": ["optional; array of valid outcomes; if present, pass = actual in this list and not in must_not_reach"],
+  "must_not_reach": ["optional; endpoints that indicate failure"],
+  "optimal_endpoint": "optional; best outcome for bonus scoring only",
   "expected_dropoff_point": "nullable string; where we expect disengagement if non-converting",
   "expected_stage_path": [
     "splash_to_stage1",
@@ -72,6 +76,10 @@ Each case in `cases.seed.json` follows this structure:
 
 - `persona_type` is a scenario/input class, not a rigid script.
 - `allowed_disclosures_by_turn` is mandatory to prevent evaluator improvisation.
+- `channel` (optional): `"web"` or `"WA"`. When `"WA"`, CK-012 and CK-013 (card/concise-web) are not applied; D1 handles message length for WhatsApp.
+- `acceptable_endpoints` (optional): array of endpoint strings. When set, pass = actual endpoint is in this array and not in `must_not_reach`. Backward compat: if absent, pass = actual === `expected_endpoint`.
+- `must_not_reach` (optional): array of endpoint strings that indicate failure (e.g. COMPLETE_SR for impossible-price cases).
+- `optimal_endpoint` (optional): single endpoint for bonus/display; does not affect pass/fail.
 - `expected_stage_path` and `expected_tool_sequence` are required for Unified Activation flow correctness, not only chat quality.
 - `behavior_bucket` maps each case to the team's behavior taxonomy:
   - `B1` Low-intent drop immediately

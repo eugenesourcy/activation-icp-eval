@@ -287,11 +287,11 @@ function buildHtml(payload) {
           ${comp.all_items
             .map(
               (r) => `<tr>
-            <td>${escapeHtml(r.group_label.replace(" Golden Transcripts", "").replace(" Chat Examples (v7)", ""))}</td>
+            <td>${escapeHtml(r.group_label.replace(" Golden Transcripts", "").replace(" Chat Examples (v7)", ""))}${r.golden_type ? " <span class=\"tag na\">" + (r.golden_type === "wa" ? "WA golden" : "Web golden") + "</span>" : ""}</td>
             <td>${escapeHtml(r.conversation_id)}</td>
             <td>${escapeHtml(r.case_id || "-")}</td>
-            <td>${escapeHtml(r.expected_endpoint || "-")}</td>
-            <td>${escapeHtml(r.actual_endpoint || "-")}</td>
+            <td>${escapeHtml(r.expected_endpoint || "-")}${(r.acceptable_endpoints && r.acceptable_endpoints.length > 1) ? " <span class=\"small\">(ok: " + escapeHtml(r.acceptable_endpoints.join(", ")) + (r.must_not_reach && r.must_not_reach.length ? "; must not: " + escapeHtml(r.must_not_reach.join(", ")) : "") + ")</span>" : ""}</td>
+            <td>${escapeHtml(r.actual_endpoint || "-")}${r.endpoint_optimal ? " <span class=\"tag ok\">optimal</span>" : ""}</td>
             <td>${endpointTag(r.endpoint_match)}</td>
             <td>${r.quality_average}</td>
             <td>${r.check_score}</td>

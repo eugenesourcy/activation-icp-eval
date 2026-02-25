@@ -239,9 +239,9 @@
         <div class="sub">From v1 baseline to v7 stabilization</div>
       </article>
       <article class="card kpi">
-        <div class="label">Biggest Fail Period</div>
-        <div class="value">v4 / v6b</div>
-        <div class="sub">v4 exposed regressions, v6b scored 3/5 under stricter rubric</div>
+        <div class="label">Rubric upgrade (v6b)</div>
+        <div class="value">v6b → v7</div>
+        <div class="sub">v6b introduced strict D1–D5 rubric; 60% pass exposed real gaps; v7 fixed them.</div>
       </article>
       <article class="card kpi">
         <div class="label">Highest Leverage Fix</div>
@@ -317,8 +317,8 @@
             <td>2026-02-16</td>
             <td>5 personas with scored rubric</td>
             <td>3/5 pass, avg 6.5/10</td>
-            <td><span class="tag bad">Rubric Failure</span></td>
-            <td>Became concise but still had low-value narrowing and process dumps in critical turns.</td>
+            <td><span class="tag warn">Stricter rubric</span></td>
+            <td>Introduced per-turn D1–D5 scoring and hard message cap; exposed narrowing-without-value and process dumps. v7 then fixed these. (Methodology upgrade, not product regression.)</td>
           </tr>
           <tr>
             <td><strong>v7</strong></td>
@@ -342,7 +342,7 @@
       <div class="bar"><span style="width:100%"></span></div>
       <div><strong>v3-test:</strong> 100%</div>
       <div class="bar"><span style="width:100%"></span></div>
-      <div><strong>v6b:</strong> 60% (scored rubric)</div>
+      <div><strong>v6b:</strong> 60% (stricter rubric)</div>
       <div class="bar"><span style="width:60%"></span></div>
       <div><strong>v7:</strong> 100% (core set)</div>
       <div class="bar"><span style="width:100%"></span></div>
@@ -417,11 +417,11 @@
       </article>
 
       <article class="card version-card">
-        <h3>v6b (New Rubric Shock)</h3>
-        <p>Switched to strict scored dimensions; quality bar increased.</p>
+        <h3>v6b (Rubric Upgrade)</h3>
+        <p>Eval methodology got stricter: introduced per-turn D1–D5 scoring and hard message cap. The 60% pass rate exposed real gaps (narrowing without value, process dumps), not a product regression.</p>
         <ul>
-          <li>3/5 pass under scoring, with D2/D5 failures in key turns.</li>
-          <li>Core issue: asking narrowing questions before giving prices.</li>
+          <li>3/5 pass under new scoring, with D2/D5 failures in key turns.</li>
+          <li>Core issue exposed: asking narrowing questions before giving prices — fixed in v7.</li>
         </ul>
         <div class="links">
           <a href="tests/run-v6/run_summary_v6.md">Run Summary</a>

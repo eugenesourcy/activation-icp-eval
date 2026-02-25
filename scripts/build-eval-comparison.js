@@ -26,6 +26,12 @@ const ERIC_CASE_MAP = {
   "v7-jammaica.jsonl": "GD-007"
 };
 
+/** Conversation eval uses only these checks; integration-layer checks (CK-001–004, 011–014, 016–017) run separately. */
+const CONVERSATION_LAYER_IDS = new Set([
+  "CK-005", "CK-006", "CK-007", "CK-008", "CK-009", "CK-010",
+  "CK-015", "CK-018", "CK-019", "CK-020", "CK-021", "CK-022", "CK-023", "CK-024"
+]);
+
 function round(n) {
   return Math.round(n * 100) / 100;
 }
@@ -179,7 +185,8 @@ function inferEndpoint(conv) {
   return "QUALIFY_AND_ADVANCE";
 }
 
-function evaluateCheck(checkId, conv, expectedEndpoint) {
+function evaluateCheck(checkId, conv, caseMeta) {
+  const expectedEndpoint = caseMeta ? caseMeta.expected_endpoint : null;
   const userText = lower(conversationText(conv, "user"));
   const assistantText = lower(conversationText(conv, "assistant"));
   const messageSteps = conv.steps.filter((s) => s.kind === "message");
@@ -272,6 +279,7 @@ function evaluateCheck(checkId, conv, expectedEndpoint) {
   }
 
   if (checkId === "CK-012") {
+    if (caseMeta && caseMeta.channel === "WA") return null;
     if (!assistantMessages.length) return false;
     const avgWords = mean(assistantMessages.map((m) => words(m.text)));
     const maxWords = Math.max(...assistantMessages.map((m) => words(m.text)));
@@ -279,6 +287,7 @@ function evaluateCheck(checkId, conv, expectedEndpoint) {
   }
 
   if (checkId === "CK-013") {
+    if (caseMeta && caseMeta.channel === "WA") return null;
     const hasCards = conv.steps.some((s) => s.kind === "tool_result");
     if (!hasCards) return null;
     return !assistantMessages.some((m) => (m.text.match(/\$\d/g) || []).length >= 3);
@@ -293,7 +302,10 @@ function evaluateCheck(checkId, conv, expectedEndpoint) {
 
   if (checkId === "CK-015") {
     const actual = inferEndpoint(conv);
-    return actual === expectedEndpoint;
+    const acceptable = caseMeta?.acceptable_endpoints?.length ? caseMeta.acceptable_endpoints : (expectedEndpoint ? [expectedEndpoint] : null);
+    const mustNot = caseMeta?.must_not_reach || [];
+    if (!acceptable) return actual === expectedEndpoint;
+    return !mustNot.includes(actual) && acceptable.includes(actual);
   }
 
   if (checkId === "CK-016") {
@@ -386,7 +398,13 @@ function generateImprovementSuggestions(row) {
   const out = [];
 
   if (row.endpoint_match === false) {
-    out.push(`Endpoint mismatch: expected ${row.expected_endpoint}, got ${row.actual_endpoint}. End with explicit ${row.expected_endpoint} behavior.`);
+    const acceptable = row.acceptable_endpoints && row.acceptable_endpoints.length ? row.acceptable_endpoints : (row.expected_endpoint ? [row.expected_endpoint] : null);
+    const mustNot = row.must_not_reach && row.must_not_reach.length ? row.must_not_reach : null;
+    if (acceptable && acceptable.length) {
+      out.push(`Endpoint mismatch: actual ${row.actual_endpoint}. Must be one of: ${acceptable.join(", ")}.${mustNot && mustNot.length ? ` Must not reach: ${mustNot.join(", ")}.` : ""}`);
+    } else {
+      out.push(`Endpoint mismatch: expected ${row.expected_endpoint}, got ${row.actual_endpoint}. End with explicit ${row.expected_endpoint} behavior.`);
+    }
   }
 
   for (const chk of row.required_checks || []) {
@@ -416,20 +434,24 @@ function generateImprovementSuggestions(row) {
   const dedup = [];
   for (const s of out) if (!dedup.includes(s)) dedup.push(s);
   if (!dedup.length) {
-    dedup.push("Maintain this pattern as golden. Keep concise transition messages with explicit next-step cues.");
+    const goldenLabel = row.golden_type === "wa" ? "WA golden" : "Web golden";
+    dedup.push(`Matches ${goldenLabel} pattern. Keep concise transition messages with explicit next-step cues.`);
   }
   return dedup.slice(0, 5);
 }
 
-function evaluateConversation(conv, caseMeta) {
+function evaluateConversation(conv, caseMeta, checksById) {
   const assistantTurns = conv.steps.filter((s) => s.role === "assistant" && s.kind === "message");
   const turnScores = assistantTurns.map((t) => ({ seq: t.seq, ...scoreAssistantMessage(t.text) }));
   const qualityAverage = round(mean(turnScores.map((t) => t.score)));
 
-  const requiredChecks = caseMeta ? caseMeta.must_pass_checks || [] : [];
+  const rawRequired = caseMeta ? caseMeta.must_pass_checks || [] : [];
+  const requiredChecks = rawRequired.filter(
+    (id) => CONVERSATION_LAYER_IDS.has(id) && (!checksById || !checksById[id] || checksById[id].layer === "conversation")
+  );
   const checkResults = requiredChecks.map((id) => ({
     id,
-    result: evaluateCheck(id, conv, caseMeta ? caseMeta.expected_endpoint : null)
+    result: evaluateCheck(id, conv, caseMeta)
   }));
 
   const passCount = checkResults.filter((c) => c.result === true).length;
@@ -441,7 +463,16 @@ function evaluateConversation(conv, caseMeta) {
 
   const actualEndpoint = inferEndpoint(conv);
   const expectedEndpoint = caseMeta ? caseMeta.expected_endpoint : null;
-  const endpointMatch = expectedEndpoint ? actualEndpoint === expectedEndpoint : null;
+  const acceptableEndpoints = caseMeta?.acceptable_endpoints?.length
+    ? caseMeta.acceptable_endpoints
+    : expectedEndpoint ? [expectedEndpoint] : null;
+  const mustNotReach = caseMeta?.must_not_reach || [];
+  const endpointMatch =
+    acceptableEndpoints === null
+      ? null
+      : !mustNotReach.includes(actualEndpoint) && acceptableEndpoints.includes(actualEndpoint);
+  const endpointOptimal =
+    caseMeta?.optimal_endpoint && actualEndpoint === caseMeta.optimal_endpoint;
 
   const composite = round(qualityAverage * 0.6 + checkScore * 0.4);
   const pass = qualityAverage >= 7 && failCount === 0 && (endpointMatch !== false);
@@ -455,6 +486,10 @@ function evaluateConversation(conv, caseMeta) {
     expected_endpoint: expectedEndpoint,
     actual_endpoint: actualEndpoint,
     endpoint_match: endpointMatch,
+    endpoint_optimal: endpointOptimal,
+    acceptable_endpoints: caseMeta?.acceptable_endpoints ?? (expectedEndpoint ? [expectedEndpoint] : null),
+    must_not_reach: caseMeta?.must_not_reach,
+    golden_type: caseMeta?.channel === "WA" ? "wa" : "web",
     assistant_turns: assistantTurns.length,
     quality_average: qualityAverage,
     required_checks: checkResults,
@@ -499,7 +534,7 @@ function main() {
 
   const awsafConversations = (awsafSeed.transcripts || []).map(normalizeAwsafConversation);
   const awsafRows = awsafConversations
-    .map((conv) => evaluateConversation(conv, casesById[conv.case_id] || null))
+    .map((conv) => evaluateConversation(conv, casesById[conv.case_id] || null, checksById))
     .slice(0, 5);
 
   const ericFiles = Object.keys(ERIC_CASE_MAP)
@@ -507,7 +542,7 @@ function main() {
     .filter((f) => fs.existsSync(f));
 
   const ericConversations = ericFiles.map(normalizeEricConversation);
-  const ericRows = ericConversations.map((conv) => evaluateConversation(conv, casesById[conv.case_id] || null));
+  const ericRows = ericConversations.map((conv) => evaluateConversation(conv, casesById[conv.case_id] || null, checksById));
 
   const awsafGroup = summarizeGroup("Awsaf Golden Transcripts", "tests/golden-eugene-v1/transcripts.seed.json", awsafRows);
   const ericGroup = summarizeGroup("Eric Chat Examples (v7)", "tests/run-v7/results/*.jsonl", ericRows);

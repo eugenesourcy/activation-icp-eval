@@ -7,6 +7,8 @@
 **Threshold:** avg >= 7.0/10 per conversation + all binary checks pass
 **Result:** 8/8 PASS — overall avg 8.8/10
 
+v6b introduced the strict D1–D5 rubric; v7 achieved 8/8 under it.
+
 ---
 
 ## Aggregate Scores
