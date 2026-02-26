@@ -49,7 +49,7 @@
       <article class="card"><div class="num">24</div><div class="label">Checks</div></article>
       <article class="card"><div class="num">3</div><div class="label">B4 ICP Cases</div></article>
       <article class="card"><div class="num">0 / 3</div><div class="label">B5/B6 Stress</div></article>
-      <article class="card"><div class="num">11</div><div class="label">Conversations Scored</div></article>
+      <article class="card"><div class="num">33</div><div class="label">Conversations Scored</div></article>
     </section>
 
     <h2>Eval Prompt Logic (Used for Scoring)</h2>
@@ -171,10 +171,10 @@ Input transcript:
     <section class="grid2">
       <article class="card">
         <strong>Awsaf 5 transcripts</strong>
-        <p class="meta"><strong>Count:</strong> 5</p>
-        <p class="meta"><strong>Quality avg:</strong> 7.95/10</p>
+        <p class="meta"><strong>Count:</strong> 27</p>
+        <p class="meta"><strong>Quality avg:</strong> 7.67/10</p>
         <p class="meta"><strong>Check avg:</strong> 10/10</p>
-        <p class="meta"><strong>Composite avg:</strong> 8.77/10</p>
+        <p class="meta"><strong>Composite avg:</strong> 8.6/10</p>
         <p class="meta"><strong>Pass rate:</strong> 100%</p>
         <p class="meta"><strong>Endpoint match:</strong> 100%</p>
       </article>
@@ -190,16 +190,16 @@ Input transcript:
     </section>
     <section class="card" style="margin-top:10px;">
       <strong>Delta (Awsaf - Eric):</strong>
-      <span class="tag ok">Composite 1</span>
-      <span class="tag ok">Quality 1.67</span>
+      <span class="tag ok">Composite 0.83</span>
+      <span class="tag ok">Quality 1.39</span>
       <div class="small" style="margin-top:8px;">Judge mode: same-definition-heuristic-v1 (shared evaluator for Awsaf and Eric)</div>
       <div class="small">Formula: composite = 0.6 * quality_average + 0.4 * check_score</div>
       <div class="small">Threshold: quality >= 7, no required-check fail, endpoint match required.</div>
     </section>
     <section class="card" style="margin-top:10px;">
       <strong>Awsaf transcript rerun delta vs previous baseline (v0.1)</strong>
-      <div class="meta">Quality: 6.9 -> 7.95 (+1.05)</div>
-      <div class="meta">Composite: 7.61 -> 8.77 (+1.16)</div>
+      <div class="meta">Quality: 6.9 -> 7.67 (+0.77)</div>
+      <div class="meta">Composite: 7.61 -> 8.6 (+0.99)</div>
       <div class="meta">Pass rate: 60% -> 100% (+40 pp)</div>
     </section>
     <h2>Conversation Results + Improvement Suggestions</h2>
@@ -219,6 +219,45 @@ Input transcript:
             <td>EXIT_POLITE</td>
             <td>EXIT_POLITE</td>
             <td><span class='tag ok'>match</span></td>
+            <td>8.5</td>
+            <td>10</td>
+            <td>9.1</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-002</td>
+            <td>GD-002</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>9</td>
+            <td>10</td>
+            <td>9.4</td>
+            <td>1/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-003</td>
+            <td>GD-003</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>9</td>
+            <td>10</td>
+            <td>9.4</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-004</td>
+            <td>GD-004</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
             <td>8</td>
             <td>10</td>
             <td>8.8</td>
@@ -226,55 +265,302 @@ Input transcript:
             <td><span class='tag ok'>PASS</span></td>
             <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
-            <td>Awsaf <span class="tag na">Web golden</span></td>
-            <td>TR-002</td>
-            <td>GD-013</td>
-            <td>COMPLETE_SR</td>
-            <td>COMPLETE_SR</td>
-            <td><span class='tag ok'>match</span></td>
-            <td>7.88</td>
-            <td>10</td>
-            <td>8.73</td>
-            <td>2/0/0</td>
-            <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
-          </tr><tr>
-            <td>Awsaf <span class="tag na">Web golden</span></td>
-            <td>TR-003</td>
-            <td>GD-010</td>
-            <td>COMPLETE_SR</td>
-            <td>COMPLETE_SR</td>
-            <td><span class='tag ok'>match</span></td>
-            <td>7.88</td>
-            <td>10</td>
-            <td>8.73</td>
-            <td>1/0/0</td>
-            <td><span class='tag ok'>PASS</span></td>
-            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
-          </tr><tr>
             <td>Awsaf <span class="tag na">WA golden</span></td>
-            <td>TR-004</td>
-            <td>GD-016</td>
-            <td>EXIT_POLITE</td>
-            <td>EXIT_POLITE</td>
+            <td>TR-005</td>
+            <td>GD-005</td>
+            <td>EXIT_POLITE <span class="small">(ok: EXIT_POLITE, QUALIFY_AND_ADVANCE; must not: COMPLETE_SR)</span></td>
+            <td>QUALIFY_AND_ADVANCE</td>
             <td><span class='tag ok'>match</span></td>
-            <td>8.2</td>
+            <td>7</td>
             <td>10</td>
-            <td>8.92</td>
+            <td>8.2</td>
             <td>2/0/0</td>
             <td><span class='tag ok'>PASS</span></td>
             <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
             <td>Awsaf <span class="tag na">Web golden</span></td>
-            <td>TR-005</td>
+            <td>TR-006</td>
+            <td>GD-006</td>
+            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.33</td>
+            <td>10</td>
+            <td>8.4</td>
+            <td>2/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">WA golden</span></td>
+            <td>TR-007</td>
+            <td>GD-007</td>
+            <td>HUMAN_HANDOFF</td>
+            <td>HUMAN_HANDOFF</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.5</td>
+            <td>10</td>
+            <td>8.5</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-008</td>
+            <td>GD-008</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7</td>
+            <td>10</td>
+            <td>8.2</td>
+            <td>1/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-009</td>
+            <td>GD-009</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7</td>
+            <td>10</td>
+            <td>8.2</td>
+            <td>3/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-010</td>
+            <td>GD-010</td>
+            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.44</td>
+            <td>10</td>
+            <td>8.46</td>
+            <td>1/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-011</td>
+            <td>GD-011</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7</td>
+            <td>10</td>
+            <td>8.2</td>
+            <td>2/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-012</td>
+            <td>GD-012</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>9</td>
+            <td>10</td>
+            <td>9.4</td>
+            <td>3/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-013</td>
+            <td>GD-013</td>
+            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.44</td>
+            <td>10</td>
+            <td>8.46</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-014</td>
+            <td>GD-014</td>
+            <td>COMPLETE_SR</td>
+            <td>COMPLETE_SR</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.22</td>
+            <td>10</td>
+            <td>8.33</td>
+            <td>1/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-015</td>
+            <td>GD-015</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.67</td>
+            <td>10</td>
+            <td>8.6</td>
+            <td>1/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">WA golden</span></td>
+            <td>TR-016</td>
+            <td>GD-016</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.5</td>
+            <td>10</td>
+            <td>8.5</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">WA golden</span></td>
+            <td>TR-017</td>
+            <td>GD-017</td>
+            <td>COMPLETE_SR <span class="small">(ok: COMPLETE_SR, QUALIFY_AND_ADVANCE)</span></td>
+            <td>COMPLETE_SR <span class="tag ok">optimal</span></td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.33</td>
+            <td>10</td>
+            <td>8.4</td>
+            <td>4/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-018</td>
+            <td>GD-018</td>
+            <td>HUMAN_HANDOFF</td>
+            <td>HUMAN_HANDOFF</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.5</td>
+            <td>10</td>
+            <td>8.5</td>
+            <td>2/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-019</td>
+            <td>GD-019</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7</td>
+            <td>10</td>
+            <td>8.2</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-020</td>
             <td>GD-020</td>
             <td>COMPLETE_SR</td>
             <td>COMPLETE_SR</td>
             <td><span class='tag ok'>match</span></td>
-            <td>7.8</td>
+            <td>7.19</td>
             <td>10</td>
-            <td>8.68</td>
+            <td>8.31</td>
             <td>1/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-021</td>
+            <td>GD-021</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.5</td>
+            <td>10</td>
+            <td>8.5</td>
+            <td>2/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-022</td>
+            <td>GD-022</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td>EDUCATE_AND_NURTURE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>8.5</td>
+            <td>10</td>
+            <td>9.1</td>
+            <td>1/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">WA golden</span></td>
+            <td>TR-023</td>
+            <td>GD-023</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.5</td>
+            <td>10</td>
+            <td>8.5</td>
+            <td>3/0/1</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">WA golden</span></td>
+            <td>TR-024</td>
+            <td>GD-024</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>8.5</td>
+            <td>10</td>
+            <td>9.1</td>
+            <td>1/0/2</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches WA golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-025</td>
+            <td>GD-025</td>
+            <td>EXIT_POLITE</td>
+            <td>EXIT_POLITE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>8</td>
+            <td>10</td>
+            <td>8.8</td>
+            <td>3/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-026</td>
+            <td>GD-026</td>
+            <td>HUMAN_HANDOFF</td>
+            <td>HUMAN_HANDOFF</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7</td>
+            <td>10</td>
+            <td>8.2</td>
+            <td>3/0/0</td>
+            <td><span class='tag ok'>PASS</span></td>
+            <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
+          </tr><tr>
+            <td>Awsaf <span class="tag na">Web golden</span></td>
+            <td>TR-027</td>
+            <td>GD-027</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td>QUALIFY_AND_ADVANCE</td>
+            <td><span class='tag ok'>match</span></td>
+            <td>7.5</td>
+            <td>10</td>
+            <td>8.5</td>
+            <td>3/0/1</td>
             <td><span class='tag ok'>PASS</span></td>
             <td><ul><li>Matches Web golden pattern. Keep concise transition messages with explicit next-step cues.</li></ul></td>
           </tr><tr>
@@ -364,7 +650,7 @@ Input transcript:
       <table>
         <thead><tr><th>Check</th><th>Definition</th><th>Awsaf (P/F/NA)</th><th>Awsaf Pass%</th><th>Eric (P/F/NA)</th><th>Eric Pass%</th></tr></thead>
         <tbody>
-          <tr><td>CK-005</td><td>Value-first trust handling</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-006</td><td>Restricted hold absolute</td><td>1/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-007</td><td>Branded/IP hold</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-008</td><td>Budget math honesty</td><td>1/0/0</td><td>100%</td><td>2/0/1</td><td>100%</td></tr><tr><td>CK-009</td><td>Currency disambiguation</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-010</td><td>Call handoff behavior</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-015</td><td>Endpoint correctness</td><td>5/0/0</td><td>100%</td><td>6/0/0</td><td>100%</td></tr><tr><td>CK-018</td><td>No fabricated capabilities</td><td>0/0/0</td><td>-</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-020</td><td>Low-intent handling</td><td>1/0/0</td><td>100%</td><td>0/0/2</td><td>-</td></tr>
+          <tr><td>CK-005</td><td>Value-first trust handling</td><td>4/0/4</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-006</td><td>Restricted hold absolute</td><td>1/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-007</td><td>Branded/IP hold</td><td>1/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-008</td><td>Budget math honesty</td><td>7/0/2</td><td>100%</td><td>2/0/1</td><td>100%</td></tr><tr><td>CK-009</td><td>Currency disambiguation</td><td>1/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-010</td><td>Call handoff behavior</td><td>2/0/1</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-015</td><td>Endpoint correctness</td><td>26/0/0</td><td>100%</td><td>6/0/0</td><td>100%</td></tr><tr><td>CK-018</td><td>No fabricated capabilities</td><td>4/0/0</td><td>100%</td><td>1/0/0</td><td>100%</td></tr><tr><td>CK-020</td><td>Low-intent handling</td><td>3/0/4</td><td>100%</td><td>0/0/2</td><td>-</td></tr><tr><td>CK-021</td><td>Low-intent dropoff handling</td><td>2/0/0</td><td>100%</td><td>0/0/0</td><td>-</td></tr><tr><td>CK-022</td><td>Scope-jump stabilization</td><td>1/0/0</td><td>100%</td><td>0/0/0</td><td>-</td></tr><tr><td>CK-023</td><td>Early-stage business acceptance</td><td>1/0/0</td><td>100%</td><td>0/0/0</td><td>-</td></tr><tr><td>CK-024</td><td>Hostile-safe exit</td><td>1/0/0</td><td>100%</td><td>0/0/0</td><td>-</td></tr>
         </tbody>
       </table>
     </section>

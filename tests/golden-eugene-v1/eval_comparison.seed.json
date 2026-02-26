@@ -1,7 +1,7 @@
 {
   "dataset_name": "golden-eugene-v1-eval-comparison",
   "version": "0.3.0",
-  "generated_at": "2026-02-25T03:33:17.255Z",
+  "generated_at": "2026-02-26T05:26:29.466Z",
   "threshold": {
     "quality_average_min": 7,
     "required_check_fail_max": 0,
@@ -62,9 +62,9 @@
     "endpoint_match_rate": 80
   },
   "awsaf_delta_vs_v01": {
-    "quality_average": 1.05,
+    "quality_average": 0.77,
     "check_average": 1.33,
-    "composite_average": 1.16,
+    "composite_average": 0.99,
     "pass_rate": 40,
     "endpoint_match_rate": 20
   },
@@ -72,16 +72,16 @@
     {
       "label": "Awsaf Golden Transcripts",
       "source": "tests/golden-eugene-v1/transcripts.seed.json",
-      "count": 5,
-      "quality_average": 7.95,
+      "count": 27,
+      "quality_average": 7.67,
       "check_average": 10,
-      "composite_average": 8.77,
+      "composite_average": 8.6,
       "pass_rate": 100,
       "endpoint_match_rate": 100,
       "items": [
         {
           "conversation_id": "TR-001",
-          "title": "Spam / Non-sourcing redirect",
+          "title": "Job seeker redirect",
           "source_group": "Awsaf",
           "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
           "case_id": "GD-001",
@@ -93,7 +93,7 @@
           ],
           "golden_type": "web",
           "assistant_turns": 2,
-          "quality_average": 8,
+          "quality_average": 8.5,
           "required_checks": [
             {
               "id": "CK-015",
@@ -109,16 +109,16 @@
           "required_checks_na": 0,
           "required_check_pass_rate": 100,
           "check_score": 10,
-          "composite_score": 8.8,
+          "composite_score": 9.1,
           "pass": true,
           "score_mode": "same-definition-heuristic-v1",
           "turn_scores": [
             {
               "seq": 2,
-              "score": 9,
+              "score": 10,
               "dimensions": {
                 "D1": 2,
-                "D2": 1,
+                "D2": 2,
                 "D3": 2,
                 "D4": 2,
                 "D5": 2
@@ -142,19 +142,184 @@
         },
         {
           "conversation_id": "TR-002",
-          "title": "Image-led medium-intent founder flow",
+          "title": "Consumer wants 2-3 pieces",
           "source_group": "Awsaf",
           "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
-          "case_id": "GD-013",
-          "expected_endpoint": "COMPLETE_SR",
-          "actual_endpoint": "COMPLETE_SR",
+          "case_id": "GD-002",
+          "expected_endpoint": "EDUCATE_AND_NURTURE",
+          "actual_endpoint": "EDUCATE_AND_NURTURE",
           "endpoint_match": true,
           "acceptable_endpoints": [
-            "COMPLETE_SR"
+            "EDUCATE_AND_NURTURE"
           ],
           "golden_type": "web",
-          "assistant_turns": 8,
-          "quality_average": 7.88,
+          "assistant_turns": 1,
+          "quality_average": 9,
+          "required_checks": [
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-020",
+              "result": null
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 9.4,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-003",
+          "title": "Trust question before product",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-003",
+          "expected_endpoint": "QUALIFY_AND_ADVANCE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 9,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 9.4,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 10,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-004",
+          "title": "Spam crypto link",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-004",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EXIT_POLITE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 1,
+          "quality_average": 8,
+          "required_checks": [
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-020",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.8,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-005",
+          "title": "Handwash buyer impossible price",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-005",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EXIT_POLITE",
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "must_not_reach": [
+            "COMPLETE_SR"
+          ],
+          "golden_type": "wa",
+          "assistant_turns": 2,
+          "quality_average": 7,
           "required_checks": [
             {
               "id": "CK-008",
@@ -170,7 +335,397 @@
           "required_checks_na": 0,
           "required_check_pass_rate": 100,
           "check_score": 10,
-          "composite_score": 8.73,
+          "composite_score": 8.2,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches WA golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-006",
+          "title": "Viable startup brand full flow",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-006",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "COMPLETE_SR"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 9,
+          "quality_average": 7.33,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": null
+            },
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.4,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 6,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 9,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 15,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 20,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 22,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 26,
+              "score": 10,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 28,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 30,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-007",
+          "title": "Call-first pastry packaging",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-007",
+          "expected_endpoint": "HUMAN_HANDOFF",
+          "actual_endpoint": "HUMAN_HANDOFF",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "HUMAN_HANDOFF"
+          ],
+          "golden_type": "wa",
+          "assistant_turns": 2,
+          "quality_average": 7.5,
+          "required_checks": [
+            {
+              "id": "CK-010",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.5,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches WA golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-008",
+          "title": "Zero-spec dreamer",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-008",
+          "expected_endpoint": "EDUCATE_AND_NURTURE",
+          "actual_endpoint": "EDUCATE_AND_NURTURE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EDUCATE_AND_NURTURE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": null
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.2,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-009",
+          "title": "Alibaba veteran challenges markup",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-009",
+          "expected_endpoint": "QUALIFY_AND_ADVANCE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": true
+            },
+            {
+              "id": "CK-008",
+              "result": null
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-018",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.2,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-010",
+          "title": "UK dog harness full SR",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-010",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "COMPLETE_SR"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 9,
+          "quality_average": 7.44,
+          "required_checks": [
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.46,
           "pass": true,
           "score_mode": "same-definition-heuristic-v1",
           "turn_scores": [
@@ -198,6 +753,956 @@
             },
             {
               "seq": 9,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 15,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 20,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 22,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 26,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 28,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 30,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-011",
+          "title": "Price shopper competitor benchmark",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-011",
+          "expected_endpoint": "QUALIFY_AND_ADVANCE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": null
+            },
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.2,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-012",
+          "title": "Burned buyer trust and QC",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-012",
+          "expected_endpoint": "QUALIFY_AND_ADVANCE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 9,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-018",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 9.4,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 10,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-013",
+          "title": "Teen jewelry image reference",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-013",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "COMPLETE_SR"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 9,
+          "quality_average": 7.44,
+          "required_checks": [
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.46,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 6,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 9,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 15,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 20,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 22,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 26,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 28,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 30,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-014",
+          "title": "Image exact match with logo",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-014",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "COMPLETE_SR"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 9,
+          "quality_average": 7.22,
+          "required_checks": [
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.33,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 6,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 9,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 15,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 20,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 22,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 26,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 28,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 30,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-015",
+          "title": "Image with no specs or budget",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-015",
+          "expected_endpoint": "EDUCATE_AND_NURTURE",
+          "actual_endpoint": "EDUCATE_AND_NURTURE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EDUCATE_AND_NURTURE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 3,
+          "quality_average": 7.67,
+          "required_checks": [
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.6,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 5,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 7,
+              "score": 6,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 1
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-016",
+          "title": "Restricted battery request",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-016",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EXIT_POLITE"
+          ],
+          "golden_type": "wa",
+          "assistant_turns": 2,
+          "quality_average": 7.5,
+          "required_checks": [
+            {
+              "id": "CK-006",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.5,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches WA golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-017",
+          "title": "Sportswear catalog lead",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-017",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "endpoint_optimal": true,
+          "acceptable_endpoints": [
+            "COMPLETE_SR",
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "golden_type": "wa",
+          "assistant_turns": 9,
+          "quality_average": 7.33,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": true
+            },
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-009",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 4,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.4,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 6,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 9,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 15,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 20,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 22,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 26,
+              "score": 10,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 28,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 30,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches WA golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-018",
+          "title": "Net-new product invention",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-018",
+          "expected_endpoint": "HUMAN_HANDOFF",
+          "actual_endpoint": "HUMAN_HANDOFF",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "HUMAN_HANDOFF"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7.5,
+          "required_checks": [
+            {
+              "id": "CK-010",
+              "result": null
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-018",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.5,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-019",
+          "title": "Custom mold and tooling",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-019",
+          "expected_endpoint": "QUALIFY_AND_ADVANCE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7,
+          "required_checks": [
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.2,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-020",
+          "title": "Multi-product add-another loop",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-020",
+          "expected_endpoint": "COMPLETE_SR",
+          "actual_endpoint": "COMPLETE_SR",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "COMPLETE_SR"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 16,
+          "quality_average": 7.19,
+          "required_checks": [
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.31,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 6,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 9,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 0
+              }
+            },
+            {
+              "seq": 14,
               "score": 7,
               "dimensions": {
                 "D1": 2,
@@ -220,10 +1725,10 @@
             },
             {
               "seq": 20,
-              "score": 8,
+              "score": 6,
               "dimensions": {
                 "D1": 2,
-                "D2": 2,
+                "D2": 0,
                 "D3": 0,
                 "D4": 2,
                 "D5": 2
@@ -252,64 +1757,7 @@
               }
             },
             {
-              "seq": 28,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            }
-          ],
-          "improvement_suggestions": [
-            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
-          ]
-        },
-        {
-          "conversation_id": "TR-003",
-          "title": "High-intent link-led ICP flow",
-          "source_group": "Awsaf",
-          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
-          "case_id": "GD-010",
-          "expected_endpoint": "COMPLETE_SR",
-          "actual_endpoint": "COMPLETE_SR",
-          "endpoint_match": true,
-          "acceptable_endpoints": [
-            "COMPLETE_SR"
-          ],
-          "golden_type": "web",
-          "assistant_turns": 8,
-          "quality_average": 7.88,
-          "required_checks": [
-            {
-              "id": "CK-015",
-              "result": true
-            }
-          ],
-          "required_checks_pass": 1,
-          "required_checks_fail": 0,
-          "required_checks_na": 0,
-          "required_check_pass_rate": 100,
-          "check_score": 10,
-          "composite_score": 8.73,
-          "pass": true,
-          "score_mode": "same-definition-heuristic-v1",
-          "turn_scores": [
-            {
-              "seq": 2,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 2,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 5,
+              "seq": 30,
               "score": 7,
               "dimensions": {
                 "D1": 2,
@@ -320,345 +1768,18 @@
               }
             },
             {
-              "seq": 8,
-              "score": 7,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 14,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 16,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 20,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 2,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 22,
-              "score": 7,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 24,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            }
-          ],
-          "improvement_suggestions": [
-            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
-          ]
-        },
-        {
-          "conversation_id": "TR-004",
-          "title": "Restricted battery request with pushback",
-          "source_group": "Awsaf",
-          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
-          "case_id": "GD-016",
-          "expected_endpoint": "EXIT_POLITE",
-          "actual_endpoint": "EXIT_POLITE",
-          "endpoint_match": true,
-          "acceptable_endpoints": [
-            "EXIT_POLITE"
-          ],
-          "golden_type": "wa",
-          "assistant_turns": 5,
-          "quality_average": 8.2,
-          "required_checks": [
-            {
-              "id": "CK-006",
-              "result": true
-            },
-            {
-              "id": "CK-015",
-              "result": true
-            }
-          ],
-          "required_checks_pass": 2,
-          "required_checks_fail": 0,
-          "required_checks_na": 0,
-          "required_check_pass_rate": 100,
-          "check_score": 10,
-          "composite_score": 8.92,
-          "pass": true,
-          "score_mode": "same-definition-heuristic-v1",
-          "turn_scores": [
-            {
-              "seq": 2,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 1,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 6,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 1,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 8,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 1,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 9,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 2,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 11,
-              "score": 7,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            }
-          ],
-          "improvement_suggestions": [
-            "Matches WA golden pattern. Keep concise transition messages with explicit next-step cues."
-          ]
-        },
-        {
-          "conversation_id": "TR-005",
-          "title": "Multi-product flow with add-another-product loop",
-          "source_group": "Awsaf",
-          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
-          "case_id": "GD-020",
-          "expected_endpoint": "COMPLETE_SR",
-          "actual_endpoint": "COMPLETE_SR",
-          "endpoint_match": true,
-          "acceptable_endpoints": [
-            "COMPLETE_SR"
-          ],
-          "golden_type": "web",
-          "assistant_turns": 15,
-          "quality_average": 7.8,
-          "required_checks": [
-            {
-              "id": "CK-015",
-              "result": true
-            }
-          ],
-          "required_checks_pass": 1,
-          "required_checks_fail": 0,
-          "required_checks_na": 0,
-          "required_check_pass_rate": 100,
-          "check_score": 10,
-          "composite_score": 8.68,
-          "pass": true,
-          "score_mode": "same-definition-heuristic-v1",
-          "turn_scores": [
-            {
-              "seq": 2,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 2,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 5,
-              "score": 7,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 8,
-              "score": 7,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 12,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 14,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 17,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 2,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 19,
+              "seq": 33,
               "score": 6,
               "dimensions": {
                 "D1": 2,
-                "D2": 0,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 22,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 2,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 25,
-              "score": 7,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 28,
-              "score": 7,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 32,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
                 "D2": 2,
                 "D3": 0,
                 "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 34,
-              "score": 8,
-              "dimensions": {
-                "D1": 2,
-                "D2": 2,
-                "D3": 0,
-                "D4": 2,
-                "D5": 2
+                "D5": 0
               }
             },
             {
               "seq": 37,
-              "score": 9,
-              "dimensions": {
-                "D1": 2,
-                "D2": 1,
-                "D3": 2,
-                "D4": 2,
-                "D5": 2
-              }
-            },
-            {
-              "seq": 39,
               "score": 7,
               "dimensions": {
                 "D1": 2,
@@ -673,6 +1794,494 @@
               "score": 8,
               "dimensions": {
                 "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 43,
+              "score": 6,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 47,
+              "score": 9,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 49,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 1,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 51,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-021",
+          "title": "Ghost lead disappears",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-021",
+          "expected_endpoint": "EDUCATE_AND_NURTURE",
+          "actual_endpoint": "EDUCATE_AND_NURTURE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EDUCATE_AND_NURTURE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7.5,
+          "required_checks": [
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-021",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 2,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.5,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 0,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 3,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-022",
+          "title": "Directionless open lead",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-022",
+          "expected_endpoint": "EDUCATE_AND_NURTURE",
+          "actual_endpoint": "EDUCATE_AND_NURTURE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EDUCATE_AND_NURTURE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 8.5,
+          "required_checks": [
+            {
+              "id": "CK-020",
+              "result": null
+            },
+            {
+              "id": "CK-021",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 9.1,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 10,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-023",
+          "title": "Branded AirPods reseller",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-023",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EXIT_POLITE"
+          ],
+          "golden_type": "wa",
+          "assistant_turns": 2,
+          "quality_average": 7.5,
+          "required_checks": [
+            {
+              "id": "CK-007",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-018",
+              "result": true
+            },
+            {
+              "id": "CK-020",
+              "result": null
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.5,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 8,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 1
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 1
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches WA golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-024",
+          "title": "Student candle hobby quantities",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-024",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EXIT_POLITE"
+          ],
+          "golden_type": "wa",
+          "assistant_turns": 2,
+          "quality_average": 8.5,
+          "required_checks": [
+            {
+              "id": "CK-008",
+              "result": null
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-020",
+              "result": null
+            }
+          ],
+          "required_checks_pass": 1,
+          "required_checks_fail": 0,
+          "required_checks_na": 2,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 9.1,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 9,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 2,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches WA golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-025",
+          "title": "Hostile spam abuse",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-025",
+          "expected_endpoint": "EXIT_POLITE",
+          "actual_endpoint": "EXIT_POLITE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "EXIT_POLITE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 1,
+          "quality_average": 8,
+          "required_checks": [
+            {
+              "id": "CK-020",
+              "result": true
+            },
+            {
+              "id": "CK-024",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.8,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-026",
+          "title": "ICP lead asks for call",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-026",
+          "expected_endpoint": "HUMAN_HANDOFF",
+          "actual_endpoint": "HUMAN_HANDOFF",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "HUMAN_HANDOFF"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7,
+          "required_checks": [
+            {
+              "id": "CK-010",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-023",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 0,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.2,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 1
+              }
+            }
+          ],
+          "improvement_suggestions": [
+            "Matches Web golden pattern. Keep concise transition messages with explicit next-step cues."
+          ]
+        },
+        {
+          "conversation_id": "TR-027",
+          "title": "Scope-jumping lead",
+          "source_group": "Awsaf",
+          "source_file": "tests/golden-eugene-v1/transcripts.seed.json",
+          "case_id": "GD-027",
+          "expected_endpoint": "QUALIFY_AND_ADVANCE",
+          "actual_endpoint": "QUALIFY_AND_ADVANCE",
+          "endpoint_match": true,
+          "acceptable_endpoints": [
+            "QUALIFY_AND_ADVANCE"
+          ],
+          "golden_type": "web",
+          "assistant_turns": 2,
+          "quality_average": 7.5,
+          "required_checks": [
+            {
+              "id": "CK-005",
+              "result": null
+            },
+            {
+              "id": "CK-008",
+              "result": true
+            },
+            {
+              "id": "CK-015",
+              "result": true
+            },
+            {
+              "id": "CK-022",
+              "result": true
+            }
+          ],
+          "required_checks_pass": 3,
+          "required_checks_fail": 0,
+          "required_checks_na": 1,
+          "required_check_pass_rate": 100,
+          "check_score": 10,
+          "composite_score": 8.5,
+          "pass": true,
+          "score_mode": "same-definition-heuristic-v1",
+          "turn_scores": [
+            {
+              "seq": 2,
+              "score": 8,
+              "dimensions": {
+                "D1": 2,
+                "D2": 2,
+                "D3": 0,
+                "D4": 2,
+                "D5": 2
+              }
+            },
+            {
+              "seq": 4,
+              "score": 7,
+              "dimensions": {
+                "D1": 1,
                 "D2": 2,
                 "D3": 0,
                 "D4": 2,

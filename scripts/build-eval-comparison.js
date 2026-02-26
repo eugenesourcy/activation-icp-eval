@@ -534,8 +534,7 @@ function main() {
 
   const awsafConversations = (awsafSeed.transcripts || []).map(normalizeAwsafConversation);
   const awsafRows = awsafConversations
-    .map((conv) => evaluateConversation(conv, casesById[conv.case_id] || null, checksById))
-    .slice(0, 5);
+    .map((conv) => evaluateConversation(conv, casesById[conv.case_id] || null, checksById));
 
   const ericFiles = Object.keys(ERIC_CASE_MAP)
     .map((name) => path.join(ERIC_RESULTS_DIR, name))
