@@ -2070,6 +2070,438 @@
         "destination"
       ],
       "channel": "web"
+    },
+    {
+      "case_id": "GD-028",
+      "title": "OEM/contract manufacturing lead with existing formulation",
+      "persona_type": "oem_contract_manufacturing",
+      "motivation": "replicate_existing_product",
+      "product_mode": "oem_replication",
+      "input_mode": "text",
+      "spec_clarity": "high",
+      "risk_class": "normal",
+      "intent_level": "high",
+      "expected_endpoint": "COMPLETE_SR",
+      "expected_stage_path": [
+        "splash_to_stage1",
+        "stage1_product_intelligence",
+        "stage2_aha_sequence",
+        "stage3_refine_feasibility",
+        "stage4_contact_finalize"
+      ],
+      "expected_tool_sequence": [
+        "productIntelligence",
+        "pricingIntelligence",
+        "feasibilityAssessment"
+      ],
+      "persona_profile": {
+        "what_they_want": "Replicate existing gummy supplement formulation with a new supplier. Has NDA and trademark ready.",
+        "what_they_know": "Full product specs, formulation, packaging requirements. Has existing product on market.",
+        "what_they_dont_know": "Which suppliers can handle custom formulation at target volume. Landed cost with new supplier.",
+        "communication_style": "Professional, detail-oriented, sends documents proactively.",
+        "trust_questions": [
+          "Can you work with our formulation?",
+          "Will the supplier sign an NDA?"
+        ],
+        "dropoff_triggers": [
+          "Supplier cannot replicate specs",
+          "No contract/NDA willingness"
+        ]
+      },
+      "hidden_truth": {
+        "quantity": "10,000 units",
+        "budget": "viable OEM budget",
+        "destination": "Philippines",
+        "timeline": "2-3 months",
+        "flexibility": "medium",
+        "notes": "Has trademark and formulation. Wants supplier to replicate, not design from scratch."
+      },
+      "allowed_disclosures_by_turn": [
+        "T1: describes existing product and replication intent",
+        "T2: shares formulation details and quantity",
+        "T3+: provides packaging specs and timeline"
+      ],
+      "must_pass_checks": [
+        "CK-005",
+        "CK-008",
+        "CK-015"
+      ],
+      "must_fail_checks": [],
+      "review_status": "reviewed",
+      "owner": "TBD",
+      "review_notes": "Based on Armada Brands gummy supplement real conversation. Tests OEM/replication sourcing path.",
+      "sources": [
+        "drive-download/Armada Brands - gummy supplement.txt"
+      ],
+      "behavior_bucket": "B3",
+      "bucket_pattern": "B3A",
+      "sourceability_status": "sourceable",
+      "expected_dropoff_point": null,
+      "required_fields_for_sr": [
+        "product",
+        "quantity",
+        "destination",
+        "timeline",
+        "contact_email"
+      ],
+      "channel": "web"
+    },
+    {
+      "case_id": "GD-029",
+      "title": "Non-English mixed-language lead sharing Alibaba links",
+      "persona_type": "non_english_technical",
+      "motivation": "source_components",
+      "product_mode": "technical_component",
+      "input_mode": "mixed",
+      "spec_clarity": "partial",
+      "risk_class": "normal",
+      "intent_level": "medium",
+      "expected_endpoint": "QUALIFY_AND_ADVANCE",
+      "expected_stage_path": [
+        "splash_to_stage1",
+        "stage1_product_intelligence"
+      ],
+      "expected_tool_sequence": [
+        "productIntelligence"
+      ],
+      "persona_profile": {
+        "what_they_want": "Source PET bottles and pump dispensers for cosmetics brand. Communicates in mixed Bahasa/English.",
+        "what_they_know": "Exact technical specs (24/410 pump, 500ml PET bottle). Has Alibaba reference links.",
+        "what_they_dont_know": "Best supplier for combined bottle + pump sourcing at their volume.",
+        "communication_style": "Mixed language (Bahasa Indonesia + English), sends Alibaba links.",
+        "trust_questions": [
+          "Apakah bisa sample dulu?",
+          "What material options do you have?"
+        ],
+        "dropoff_triggers": [
+          "Bot cannot handle non-English",
+          "No technical spec understanding"
+        ]
+      },
+      "hidden_truth": {
+        "quantity": "10,000+ per component",
+        "budget": "viable",
+        "destination": "Indonesia",
+        "timeline": "flexible",
+        "flexibility": "high",
+        "notes": "Tests non-English language handling. Bot should respond in English but acknowledge language."
+      },
+      "allowed_disclosures_by_turn": [
+        "T1: sends mixed-language message with product category",
+        "T2: shares Alibaba link and technical specs",
+        "T3: provides quantity if bot responds helpfully"
+      ],
+      "must_pass_checks": [
+        "CK-005",
+        "CK-015"
+      ],
+      "must_fail_checks": [],
+      "review_status": "reviewed",
+      "owner": "TBD",
+      "review_notes": "Based on Oaken Lab ID client conversation. Tests non-English input handling.",
+      "sources": [
+        "drive-download/Oaken Lab - ID client.docx"
+      ],
+      "behavior_bucket": "B2",
+      "bucket_pattern": "B2A",
+      "sourceability_status": "sourceable",
+      "expected_dropoff_point": null,
+      "required_fields_for_sr": [
+        "product",
+        "quantity",
+        "destination"
+      ],
+      "channel": "web"
+    },
+    {
+      "case_id": "GD-030",
+      "title": "Corporate/institutional buyer ordering for events not resale",
+      "persona_type": "corporate_gifting",
+      "motivation": "corporate_events",
+      "product_mode": "light_customization",
+      "input_mode": "text",
+      "spec_clarity": "high",
+      "risk_class": "normal",
+      "intent_level": "high",
+      "expected_endpoint": "COMPLETE_SR",
+      "expected_stage_path": [
+        "splash_to_stage1",
+        "stage1_product_intelligence",
+        "stage2_aha_sequence",
+        "stage3_refine_feasibility",
+        "stage4_contact_finalize"
+      ],
+      "expected_tool_sequence": [
+        "productIntelligence",
+        "pricingIntelligence",
+        "feasibilityAssessment"
+      ],
+      "persona_profile": {
+        "what_they_want": "Custom water bottles with company logo for corporate events. 50-100 units.",
+        "what_they_know": "Exact product reference, quantity, and logo design ready.",
+        "what_they_dont_know": "Whether low MOQ is feasible for custom printing.",
+        "communication_style": "Professional, corporate tone. Quick decision-making.",
+        "trust_questions": [
+          "Can you do 50 units with custom logo?",
+          "What is the lead time?"
+        ],
+        "dropoff_triggers": [
+          "MOQ too high for corporate order",
+          "Lead time exceeds event date"
+        ]
+      },
+      "hidden_truth": {
+        "quantity": "100 units",
+        "budget": "corporate budget (flexible)",
+        "destination": "Philippines",
+        "timeline": "3-4 weeks",
+        "flexibility": "high on price, low on timeline",
+        "notes": "Not a product business. Corporate gifting use case."
+      },
+      "allowed_disclosures_by_turn": [
+        "T1: describes corporate event need and product",
+        "T2: shares quantity, logo, and timeline",
+        "T3+: provides company details for SR"
+      ],
+      "must_pass_checks": [
+        "CK-008",
+        "CK-015"
+      ],
+      "must_fail_checks": [],
+      "review_status": "reviewed",
+      "owner": "TBD",
+      "review_notes": "Based on Foxmont VC fund Owala order. Tests non-resale corporate sourcing.",
+      "sources": [
+        "drive-download/foxmont.txt"
+      ],
+      "behavior_bucket": "B3",
+      "bucket_pattern": "B3A",
+      "sourceability_status": "sourceable",
+      "expected_dropoff_point": null,
+      "required_fields_for_sr": [
+        "product",
+        "quantity",
+        "destination",
+        "timeline",
+        "contact_email"
+      ],
+      "channel": "web"
+    },
+    {
+      "case_id": "GD-031",
+      "title": "Gray-area branded product from origin supplier",
+      "persona_type": "branded_gray_area",
+      "motivation": "resell_branded",
+      "product_mode": "branded_licensed",
+      "input_mode": "text",
+      "spec_clarity": "high",
+      "risk_class": "ip_branded",
+      "intent_level": "medium",
+      "expected_endpoint": "EXIT_POLITE",
+      "acceptable_endpoints": [
+        "QUALIFY_AND_ADVANCE",
+        "EXIT_POLITE"
+      ],
+      "expected_stage_path": [
+        "splash_to_stage1"
+      ],
+      "expected_tool_sequence": [],
+      "persona_profile": {
+        "what_they_want": "Source branded water bottles from the factory that makes them. Claims origin supplier access.",
+        "what_they_know": "Brand name, product specs, claims to know origin factory.",
+        "what_they_dont_know": "Whether Sourcy can facilitate branded product sourcing without brand authorization.",
+        "communication_style": "Direct, references specific brand and supplier relationship.",
+        "trust_questions": [
+          "Can you source from the origin factory?",
+          "Is this the same supplier as the brand?"
+        ],
+        "dropoff_triggers": [
+          "Outright rejection without exploring alternatives",
+          "No acknowledgment of the nuance"
+        ]
+      },
+      "hidden_truth": {
+        "quantity": "200-500 units",
+        "budget": "moderate",
+        "destination": "SEA",
+        "timeline": "flexible",
+        "flexibility": "medium",
+        "notes": "Gray area: not counterfeiting but reselling branded without authorization. Bot should clarify IP and offer unbranded alternative."
+      },
+      "allowed_disclosures_by_turn": [
+        "T1: requests branded product by name, mentions origin factory",
+        "T2: asks if Sourcy can source from the same factory",
+        "T3: may accept unbranded alternative if offered"
+      ],
+      "must_pass_checks": [
+        "CK-007",
+        "CK-015",
+        "CK-018"
+      ],
+      "must_fail_checks": [],
+      "review_status": "reviewed",
+      "owner": "TBD",
+      "review_notes": "Based on Foxmont Owala angle. Tests B5 gray-area branded handling. First B5 case in dataset.",
+      "sources": [
+        "drive-download/foxmont.txt"
+      ],
+      "behavior_bucket": "B5",
+      "bucket_pattern": "B5A",
+      "sourceability_status": "conditional",
+      "expected_dropoff_point": null,
+      "required_fields_for_sr": [],
+      "channel": "web"
+    },
+    {
+      "case_id": "GD-032",
+      "title": "International fashion brand requesting DDP and sample round",
+      "persona_type": "international_brand_owner",
+      "motivation": "launch_brand",
+      "product_mode": "heavy_customization",
+      "input_mode": "text",
+      "spec_clarity": "partial",
+      "risk_class": "normal",
+      "intent_level": "high",
+      "expected_endpoint": "COMPLETE_SR",
+      "expected_stage_path": [
+        "splash_to_stage1",
+        "stage1_product_intelligence",
+        "stage2_aha_sequence",
+        "stage3_refine_feasibility",
+        "stage4_contact_finalize"
+      ],
+      "expected_tool_sequence": [
+        "productIntelligence",
+        "pricingIntelligence",
+        "visualConceptGeneration",
+        "feasibilityAssessment"
+      ],
+      "persona_profile": {
+        "what_they_want": "Source custom leather handbags for Latin American fashion brand. Wants DDP pricing to Mexico with sample round.",
+        "what_they_know": "Design direction, target market, reference images from competitors.",
+        "what_they_dont_know": "Factory options, customs duties for Mexico, lead times for sample-to-bulk.",
+        "communication_style": "Professional, detail-oriented, expects full landed cost transparency.",
+        "trust_questions": [
+          "Can you provide DDP pricing to Mexico?",
+          "What does the sample process look like?"
+        ],
+        "dropoff_triggers": [
+          "No DDP pricing",
+          "No sample option before bulk commitment"
+        ]
+      },
+      "hidden_truth": {
+        "quantity": "500-1000 units",
+        "budget": "mid-range brand budget",
+        "destination": "Mexico",
+        "timeline": "3-4 months",
+        "flexibility": "medium",
+        "notes": "International brand with customs/DDP emphasis. Tests non-US destination handling."
+      },
+      "allowed_disclosures_by_turn": [
+        "T1: describes brand and product category",
+        "T2: shares design references and quantity range",
+        "T3+: provides destination and timeline for DDP quote"
+      ],
+      "must_pass_checks": [
+        "CK-005",
+        "CK-008",
+        "CK-015"
+      ],
+      "must_fail_checks": [],
+      "review_status": "reviewed",
+      "owner": "TBD",
+      "review_notes": "Based on Bala Di Gala Mexican fashion brand. Tests international DDP and sample-first flow.",
+      "sources": [
+        "drive-download/WhatsApp Chat - Sourcy __ Bala Di Gala (1).txt"
+      ],
+      "behavior_bucket": "B3",
+      "bucket_pattern": "B3A",
+      "sourceability_status": "sourceable",
+      "expected_dropoff_point": null,
+      "required_fields_for_sr": [
+        "product",
+        "quantity",
+        "destination",
+        "timeline",
+        "contact_email"
+      ],
+      "channel": "web"
+    },
+    {
+      "case_id": "GD-033",
+      "title": "Enterprise multi-stakeholder procurement with PO and VAT",
+      "persona_type": "enterprise_procurement",
+      "motivation": "restock_and_expand",
+      "product_mode": "reorder_customization",
+      "input_mode": "text",
+      "spec_clarity": "high",
+      "risk_class": "normal",
+      "intent_level": "high",
+      "expected_endpoint": "COMPLETE_SR",
+      "expected_stage_path": [
+        "splash_to_stage1",
+        "stage1_product_intelligence",
+        "stage2_aha_sequence",
+        "stage3_refine_feasibility",
+        "stage4_contact_finalize"
+      ],
+      "expected_tool_sequence": [
+        "productIntelligence",
+        "pricingIntelligence",
+        "feasibilityAssessment"
+      ],
+      "persona_profile": {
+        "what_they_want": "Source baby play gyms for e-commerce platform. Multiple SKUs, formal procurement (PO, VAT invoice). 200+ units per variant.",
+        "what_they_know": "Exact product specs from previous order, packaging requirements, delivery address.",
+        "what_they_dont_know": "New supplier pricing and lead times. Label insert printing options.",
+        "communication_style": "Structured, corporate. References PO process and payment terms.",
+        "trust_questions": [
+          "Can you provide VAT invoice?",
+          "What is the production lead time before CNY?"
+        ],
+        "dropoff_triggers": [
+          "Cannot issue formal invoice",
+          "Lead time exceeds deadline"
+        ]
+      },
+      "hidden_truth": {
+        "quantity": "400 units (200 per variant)",
+        "budget": "corporate procurement budget",
+        "destination": "China warehouse (Yiwu) then Philippines",
+        "timeline": "3-4 weeks production",
+        "flexibility": "low on timeline, high on price",
+        "notes": "Enterprise with multi-stakeholder approval. Tests formal procurement path."
+      },
+      "allowed_disclosures_by_turn": [
+        "T1: describes product category and volume",
+        "T2: shares specific SKU requirements and packaging",
+        "T3+: provides company details, PO requirement, delivery address"
+      ],
+      "must_pass_checks": [
+        "CK-005",
+        "CK-008",
+        "CK-015"
+      ],
+      "must_fail_checks": [],
+      "review_status": "reviewed",
+      "owner": "TBD",
+      "review_notes": "Based on Edamama play gym real conversation. Tests enterprise procurement with formal PO flow.",
+      "sources": [
+        "drive-download/Edamama.txt"
+      ],
+      "behavior_bucket": "B3",
+      "bucket_pattern": "B3A",
+      "sourceability_status": "sourceable",
+      "expected_dropoff_point": null,
+      "required_fields_for_sr": [
+        "product",
+        "quantity",
+        "destination",
+        "timeline",
+        "contact_email"
+      ],
+      "channel": "web"
     }
   ]
 }

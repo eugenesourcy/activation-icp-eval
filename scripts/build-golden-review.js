@@ -9,33 +9,7 @@ const TRANSCRIPTS_INPUT = path.join(ROOT, "tests", "golden-eugene-v1", "transcri
 const EVAL_COMPARISON_INPUT = path.join(ROOT, "tests", "golden-eugene-v1", "eval_comparison.seed.json");
 const OUTPUT = path.join(ROOT, "golden_dataset_review.html");
 
-const AWSAF_PRIORITY = [
-  {
-    case_id: "GD-001",
-    stars: 5,
-    reason: "Non-buyer guardrail: proves polite scope control without wasting tools."
-  },
-  {
-    case_id: "GD-013",
-    stars: 5,
-    reason: "Mid-intent image-led: validates full stage choreography and conversion hygiene."
-  },
-  {
-    case_id: "GD-010",
-    stars: 5,
-    reason: "High-intent ICP: clean path to complete SR with correct tool ordering."
-  },
-  {
-    case_id: "GD-016",
-    stars: 4,
-    reason: "Compliance lock: restricted-category hold under pushback."
-  },
-  {
-    case_id: "GD-020",
-    stars: 4,
-    reason: "System behavior: multi-product add loop and finalize transition."
-  }
-];
+const AWSAF_PRIORITY = [];
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
@@ -93,8 +67,8 @@ function buildPayload(casesData, transcriptsData, evalComparisonData) {
       ...caseWithoutOwner,
       linked_transcripts: linked,
       linked_transcript_count: linked.length,
-      awsaf_priority_stars: priorityByCase[c.case_id]?.stars || 0,
-      awsaf_priority_reason: priorityByCase[c.case_id]?.reason || ""
+      awsaf_priority_stars: 0,
+      awsaf_priority_reason: ""
     };
   });
 
@@ -252,17 +226,6 @@ function buildHtml(payload) {
       font-weight: 700;
     }
     h2 { margin: 18px 0 8px; font-size: 18px; }
-    .priority-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-    }
-    .starline {
-      color: var(--star);
-      font-size: 16px;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
     .tag {
       display: inline-block;
       font-size: 11px;
@@ -510,7 +473,6 @@ function buildHtml(payload) {
     @media (max-width: 1200px) {
       .main { grid-template-columns: 1fr; }
       .cols, .grid-2 { grid-template-columns: 1fr; }
-      .priority-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 960px) {
       .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -546,9 +508,6 @@ function buildHtml(payload) {
 
     ${evalSection}
 
-    <h2>Awsaf First Review</h2>
-    <section class="priority-grid" id="priorityGrid"></section>
-
     <h2>Coverage Overview</h2>
     <div class="grid-2">
       <section class="card">
@@ -567,6 +526,7 @@ function buildHtml(payload) {
     <h2>Case Catalog</h2>
     <section class="filters">
       <div class="field"><label for="fBucket">Behavior Bucket</label><select id="fBucket"></select></div>
+      <div class="field"><label for="fChannel">Channel</label><select id="fChannel"></select></div>
       <div class="field"><label for="fPersona">Persona Type</label><select id="fPersona"></select></div>
       <div class="field"><label for="fMotivation">Motivation</label><select id="fMotivation"></select></div>
       <div class="field"><label for="fProductMode">Product Mode</label><select id="fProductMode"></select></div>
@@ -607,9 +567,8 @@ function buildHtml(payload) {
       const caseListEl = document.getElementById("caseList");
       const caseDetailEl = document.getElementById("caseDetail");
       const heroMeta = document.getElementById("heroMeta");
-      const priorityGrid = document.getElementById("priorityGrid");
-
       const fBucket = document.getElementById("fBucket");
+      const fChannel = document.getElementById("fChannel");
       const fPersona = document.getElementById("fPersona");
       const fMotivation = document.getElementById("fMotivation");
       const fProductMode = document.getElementById("fProductMode");
@@ -657,11 +616,6 @@ function buildHtml(payload) {
         return "Needs definition";
       }
 
-      function stars(n) {
-        if (!n) return "";
-        return "★".repeat(n) + "☆".repeat(Math.max(0, 5 - n));
-      }
-
       function renderCoverage(id, obj) {
         const el = document.getElementById(id);
         el.innerHTML = "";
@@ -670,30 +624,6 @@ function buildHtml(payload) {
           span.className = "tag";
           span.textContent = k + ": " + obj[k];
           el.appendChild(span);
-        });
-      }
-
-      function renderPriority() {
-        priorityGrid.innerHTML = "";
-        if (!priority.length) {
-          priorityGrid.innerHTML = "<div class='card'>No priority list configured.</div>";
-          return;
-        }
-        priority.forEach((p) => {
-          const c = document.createElement("article");
-          c.className = "card";
-          c.innerHTML =
-            "<div class='starline'>" + stars(p.stars) + "</div>" +
-            "<div style='font-weight:700; margin-bottom:4px;'>" + p.case_id + " - " + p.title + "</div>" +
-            "<div style='font-size:12px; color:#5b6767; margin-bottom:6px;'>" + p.reason + "</div>" +
-            "<span class='tag " + statusClass(p.review_status) + "'>" + statusLabel(p.review_status) + "</span>" +
-            "<span class='tag'>" + p.expected_endpoint + "</span>" +
-            "<span class='tag'>transcripts: " + p.linked_transcript_count + "</span>";
-          c.addEventListener("click", () => {
-            currentId = p.case_id;
-            render(filteredCases());
-          });
-          priorityGrid.appendChild(c);
         });
       }
 
@@ -774,6 +704,7 @@ function buildHtml(payload) {
         const q = (fSearch.value || "").toLowerCase().trim();
         return cases.filter((c) => {
           if (fBucket.value !== "all" && c.behavior_bucket !== fBucket.value) return false;
+          if (fChannel.value !== "all" && c.channel !== fChannel.value) return false;
           if (fPersona.value !== "all" && c.persona_type !== fPersona.value) return false;
           if (fMotivation.value !== "all" && c.motivation !== fMotivation.value) return false;
           if (fProductMode.value !== "all" && c.product_mode !== fProductMode.value) return false;
@@ -806,7 +737,6 @@ function buildHtml(payload) {
           div.innerHTML =
             "<div class='t'>" + c.case_id + " - " + c.title + "</div>" +
             "<div class='meta'>" + c.persona_type + " | " + c.motivation + " | " + c.expected_endpoint + "</div>" +
-            (c.awsaf_priority_stars > 0 ? "<div class='starline'>" + stars(c.awsaf_priority_stars) + "</div>" : "") +
             "<span class='tag' style='background:#e0e7ff;color:#3730a3;font-weight:600'>" + (BUCKET_LABELS[c.behavior_bucket] || c.behavior_bucket) + "</span>" +
             "<span class='tag " + statusClass(c.review_status) + "'>" + statusLabel(c.review_status) + "</span>" +
             "<span class='tag'>" + c.risk_class + "</span>" +
@@ -1033,7 +963,6 @@ function buildHtml(payload) {
         }
         head.innerHTML =
           "<h4>" + c.case_id + " - " + c.title + "</h4>" +
-          (c.awsaf_priority_stars > 0 ? "<div class='starline'>" + stars(c.awsaf_priority_stars) + " Awsaf priority</div>" : "") +
           "<span class='tag' style='background:#e0e7ff;color:#3730a3;font-weight:600'>" + (BUCKET_LABELS[c.behavior_bucket] || c.behavior_bucket) + "</span>" +
           (c.channel ? "<span class='tag' style='background:#f0fdf4;color:#15803d;font-weight:600'>" + c.channel + "</span>" : "") +
           "<span class='tag " + statusClass(c.review_status) + "'>" + statusLabel(c.review_status) + "</span>" +
@@ -1043,7 +972,7 @@ function buildHtml(payload) {
           endpointRangeHtml +
           "<span class='tag'>" + c.intent_level + " intent</span>" +
           "<span class='tag'>transcripts: " + c.linked_transcript_count + "</span>" +
-          (c.awsaf_priority_reason ? "<p style='margin:8px 0 0; font-size:13px; color:#4a5757;'><strong>Why first:</strong> " + c.awsaf_priority_reason + "</p>" : "");
+          "";
         caseDetailEl.appendChild(head);
 
         const cols = document.createElement("div");
@@ -1136,6 +1065,7 @@ function buildHtml(payload) {
             fBucket.appendChild(op);
           });
         }
+        fillSelect(fChannel, uniq(cases.map((c) => c.channel || "web")), "All channels");
         fillSelect(fPersona, uniq(cases.map((c) => c.persona_type)), "All persona types");
         fillSelect(fMotivation, uniq(cases.map((c) => c.motivation)), "All motivations");
         fillSelect(fProductMode, uniq(cases.map((c) => c.product_mode)), "All product modes");
@@ -1166,7 +1096,7 @@ function buildHtml(payload) {
       }
 
       function wire() {
-        [fBucket, fPersona, fMotivation, fProductMode, fRisk, fStatus, fTranscript, fSearch].forEach((el) => {
+        [fBucket, fChannel, fPersona, fMotivation, fProductMode, fRisk, fStatus, fTranscript, fSearch].forEach((el) => {
           el.addEventListener("change", () => render(filteredCases()));
           el.addEventListener("input", () => render(filteredCases()));
         });
@@ -1193,7 +1123,6 @@ function buildHtml(payload) {
         renderHeatTable();
         renderChecksTable();
         renderSignoffTable();
-        renderPriority();
       }
 
       initFilters();

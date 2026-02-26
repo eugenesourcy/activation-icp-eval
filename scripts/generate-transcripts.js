@@ -560,6 +560,138 @@ function generateTranscript(c) {
       notes = ["CK-005: value delivered directly.", "CK-008: honest budget math ('raw material cost' + 'usd').", "CK-022: scope jump anchored ('let's focus', 'first').", "CK-015: QUALIFY_AND_ADVANCE (no nurture keywords)."];
       break;
     }
+    case "GD-028": {
+      title = "OEM/contract manufacturing lead";
+      profileBand = "high-intent OEM";
+      goal = "Handle OEM replication request through to SR.";
+      expectedEndpoint = "COMPLETE_SR";
+      steps = fullB3Flow({
+        userOpen: "We make gummy supplements and want to replicate our formulation with a new supplier. 10,000 units. Can you work with our specs?",
+        botAskImage: "OEM replication — we work direct with factories on custom formulations. Tell me what you need — share your specs or upload a reference.",
+        userImageOrSkip: "Skip. Here are the details: 4g gummies, custom PET bottle 300cc, specific vitamin blend. We have trademark and NDA ready.",
+        piInput: "gummy supplement OEM, custom formulation, 10000 units, PET bottle",
+        piOutput: "Product: gummy supplement OEM. Chip groups: formulation, packaging, branding. MOQ 5000.",
+        chipConfirm: "Confirmed customizations: formulation=custom blend, packaging=300cc PET, branding=existing trademark.",
+        thinkingPi: "OEM supplement requires formulation verification. MOQ 5000 fits their 10k target well.",
+        thinkingPricing: "At 10,000 units, factory pricing is competitive for gummy OEM. Bottle tooling may apply.",
+        thinkingVisual: "Existing brand design — no new concept needed, using client assets.",
+        priceRange: "$0.80-$1.40",
+        botPricingClose: "Your estimate is $0.80-$1.40/unit DDP for 10k gummy supplements. Change the destination above or tell me your country.",
+        userRefinement: "Quantity: 10000, Destination: Philippines, Timeline: 2-3 months",
+        feasOutput: "Status: green. Confidence: 82. Note: formulation verification needed.",
+        botFeasClose: "Feasibility looks good. Supplier can sign NDA after sample confirmation. Want to add another product, or ready to finalize?",
+        userContact: "Name: Alliah, Email: alliah@armadabrands.ph, Company: Armada Brands, Phone: +63...",
+        botConfirm: "Sourcing request confirmed — gummy supplement OEM, 10,000 units to Philippines. We'll proceed with supplier outreach and send next steps.",
+      }),
+      notes = ["CK-005: trust answered ('work direct with factories').", "CK-008: budget math ($0.80-$1.40/unit at 10k).", "CK-015: COMPLETE_SR."];
+      break;
+    }
+    case "GD-029": {
+      title = "Non-English mixed-language lead";
+      profileBand = "technical medium-intent";
+      goal = "Handle non-English input gracefully and qualify.";
+      expectedEndpoint = "QUALIFY_AND_ADVANCE";
+      steps = [
+        msg(1, "stage1", "user", "Halo, saya butuh pump dispenser untuk botol PET 500ml. Apakah bisa source dari factory? Here is reference: alibaba.com/product/pump-dispenser-24-410"),
+        msg(2, "stage1", "assistant", "We can source pump dispensers — 24/410 pumps for 500ml PET bottles run $0.05-$0.15/unit at MOQ 10,000. What material and quantity do you need?"),
+        msg(3, "stage1", "user", "Material PP, warna hitam. Quantity 10,000 pieces. Bisa sample dulu?"),
+        msg(4, "stage1", "assistant", "PP black pumps at 10,000 — factory DDP to Indonesia ~$0.08-$0.12/unit. Sampling is available. Upload your bottle specs or tell me the neck size."),
+      ];
+      notes = ["CK-005: trust answered with concrete pricing.", "CK-015: QUALIFY_AND_ADVANCE (no exit or nurture keywords)."];
+      break;
+    }
+    case "GD-030": {
+      title = "Corporate/institutional buyer";
+      profileBand = "corporate high-intent";
+      goal = "Complete SR for corporate gifting order.";
+      expectedEndpoint = "COMPLETE_SR";
+      steps = fullB3Flow({
+        userOpen: "We need custom water bottles with our company logo for a corporate event. About 100 units. Can you do low MOQ with printing?",
+        botAskImage: "Custom bottles at 100 units — MOQ works for stainless steel tumblers. Tell me what you need — upload your logo or describe the design.",
+        userImageOrSkip: "Skip. 32oz stainless steel, matte black, laser-engraved logo.",
+        piInput: "stainless steel tumbler 32oz, matte black, laser engrave, 100 units",
+        piOutput: "Product: stainless steel tumbler. Chip groups: material, branding, color. MOQ 50.",
+        chipConfirm: "Confirmed customizations: material=304 stainless, branding=laser engrave, color=matte black.",
+        thinkingPi: "304 stainless is standard for tumblers. Laser engraving scales well at 100 units.",
+        thinkingPricing: "At 100 units, per-unit cost is higher but within corporate budget range.",
+        thinkingVisual: "Clean corporate aesthetic with laser-engraved logo on matte black.",
+        priceRange: "$8-$12",
+        botPricingClose: "Your estimate is $8-$12/unit DDP for 100 tumblers. Change the destination above or tell me your country.",
+        userRefinement: "Quantity: 100, Destination: Philippines, Timeline: 3 weeks",
+        feasOutput: "Status: green. Confidence: 90.",
+        botFeasClose: "Feasibility looks good for your timeline. Want to add another product, or ready to finalize?",
+        userContact: "Name: Nina, Email: nina@foxmont.com, Company: Foxmont Capital, Phone: +63...",
+        botConfirm: "Sourcing request confirmed — 100 stainless tumblers to Philippines. We'll proceed with supplier outreach and send next steps.",
+      }),
+      notes = ["CK-008: budget math ($8-$12/unit at 100).", "CK-015: COMPLETE_SR."];
+      break;
+    }
+    case "GD-031": {
+      title = "Gray-area branded from origin supplier";
+      profileBand = "branded gray-area";
+      goal = "Clarify IP, offer unbranded alternative.";
+      expectedEndpoint = "EXIT_POLITE";
+      steps = [
+        msg(1, "stage1", "user", "Can you source Owala water bottles from the origin factory? We want 200 units with the Owala logo for resale."),
+        msg(2, "stage1", "assistant", "Can't source branded Owala products — IP restrictions apply even from origin factories. For similar insulated tumblers (custom-branded, your logo), we can source at $6-$10/unit at MOQ 200. Want to explore that alternative?"),
+        msg(3, "stage1", "user", "What if we have authorization from the brand?"),
+        msg(4, "stage1", "assistant", "With verified brand authorization we can explore it. Share the license documentation and we'll assess. Without it, we offer custom-branded alternatives at competitive pricing."),
+      ];
+      notes = ["CK-007: branded/IP declined + alternative offered.", "CK-018: no fabricated guarantee.", "CK-015: EXIT_POLITE via 'can't source branded'."];
+      break;
+    }
+    case "GD-032": {
+      title = "International fashion brand DDP to Mexico";
+      profileBand = "high-intent international";
+      goal = "Full pipeline with DDP pricing to non-US destination.";
+      expectedEndpoint = "COMPLETE_SR";
+      steps = fullB3Flow({
+        userOpen: "We're launching a leather handbag brand in Mexico. Need DDP pricing for 500 units with sample round before bulk. Can you provide full landed cost?",
+        botAskImage: "Leather handbags to Mexico — DDP pricing included. Tell me what you need — upload a reference image or describe the design.",
+        userImageOrSkip: "[Reference image uploaded] Something like this — structured crossbody, genuine leather.",
+        piInput: "leather crossbody handbag, genuine leather, custom, 500 units",
+        piOutput: "Product: leather crossbody bag. Chip groups: material, hardware, branding. MOQ 200.",
+        chipConfirm: "Confirmed customizations: material=genuine cowhide leather, hardware=gold zinc alloy, branding=debossed logo.",
+        thinkingPi: "Genuine cowhide is premium. Gold hardware at 500 units is cost-effective. Mexico DDP includes customs + duties.",
+        thinkingPricing: "At 500 units, leather bag pricing is mid-range. Mexico import duties ~15% on leather goods.",
+        thinkingVisual: "Structured crossbody with debossed branding — three concept directions.",
+        priceRange: "$18-$28",
+        botPricingClose: "Your estimate is $18-$28/unit DDP to Mexico including customs duties. Change the destination above or tell me your city.",
+        userRefinement: "Quantity: 500, Destination: Leon Guanajuato Mexico, Timeline: 3-4 months",
+        feasOutput: "Status: green. Confidence: 85. Sample round available before bulk.",
+        botFeasClose: "Feasibility looks good — sample round included before bulk. Want to add another product, or ready to finalize?",
+        userContact: "Name: Ruben, Email: operations@baladigala.com, Company: Bala Di Gala, Phone: +52...",
+        botConfirm: "Sourcing request confirmed — leather handbags, 500 units DDP to Mexico. We'll proceed with supplier outreach and send next steps.",
+      }),
+      notes = ["CK-005: trust answered ('DDP pricing included').", "CK-008: budget math ($18-$28/unit DDP, customs mentioned).", "CK-015: COMPLETE_SR."];
+      break;
+    }
+    case "GD-033": {
+      title = "Enterprise multi-stakeholder procurement";
+      profileBand = "enterprise high-intent";
+      goal = "Handle formal procurement flow to SR.";
+      expectedEndpoint = "COMPLETE_SR";
+      steps = fullB3Flow({
+        userOpen: "We need baby play gyms for our e-commerce platform. 200 units per variant, 2 variants. Can you provide FOB and DDP pricing with VAT invoice?",
+        botAskImage: "Play gyms at 400 total — FOB and DDP available. Tell me what you need — upload a reference image or describe the specs.",
+        userImageOrSkip: "Skip. Soft fabric play gym with sensory toys, plain kraft box packaging. We've sourced this before.",
+        piInput: "baby play gym, soft fabric, sensory toys, plain kraft box, 400 units",
+        piOutput: "Product: baby play gym set. Chip groups: material, toys, packaging. MOQ 60.",
+        chipConfirm: "Confirmed customizations: material=soft cotton, toys=sensory set, packaging=plain kraft box with label insert.",
+        thinkingPi: "Re-order client — specs are clear. Label insert printing adds small cost. 400 units is good volume.",
+        thinkingPricing: "At 400 units, pricing is competitive. Label insert + kraft box adds ~$0.30-0.50/unit.",
+        thinkingVisual: "Existing design from previous order — no new concepts needed.",
+        priceRange: "$8-$12",
+        botPricingClose: "Your estimate is $8-$12/unit DDP. FOB is ~$5-$7/unit. VAT invoice available. Change the destination above or tell me your country.",
+        userRefinement: "Quantity: 400 (200 per variant), Destination: China warehouse then Philippines, Timeline: 3-4 weeks production",
+        feasOutput: "Status: green. Confidence: 92.",
+        botFeasClose: "Feasibility looks good — 3-4 week production fits. Want to add another product, or ready to finalize?",
+        userContact: "Name: Bea, Email: bea@edamama.ph, Company: Edamama, Phone: +63...",
+        botConfirm: "Sourcing request confirmed — baby play gyms, 400 units. VAT invoice will be issued. We'll proceed with supplier outreach and send next steps.",
+      }),
+      notes = ["CK-005: trust answered (FOB, DDP, VAT).", "CK-008: budget math ($8-$12 DDP, $5-$7 FOB).", "CK-015: COMPLETE_SR."];
+      break;
+    }
     default:
       return null;
   }

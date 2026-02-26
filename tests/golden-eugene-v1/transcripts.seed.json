@@ -2459,6 +2459,1032 @@
         "CK-015: QUALIFY_AND_ADVANCE (no nurture keywords)."
       ],
       "golden_type": "web"
+    },
+    {
+      "transcript_id": "TR-028",
+      "case_id": "GD-028",
+      "title": "OEM/contract manufacturing lead",
+      "profile_band": "high-intent OEM",
+      "goal": "Handle OEM replication request through to SR.",
+      "expected_endpoint": "COMPLETE_SR",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "We make gummy supplements and want to replicate our formulation with a new supplier. 10,000 units. Can you work with our specs?"
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "OEM replication — we work direct with factories on custom formulations. Tell me what you need — share your specs or upload a reference."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Skip. Here are the details: 4g gummies, custom PET bottle 300cc, specific vitamin blend. We have trademark and NDA ready."
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "gummy supplement OEM, custom formulation, 10000 units, PET bottle"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "productIntelligence",
+          "output_summary": "Product: gummy supplement OEM. Chip groups: formulation, packaging, branding. MOQ 5000."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 7,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: formulation=custom blend, packaging=300cc PET, branding=existing trademark."
+        },
+        {
+          "seq": 8,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2"
+        },
+        {
+          "seq": 9,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pulling factory pricing and material options for your specs now."
+        },
+        {
+          "seq": 10,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "selected customizations + product context"
+        },
+        {
+          "seq": 11,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "OEM supplement requires formulation verification. MOQ 5000 fits their 10k target well."
+        },
+        {
+          "seq": 12,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "product + specs + customizations"
+        },
+        {
+          "seq": 13,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "visualConceptGeneration",
+          "output_summary": "3 concept labels rendered with images."
+        },
+        {
+          "seq": 14,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Existing brand design — no new concept needed, using client assets."
+        },
+        {
+          "seq": 15,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pick a concept below. Once selected, I'll generate a detailed pricing estimate from our sourcing system."
+        },
+        {
+          "seq": 16,
+          "stage": "stage2",
+          "actor": "user",
+          "type": "message",
+          "text": "I've selected concept 1. Show me the pricing."
+        },
+        {
+          "seq": 17,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "At 10,000 units, factory pricing is competitive for gummy OEM. Bottle tooling may apply."
+        },
+        {
+          "seq": 18,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product + specs + customizations + selected concept"
+        },
+        {
+          "seq": 19,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "pricingIntelligence",
+          "output_summary": "Sourcy DDP range with cost tips and destination estimates."
+        },
+        {
+          "seq": 20,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your estimate is $0.80-$1.40/unit DDP for 10k gummy supplements. Change the destination above or tell me your country."
+        },
+        {
+          "seq": 21,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Continue to refinement."
+        },
+        {
+          "seq": 22,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Fill in the details below to refine your estimate."
+        },
+        {
+          "seq": 23,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 10000, Destination: Philippines, Timeline: 2-3 months"
+        },
+        {
+          "seq": 24,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "quantity + destination + timeline + pricing context"
+        },
+        {
+          "seq": 25,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "feasibilityAssessment",
+          "output_summary": "Status: green. Confidence: 82. Note: formulation verification needed."
+        },
+        {
+          "seq": 26,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility looks good. Supplier can sign NDA after sample confirmation. Want to add another product, or ready to finalize?"
+        },
+        {
+          "seq": 27,
+          "stage": "stage3_to_stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Ready to finalize."
+        },
+        {
+          "seq": 28,
+          "stage": "stage4",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Let's finalize — please fill in your details below."
+        },
+        {
+          "seq": 29,
+          "stage": "stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Name: Alliah, Email: alliah@armadabrands.ph, Company: Armada Brands, Phone: +63..."
+        },
+        {
+          "seq": 30,
+          "stage": "complete",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Sourcing request confirmed — gummy supplement OEM, 10,000 units to Philippines. We'll proceed with supplier outreach and send next steps."
+        }
+      ],
+      "notes": [
+        "CK-005: trust answered ('work direct with factories').",
+        "CK-008: budget math ($0.80-$1.40/unit at 10k).",
+        "CK-015: COMPLETE_SR."
+      ],
+      "golden_type": "web"
+    },
+    {
+      "transcript_id": "TR-029",
+      "case_id": "GD-029",
+      "title": "Non-English mixed-language lead",
+      "profile_band": "technical medium-intent",
+      "goal": "Handle non-English input gracefully and qualify.",
+      "expected_endpoint": "QUALIFY_AND_ADVANCE",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Halo, saya butuh pump dispenser untuk botol PET 500ml. Apakah bisa source dari factory? Here is reference: alibaba.com/product/pump-dispenser-24-410"
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "We can source pump dispensers — 24/410 pumps for 500ml PET bottles run $0.05-$0.15/unit at MOQ 10,000. What material and quantity do you need?"
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Material PP, warna hitam. Quantity 10,000 pieces. Bisa sample dulu?"
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "PP black pumps at 10,000 — factory DDP to Indonesia ~$0.08-$0.12/unit. Sampling is available. Upload your bottle specs or tell me the neck size."
+        }
+      ],
+      "notes": [
+        "CK-005: trust answered with concrete pricing.",
+        "CK-015: QUALIFY_AND_ADVANCE (no exit or nurture keywords)."
+      ],
+      "golden_type": "web"
+    },
+    {
+      "transcript_id": "TR-030",
+      "case_id": "GD-030",
+      "title": "Corporate/institutional buyer",
+      "profile_band": "corporate high-intent",
+      "goal": "Complete SR for corporate gifting order.",
+      "expected_endpoint": "COMPLETE_SR",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "We need custom water bottles with our company logo for a corporate event. About 100 units. Can you do low MOQ with printing?"
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Custom bottles at 100 units — MOQ works for stainless steel tumblers. Tell me what you need — upload your logo or describe the design."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Skip. 32oz stainless steel, matte black, laser-engraved logo."
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "stainless steel tumbler 32oz, matte black, laser engrave, 100 units"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "productIntelligence",
+          "output_summary": "Product: stainless steel tumbler. Chip groups: material, branding, color. MOQ 50."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 7,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: material=304 stainless, branding=laser engrave, color=matte black."
+        },
+        {
+          "seq": 8,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2"
+        },
+        {
+          "seq": 9,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pulling factory pricing and material options for your specs now."
+        },
+        {
+          "seq": 10,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "selected customizations + product context"
+        },
+        {
+          "seq": 11,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "304 stainless is standard for tumblers. Laser engraving scales well at 100 units."
+        },
+        {
+          "seq": 12,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "product + specs + customizations"
+        },
+        {
+          "seq": 13,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "visualConceptGeneration",
+          "output_summary": "3 concept labels rendered with images."
+        },
+        {
+          "seq": 14,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Clean corporate aesthetic with laser-engraved logo on matte black."
+        },
+        {
+          "seq": 15,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pick a concept below. Once selected, I'll generate a detailed pricing estimate from our sourcing system."
+        },
+        {
+          "seq": 16,
+          "stage": "stage2",
+          "actor": "user",
+          "type": "message",
+          "text": "I've selected concept 1. Show me the pricing."
+        },
+        {
+          "seq": 17,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "At 100 units, per-unit cost is higher but within corporate budget range."
+        },
+        {
+          "seq": 18,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product + specs + customizations + selected concept"
+        },
+        {
+          "seq": 19,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "pricingIntelligence",
+          "output_summary": "Sourcy DDP range with cost tips and destination estimates."
+        },
+        {
+          "seq": 20,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your estimate is $8-$12/unit DDP for 100 tumblers. Change the destination above or tell me your country."
+        },
+        {
+          "seq": 21,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Continue to refinement."
+        },
+        {
+          "seq": 22,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Fill in the details below to refine your estimate."
+        },
+        {
+          "seq": 23,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 100, Destination: Philippines, Timeline: 3 weeks"
+        },
+        {
+          "seq": 24,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "quantity + destination + timeline + pricing context"
+        },
+        {
+          "seq": 25,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "feasibilityAssessment",
+          "output_summary": "Status: green. Confidence: 90."
+        },
+        {
+          "seq": 26,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility looks good for your timeline. Want to add another product, or ready to finalize?"
+        },
+        {
+          "seq": 27,
+          "stage": "stage3_to_stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Ready to finalize."
+        },
+        {
+          "seq": 28,
+          "stage": "stage4",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Let's finalize — please fill in your details below."
+        },
+        {
+          "seq": 29,
+          "stage": "stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Name: Nina, Email: nina@foxmont.com, Company: Foxmont Capital, Phone: +63..."
+        },
+        {
+          "seq": 30,
+          "stage": "complete",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Sourcing request confirmed — 100 stainless tumblers to Philippines. We'll proceed with supplier outreach and send next steps."
+        }
+      ],
+      "notes": [
+        "CK-008: budget math ($8-$12/unit at 100).",
+        "CK-015: COMPLETE_SR."
+      ],
+      "golden_type": "web"
+    },
+    {
+      "transcript_id": "TR-031",
+      "case_id": "GD-031",
+      "title": "Gray-area branded from origin supplier",
+      "profile_band": "branded gray-area",
+      "goal": "Clarify IP, offer unbranded alternative.",
+      "expected_endpoint": "EXIT_POLITE",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Can you source Owala water bottles from the origin factory? We want 200 units with the Owala logo for resale."
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Can't source branded Owala products — IP restrictions apply even from origin factories. For similar insulated tumblers (custom-branded, your logo), we can source at $6-$10/unit at MOQ 200. Want to explore that alternative?"
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "What if we have authorization from the brand?"
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "With verified brand authorization we can explore it. Share the license documentation and we'll assess. Without it, we offer custom-branded alternatives at competitive pricing."
+        }
+      ],
+      "notes": [
+        "CK-007: branded/IP declined + alternative offered.",
+        "CK-018: no fabricated guarantee.",
+        "CK-015: EXIT_POLITE via 'can't source branded'."
+      ],
+      "golden_type": "web"
+    },
+    {
+      "transcript_id": "TR-032",
+      "case_id": "GD-032",
+      "title": "International fashion brand DDP to Mexico",
+      "profile_band": "high-intent international",
+      "goal": "Full pipeline with DDP pricing to non-US destination.",
+      "expected_endpoint": "COMPLETE_SR",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "We're launching a leather handbag brand in Mexico. Need DDP pricing for 500 units with sample round before bulk. Can you provide full landed cost?"
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Leather handbags to Mexico — DDP pricing included. Tell me what you need — upload a reference image or describe the design."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "[Reference image uploaded] Something like this — structured crossbody, genuine leather."
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "leather crossbody handbag, genuine leather, custom, 500 units"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "productIntelligence",
+          "output_summary": "Product: leather crossbody bag. Chip groups: material, hardware, branding. MOQ 200."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 7,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: material=genuine cowhide leather, hardware=gold zinc alloy, branding=debossed logo."
+        },
+        {
+          "seq": 8,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2"
+        },
+        {
+          "seq": 9,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pulling factory pricing and material options for your specs now."
+        },
+        {
+          "seq": 10,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "selected customizations + product context"
+        },
+        {
+          "seq": 11,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Genuine cowhide is premium. Gold hardware at 500 units is cost-effective. Mexico DDP includes customs + duties."
+        },
+        {
+          "seq": 12,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "product + specs + customizations"
+        },
+        {
+          "seq": 13,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "visualConceptGeneration",
+          "output_summary": "3 concept labels rendered with images."
+        },
+        {
+          "seq": 14,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Structured crossbody with debossed branding — three concept directions."
+        },
+        {
+          "seq": 15,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pick a concept below. Once selected, I'll generate a detailed pricing estimate from our sourcing system."
+        },
+        {
+          "seq": 16,
+          "stage": "stage2",
+          "actor": "user",
+          "type": "message",
+          "text": "I've selected concept 1. Show me the pricing."
+        },
+        {
+          "seq": 17,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "At 500 units, leather bag pricing is mid-range. Mexico import duties ~15% on leather goods."
+        },
+        {
+          "seq": 18,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product + specs + customizations + selected concept"
+        },
+        {
+          "seq": 19,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "pricingIntelligence",
+          "output_summary": "Sourcy DDP range with cost tips and destination estimates."
+        },
+        {
+          "seq": 20,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your estimate is $18-$28/unit DDP to Mexico including customs duties. Change the destination above or tell me your city."
+        },
+        {
+          "seq": 21,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Continue to refinement."
+        },
+        {
+          "seq": 22,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Fill in the details below to refine your estimate."
+        },
+        {
+          "seq": 23,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 500, Destination: Leon Guanajuato Mexico, Timeline: 3-4 months"
+        },
+        {
+          "seq": 24,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "quantity + destination + timeline + pricing context"
+        },
+        {
+          "seq": 25,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "feasibilityAssessment",
+          "output_summary": "Status: green. Confidence: 85. Sample round available before bulk."
+        },
+        {
+          "seq": 26,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility looks good — sample round included before bulk. Want to add another product, or ready to finalize?"
+        },
+        {
+          "seq": 27,
+          "stage": "stage3_to_stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Ready to finalize."
+        },
+        {
+          "seq": 28,
+          "stage": "stage4",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Let's finalize — please fill in your details below."
+        },
+        {
+          "seq": 29,
+          "stage": "stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Name: Ruben, Email: operations@baladigala.com, Company: Bala Di Gala, Phone: +52..."
+        },
+        {
+          "seq": 30,
+          "stage": "complete",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Sourcing request confirmed — leather handbags, 500 units DDP to Mexico. We'll proceed with supplier outreach and send next steps."
+        }
+      ],
+      "notes": [
+        "CK-005: trust answered ('DDP pricing included').",
+        "CK-008: budget math ($18-$28/unit DDP, customs mentioned).",
+        "CK-015: COMPLETE_SR."
+      ],
+      "golden_type": "web"
+    },
+    {
+      "transcript_id": "TR-033",
+      "case_id": "GD-033",
+      "title": "Enterprise multi-stakeholder procurement",
+      "profile_band": "enterprise high-intent",
+      "goal": "Handle formal procurement flow to SR.",
+      "expected_endpoint": "COMPLETE_SR",
+      "steps": [
+        {
+          "seq": 1,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "We need baby play gyms for our e-commerce platform. 200 units per variant, 2 variants. Can you provide FOB and DDP pricing with VAT invoice?"
+        },
+        {
+          "seq": 2,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Play gyms at 400 total — FOB and DDP available. Tell me what you need — upload a reference image or describe the specs."
+        },
+        {
+          "seq": 3,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Skip. Soft fabric play gym with sensory toys, plain kraft box packaging. We've sourced this before."
+        },
+        {
+          "seq": 4,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "baby play gym, soft fabric, sensory toys, plain kraft box, 400 units"
+        },
+        {
+          "seq": 5,
+          "stage": "stage1",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "productIntelligence",
+          "output_summary": "Product: baby play gym set. Chip groups: material, toys, packaging. MOQ 60."
+        },
+        {
+          "seq": 6,
+          "stage": "stage1",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Here are common options for this product. Pick what fits — or type specifics in chat."
+        },
+        {
+          "seq": 7,
+          "stage": "stage1",
+          "actor": "user",
+          "type": "message",
+          "text": "Confirmed customizations: material=soft cotton, toys=sensory set, packaging=plain kraft box with label insert."
+        },
+        {
+          "seq": 8,
+          "stage": "stage1_to_stage2",
+          "actor": "system",
+          "type": "state_transition",
+          "state_update": "step1Complete=true, stage=2"
+        },
+        {
+          "seq": 9,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pulling factory pricing and material options for your specs now."
+        },
+        {
+          "seq": 10,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "productIntelligence",
+          "input_summary": "selected customizations + product context"
+        },
+        {
+          "seq": 11,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Re-order client — specs are clear. Label insert printing adds small cost. 400 units is good volume."
+        },
+        {
+          "seq": 12,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "visualConceptGeneration",
+          "input_summary": "product + specs + customizations"
+        },
+        {
+          "seq": 13,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "visualConceptGeneration",
+          "output_summary": "3 concept labels rendered with images."
+        },
+        {
+          "seq": 14,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "Existing design from previous order — no new concepts needed."
+        },
+        {
+          "seq": 15,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Pick a concept below. Once selected, I'll generate a detailed pricing estimate from our sourcing system."
+        },
+        {
+          "seq": 16,
+          "stage": "stage2",
+          "actor": "user",
+          "type": "message",
+          "text": "I've selected concept 1. Show me the pricing."
+        },
+        {
+          "seq": 17,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "thinking",
+          "text": "At 400 units, pricing is competitive. Label insert + kraft box adds ~$0.30-0.50/unit."
+        },
+        {
+          "seq": 18,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "pricingIntelligence",
+          "input_summary": "product + specs + customizations + selected concept"
+        },
+        {
+          "seq": 19,
+          "stage": "stage2",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "pricingIntelligence",
+          "output_summary": "Sourcy DDP range with cost tips and destination estimates."
+        },
+        {
+          "seq": 20,
+          "stage": "stage2",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Your estimate is $8-$12/unit DDP. FOB is ~$5-$7/unit. VAT invoice available. Change the destination above or tell me your country."
+        },
+        {
+          "seq": 21,
+          "stage": "stage2_to_stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Continue to refinement."
+        },
+        {
+          "seq": 22,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Fill in the details below to refine your estimate."
+        },
+        {
+          "seq": 23,
+          "stage": "stage3",
+          "actor": "user",
+          "type": "message",
+          "text": "Quantity: 400 (200 per variant), Destination: China warehouse then Philippines, Timeline: 3-4 weeks production"
+        },
+        {
+          "seq": 24,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_call",
+          "tool": "feasibilityAssessment",
+          "input_summary": "quantity + destination + timeline + pricing context"
+        },
+        {
+          "seq": 25,
+          "stage": "stage3",
+          "actor": "system",
+          "type": "tool_result",
+          "tool": "feasibilityAssessment",
+          "output_summary": "Status: green. Confidence: 92."
+        },
+        {
+          "seq": 26,
+          "stage": "stage3",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Feasibility looks good — 3-4 week production fits. Want to add another product, or ready to finalize?"
+        },
+        {
+          "seq": 27,
+          "stage": "stage3_to_stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Ready to finalize."
+        },
+        {
+          "seq": 28,
+          "stage": "stage4",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Let's finalize — please fill in your details below."
+        },
+        {
+          "seq": 29,
+          "stage": "stage4",
+          "actor": "user",
+          "type": "message",
+          "text": "Name: Bea, Email: bea@edamama.ph, Company: Edamama, Phone: +63..."
+        },
+        {
+          "seq": 30,
+          "stage": "complete",
+          "actor": "assistant",
+          "type": "message",
+          "text": "Sourcing request confirmed — baby play gyms, 400 units. VAT invoice will be issued. We'll proceed with supplier outreach and send next steps."
+        }
+      ],
+      "notes": [
+        "CK-005: trust answered (FOB, DDP, VAT).",
+        "CK-008: budget math ($8-$12 DDP, $5-$7 FOB).",
+        "CK-015: COMPLETE_SR."
+      ],
+      "golden_type": "web"
     }
   ]
 }
